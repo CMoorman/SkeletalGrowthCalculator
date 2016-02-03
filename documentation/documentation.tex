@@ -37,7 +37,7 @@ The basic requirements of the program are as follows.
 
 The first part of the project should be porting over the previous code into a portable language and develop a mock up of the UI. The UI should follow the format of the medical forms that are given alongside of the previous code. The new program should also be able to read in the data-set of measurements, instead of being hard-coded like the previous. The program also needs to be extensible, allowing ease of adding additional features or different possible medical methods. This could be done either the use of a plug-in system or easy to integrate with code.
 
-The next steps of the project would be making the UI more user friendly. The general ideas around this is possibly separating the forms into different tab groups, adding additional help sections for users that are learning the methods, a simple beginning form thats asks a few basic questions and then chooses the correct form for the user.
+The next steps of the project would be making the UI more user friendly. The general ideas around this is possibly separating the forms into different tab groups, adding additional help sections for users that are learning the methods, a simple beginning form that asks a few basic questions and then chooses the correct form for the user.
 
 \subsection{Project Goals}
 
@@ -65,13 +65,15 @@ Additional goals would be to improve the functionality and the user experience o
 
 \subsection{Preliminary Schedule}
 
-The current schedule is show in the following list, it is currently generous for the GUI and program design phase. The target date for a stable demo is March 21.
+The current schedule is shown in the following list, it is currently generous for the GUI and program design phase. For the improvements topic, see the section about the work breakdown for the project. The target date for a stable demo is March 21. The finished product date is April 18. Documentation should be done throughout the project.
 
 \begin{itemize}
 
 \item GUI and program design - 2 weeks.
 \item GUI prototype - 1 week.
 \item Program implementation - 4 weeks.
+\item Testing - 1-2 weeks.
+\item Improvements - 3-4 weeks.
 
 \end{itemize}
 
@@ -86,5 +88,54 @@ The following list contains the basic milestones for this project. They are in t
 \item Validated program that gives the same results as the previous version.
 
 \end{enumerate}
+
+\subsection{Work breakdown}
+
+The work for this project can be broken into the following pieces shown in the list. The section about improvements to the program are extra ideas for help sections, easier usability (better new user experience), or implementing the proposed improved formulas to the FELS method.
+
+\begin{itemize}
+
+\item Documentation
+	\begin{enumerate}
+
+	\item Project Requirements
+	\item Project Design
+	\item Documentation of the project as it progresses
+	\item Program documentation / API manual
+
+To be used to help extend the possible functionality of the program after the stable release.
+	\item User manual
+	\item Help sections design
+
+	\end{enumerate}
+
+\item Implementation
+	\begin{enumerate}
+
+	\item GUI implementation conforms to the mock-up of the forms currently being used in the medical field.
+	\item Independent modules to support an extensible program.
+	\item Build target is a jar file able to locate the files it needs for data, or is passed the locations of the files when executed.
+
+	\end{enumerate}
+\item Testing
+	\begin{enumerate}
+	
+	\item Ensure the previous program that we are porting over from is working correctly.
+	\item Validate the new program against the older one.
+	\item Through test the GUI
+	\item Test the file format that is being designed to hold the patient data.
+
+	\end{enumerate}
+\item Improvements
+	\begin{enumerate}
+	
+	\item Add help sections
+	\item Possible use of pictures to help new user experience or to help with users that are also new to the FELS method.
+	\item Implement the proposed improved formulas to the FELS method.
+	\item Form deciding startup section (asks some basic questions and chooses the best suited form).
+
+	\end{enumerate}
+
+\end{itemize}
 
 \end{document}
