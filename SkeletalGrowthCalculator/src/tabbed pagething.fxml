@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="1833.0" prefWidth="601.0" style="" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="tabFELS" style="width:200px;&#10;-fx-background-color:#eee" text="FELS Method">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="1578.0" prefWidth="601.0" style="-fx-background-color:#eee">
+              <children>
+                <Pane fx:id="panePatientInfo" layoutX="0.0" layoutY="0.0" prefHeight="194.9998779296875" prefWidth="601.0" style="-fx-background-color:#eee">
+                  <children>
+                    <Label fx:id="lblPatientInfo" layoutX="14.0" layoutY="6.0" style="-fx-font-weight:bold;" text="Patient Information" underline="false">
+                      <font>
+                        <Font size="15.0" />
+                      </font>
+                    </Label>
+                    <Text fx:id="lblStudy" layoutX="49.0" layoutY="50.0" scaleX="1.0000035338370918" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" />
+                    <Text fx:id="lblID" layoutX="70.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                    <Text fx:id="lblCronAge" layoutX="13.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chron. Age" />
+                    <Text fx:id="lblSex" layoutX="61.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sex" />
+                    <SplitMenuButton fx:id="mnuSex" layoutX="91.0" layoutY="128.0" mnemonicParsing="false" prefWidth="79.99990610351816" text="---">
+                      <items>
+                        <MenuItem mnemonicParsing="false" text="Male" />
+                        <MenuItem mnemonicParsing="false" text="Female" />
+                      </items>
+                    </SplitMenuButton>
+                    <TextField fx:id="txtStudy" layoutX="90.0" layoutY="34.0" prefWidth="80.0" />
+                    <TextField fx:id="txtID" layoutX="91.0" layoutY="65.0" prefWidth="80.0" />
+                    <TextField fx:id="txtCronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
+                    <Label fx:id="lblAssessorNum" layoutX="231.0" layoutY="38.0" text="Assessor #" />
+                    <Label fx:id="lblAssessmentNum" layoutX="212.0" layoutY="70.0" text="Assessment #" />
+                    <Label fx:id="lblBirthDate" layoutX="237.0" layoutY="101.0" text="Birth Date" />
+                    <Label fx:id="lblXrayDate" layoutX="231.0" layoutY="133.0" text="X-ray Date" />
+                    <Label fx:id="lblAsmDate" layoutX="192.0" layoutY="164.0" text="Assessment Date" />
+                    <TextField fx:id="txtAssessorNum" layoutX="309.0" layoutY="35.0" prefWidth="92.0001220703125" />
+                    <TextField fx:id="txtAssessmentNum" layoutX="309.0" layoutY="66.0" prefWidth="92.0" />
+                    <TextField fx:id="txtBirthDate" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
+                    <TextField fx:id="txtXrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
+                    <TextField fx:id="txtAsmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
+                    <Text fx:id="lblSA" layoutX="453.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A." />
+                    <Text fx:id="lblSEE" layoutX="444.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.E.E." />
+                    <TextField fx:id="txtSEE" layoutX="484.0" layoutY="97.0" prefWidth="92.0" />
+                    <TextField fx:id="txtSA" layoutX="484.0" layoutY="66.0" prefWidth="92.0" />
+                  </children>
+                </Pane>
+                <Pane fx:id="paneMeasurementInputs" layoutX="1.0" layoutY="195.0" prefHeight="750.0" prefWidth="601.0">
+                  <children>
+                    <Label id="lblPatientInfo" fx:id="lblMeasurments" layoutX="14.0" layoutY="11.0" style="-fx-font-weight:bold;" text="Measurements" />
+                    <Label fx:id="lblRadius" layoutX="27.0" layoutY="33.0" style="-fx-font-weight:bold;&#10;" text="Radius">
+                      <textFill>
+                        <Color blue="1.000" green="0.000" red="0.080" fx:id="x1" />
+                      </textFill>
+                    </Label>
+                    <Label fx:id="lblR1" layoutX="37.0" layoutY="58.0" text="R-1" />
+                    <Label fx:id="lblR2" layoutX="37.0" layoutY="88.0" text="R-2" />
+                    <Label fx:id="lblR3" layoutX="37.0" layoutY="180.0" text="R-3" />
+                    <Label fx:id="lblR4" layoutX="37.0" layoutY="209.0" text="R-4" />
+                    <Label fx:id="lblR5" layoutX="37.0" layoutY="239.0" text="R-5" />
+                    <Label fx:id="lblR6" layoutX="37.0" layoutY="270.0" text="R-6" />
+                    <Label fx:id="lblR7" layoutX="37.0" layoutY="299.0" text="R-7" />
+                    <Label fx:id="lblR8" layoutX="37.0" layoutY="326.0" text="R-8" />
+                    <Label fx:id="lblR2EW" layoutX="48.0" layoutY="119.0" text="(EW)" />
+                    <Label id="lblR2ME" fx:id="lblR2MW" layoutX="46.0" layoutY="147.0" text="(MW)" />
+                    <TextField fx:id="txtR1" layoutX="73.0" layoutY="55.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR2" layoutX="73.0" layoutY="85.0" prefWidth="69.00009999999747" />
+                    <TextField fx:id="txtR3" layoutX="73.0" layoutY="177.0" prefWidth="69.00009999999747" />
+                    <TextField fx:id="txtR4" layoutX="73.0" layoutY="206.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR5" layoutX="73.0" layoutY="236.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR6" layoutX="73.0" layoutY="267.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR7" layoutX="73.0" layoutY="296.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR8" layoutX="73.0" layoutY="323.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR2EW" layoutX="84.0" layoutY="116.0" prefWidth="55.0" />
+                    <TextField fx:id="txtR2MW" layoutX="84.0" layoutY="144.0" prefWidth="55.0" />
+                    <Text fill="$x1" layoutX="197.0" layoutY="43.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Triquetral" />
+                    <Text layoutX="210.0" layoutY="71.0" scaleX="0.9541323112729819" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRI-1" />
+                    <Text layoutX="211.0" layoutY="101.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRI-2" />
+                    <Text layoutX="210.0" layoutY="132.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRI-3" />
+                    <Text layoutX="210.0" layoutY="160.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRI-4" />
+                    <TextField layoutX="253.0" layoutY="55.0" prefWidth="69.00003051757812" />
+                    <TextField layoutX="253.0" layoutY="85.0" prefWidth="69.0" />
+                    <TextField layoutX="253.0" layoutY="116.0" prefWidth="69.0" />
+                    <TextField layoutX="253.0" layoutY="144.0" prefWidth="69.0" />
+                    <Text fill="$x1" layoutX="403.0" layoutY="43.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Trapezoid" />
+                    <Text layoutX="415.0" layoutY="71.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-1" />
+                    <Text layoutX="415.0" layoutY="101.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-2" />
+                    <Text layoutX="416.0" layoutY="132.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-3" />
+                    <Text layoutX="416.0" layoutY="160.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-4" />
+                    <Text layoutX="416.0" layoutY="190.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-5" />
+                    <Text layoutX="416.0" layoutY="219.0" scaleX="1.0" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-6" />
+                    <Text layoutX="416.0" layoutY="249.0" scaleX="0.9999970143193245" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-7" />
+                    <TextField layoutX="463.0" layoutY="55.0" prefWidth="69.0" />
+                    <TextField layoutX="463.0" layoutY="85.0" prefWidth="69.0" />
+                    <TextField layoutX="463.0" layoutY="116.0" prefWidth="69.0" />
+                    <TextField layoutX="463.0" layoutY="144.0" prefWidth="69.0" />
+                    <TextField layoutX="463.0" layoutY="174.0" prefWidth="69.0" />
+                    <TextField layoutX="463.0" layoutY="203.0" prefWidth="69.0" />
+                    <TextField layoutX="463.0" layoutY="233.0" prefWidth="69.0" />
+                    <TextField layoutX="253.0" layoutY="221.0" prefWidth="69.0" />
+                    <Text fill="#1400ff" layoutX="199.0" layoutY="211.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="PISIForm" />
+                    <Text layoutX="223.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P-1" />
+                  </children>
+                </Pane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="OTHER">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
