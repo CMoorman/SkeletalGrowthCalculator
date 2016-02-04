@@ -13,7 +13,7 @@ GetHand - incomplete
 Max - incomplete
 Knee - incomplete
 Hand - incomplete
-Both - incomplete
+Both - done
 Main - done
 
 Data:
@@ -21,7 +21,7 @@ Data:
 constants:
 
 int M0 5
-Appears nowhere in the code. Possible hardcoded thing to add padding in memory?
+Appears nowhere in the code. Possible hard-coded thing to add padding in memory?
 
 int N 132
 Total number of indicators
@@ -29,6 +29,9 @@ Is used to declare arrays that contain the data and for moving through
 them in the Max procedure. Appears nowhere else in the code.
 
 int MKNEE 1
+Index location for knee indicators in the array.
+It is used in the GetKnee, HeadIn, Knee, and Both Procedures. It is used to
+set I and I1 for index values to go through the arrays.
 
 int NKNEE 34
 
@@ -42,8 +45,26 @@ int MREGR 120
 
 int NREGR 132
 
-int array M size N
+int array M size NGRADED
 Contains the max value for each indicator.
+
+real array P size 264 by 5
+
+real array Y size N by 2
+
+real array Z size N by 2
+
+string array KD size 6 by 2
+
+string array ID size N
+Contains all the strings for the indicators, used to print out to the screen.
+Deprecated
+
+real array C size 6 by 6
+
+int array XY size N by 2
+This array contains the screen locations for an IBM PC.
+Deprecated
 
 vars:
 
@@ -132,6 +153,13 @@ GetKneeI:
 
 GetKnee:
 
+initialize I9 to zero
+
+for I is MKNEE to NKNEE
+do
+	if M[I] is less than five
+		
+		
 GetHandI:
 
 GetHand:
@@ -153,6 +181,7 @@ initialize RSW to true
 call Max
 
 END Both
+
 
 Main:
 
