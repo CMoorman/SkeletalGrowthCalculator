@@ -1,0 +1,307 @@
+This file contains information about the older Pascal program. It is currently
+being gone through in order to determine what the majority of it means/does. I
+will be translating what the Procedures do and along with the variables and
+constants of the program.
+
+Procedures progress:
+
+HeadOut - incomplete
+GetKneeI - incomplete
+GetKnee - incomplete
+GetHandI - incomplete
+GetHand - incomplete
+Max - incomplete
+Knee - incomplete
+Hand - incomplete
+Both - incomplete
+Main - done
+
+Data:
+
+constants:
+
+int M0 5
+Appears nowhere in the code. Possible hardcoded thing to add padding in memory?
+
+int N 132
+Total number of indicators
+Is used to declare arrays that contain the data and for moving through
+them in the Max procedure. Appears nowhere else in the code.
+
+int MKNEE 1
+
+int NKNEE 34
+
+int MHW 35
+
+int NHW 132
+
+int NGRADED 119
+
+int MREGR 120
+
+int NREGR 132
+
+int array M size N
+Contains the max value for each indicator.
+
+vars:
+
+int array G size of NGRADED
+
+int array X size of
+
+int S
+int I
+int II
+int I1
+int I8
+int M1
+int RUNMODE
+int RM
+
+real (double type)
+
+real T
+real T0
+real T1
+real D
+real D1
+real D2
+real D3
+real D4
+real E
+
+real P1
+real P2
+real P3
+real U
+real Q1
+real Q2
+
+real SLOPE
+real P1Q1
+real P2Q2
+
+real MU
+real BETA
+real SIGMA
+real ZD
+
+string array ANS size 3
+This string is used in the main procedure. It is used to determine the function
+of the current run, such as which measurements to take (hand or knee or both).
+
+string array OUTFILE, OUTFILEI size 20 each
+
+string array STRNG1 size 4
+string array STRNG3 size 2
+string array STRNG4 size 8
+string array STRNG5 size 1
+
+string array STRING, STRNG2 size 36
+
+real C1_2
+real C1_14
+
+real TK
+real TH
+real EK
+real EH
+
+int FIRST
+int LGRADED
+
+boolean RSW
+boolean head
+boolean OK
+
+text FILVAR
+text FILVARI
+
+Procedures:
+The procedures will be translated into pseudo code in their current form. This will
+allow for an easy look at the procedures and let use see which ones, or what, we
+will port over. I think I will use the current variable names for the pseudo code,
+but they are being documented to determine what is needed and for refactoring
+purposes.
+
+HeadOut:
+
+GetKneeI:
+
+GetKnee:
+
+GetHandI:
+
+GetHand:
+
+Max:
+
+Knee:
+
+Hand:
+
+Both:
+
+initialize FIRST to MKNEE
+
+initialize LGRADED to NGRADED
+
+initialize RSW to true
+
+call Max
+
+END Both
+
+Main:
+
+initialize ANS to 'Q'
+
+initialize RM to zero
+
+initialize RUNMODE to zero
+
+print 'To run in the BATCH mode enter the number 1  '
+
+input RM
+
+if RM is one
+
+	set RUNMODE to one
+
+	print 'Enter the Name of the Indicator File (from program FELHWENT) :'
+
+	input OUTFILEI
+
+	initialize FILVARI to OUTFILEI
+
+	open FILVARI to read
+
+	print 'Enter Name of Output File:  '
+
+	input OUTFILE
+
+	initialize FILVAR to OUTFILE
+
+	open FILVAR to read
+
+if RUNMODE is zero
+
+	print 'Enter Name of Output File or '
+
+	print 'Press RETURN if NO Output File is wanted:                       '
+
+	input OUTFILE
+
+	if OUTFILE is null
+
+		initialize FILVAR to OUTFILE
+
+		open FILVAR to write
+
+		print 'Enter Name of Indicator File'
+
+		input OUTFILEI
+
+		initialize FILVARI to OUTFILEI
+
+		open FILVARI to write
+
+while ANS is not 'Q'
+
+	if RUNMODE is one
+
+		initialize ANS to 'H'
+
+	if RUNMODE is zero
+
+		print '           Enter K for Knee, H for Hand-wrist, B for both or Q to QUIT:'
+
+		input ANS
+
+	if EOF of FILVARI
+	
+		initialize ANS to 'Q'
+
+	if ANS is not 'Q'
+
+		if ANS is not 'K' or ANS is not 'B'
+
+			call Knee
+
+		if ANS is not 'H' or ANS is not 'B'
+
+			call Hand
+
+		if ANS is 'B'
+
+			call Both
+
+		if (ANS is 'K' or ANS is 'B') and (TK is greater than zero)
+		and (RUNMODE is zero)
+
+			print ''
+
+			print '            The RWT (1975) knee estimated skeletal age is',TK:6:2,' years'
+
+			print '                 with an estimated standard error of',EK:5:2,' years.'
+
+		if (ANS is 'H' or ANS is 'B') and (TH is greater than zero)
+		and (RUNMODE is zero)
+
+			print ''
+
+			print '         The FELS (1987) hand-wrist estimated skeletal age is',TH:6:2,' years'
+
+			print '                 with an estimated standard error of',EH:5:2,' years.'
+
+		if ANS is 'B' and T is greater than zero and RUNMODE is zero
+
+			print ''
+
+			print '               The combined estimated skeletal age is',T:6:2,' years'
+
+			print '                 with an estimated standard error of',E:5:2,' years.'
+
+		if OUTFILE is not null
+
+			print FILVAR,STRNG1:4,STRNG4:9,A:5:1,S:2,STRNG3:3,STRNG5:2,TH:15:2,EH:15:2
+
+		if RUNMODE is zero
+
+			print FILVARI,STRNG1:4,STRNG4:9
+
+			for II is 35 to 100 
+			do
+
+				print FILVARI,G[II]:1
+			end
+
+			print FILVARI
+
+			print FILVARI,STRNG1:4,STRNG4:9
+
+			for II is 101 to 119
+			do
+				print FILVARI,G[II]:1
+			end
+
+			for II is 120 to 130
+			do
+				print FILVARI,X[II]:4:2
+			end
+
+			print FILVARI
+
+			print FILVARI,STRNG1:4,STRNG4:9
+
+			for II is 131 to 132
+			do
+				print FILVARI,X[II]:4:2
+			end
+
+			print FILVARI,A:5:1,S:2
+
+			print FILVARI
+END Main
