@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <TabPane fx:id="tabpaneChartTabs" layoutX="0.0" layoutY="0.0" prefHeight="368.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="tabLineChart" text="Line Chart">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <LineChart fx:id="LineChart" layoutX="0.0" layoutY="0.0" prefHeight="337.0" prefWidth="600.0" title="">
+                  <xAxis>
+                    <CategoryAxis id="axLineCategory" fx:id="axCategoryLine" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis fx:id="axNumberLine" prefHeight="290.0" side="LEFT" />
+                  </yAxis>
+                </LineChart>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab fx:id="tabScatterChart" text="Scatter Chart">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <ScatterChart fx:id="ScatterChart" layoutX="0.0" layoutY="0.0" prefHeight="337.0000999999975" prefWidth="600.0">
+                  <xAxis>
+                    <CategoryAxis id="axCategory" fx:id="axScatterCategory" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis fx:id="axScatterNumber" side="LEFT" />
+                  </yAxis>
+                </ScatterChart>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab fx:id="tabOptions" text="Options">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="600.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+    <ToolBar layoutX="0.0" layoutY="368.0" prefHeight="32.0" prefWidth="600.0">
+      <items>
+        <Button fx:id="btnBack" cancelButton="true" mnemonicParsing="false" text="Back" textAlignment="CENTER" underline="false">
+          <font>
+            <Font size="16.0" fx:id="x1" />
+          </font>
+        </Button>
+        <Button id="btnDone" fx:id="btnHome" alignment="TOP_LEFT" cancelButton="false" contentDisplay="TOP" defaultButton="true" font="$x1" mnemonicParsing="false" text="Home" textAlignment="CENTER" />
+      </items>
+    </ToolBar>
+  </children>
+</AnchorPane>
