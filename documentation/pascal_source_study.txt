@@ -10,7 +10,7 @@ GetKneeI - incomplete
 GetKnee - incomplete
 GetHandI - incomplete
 GetHand - incomplete
-Max - incomplete
+Max - done
 Knee - incomplete
 Hand - incomplete
 Both - done
@@ -189,6 +189,7 @@ initialize D1 to zero
 initialize I1 to zero  //Iteration
 
 while I1 is greater than 50 or absolute(D1) is less than 0.001
+//Convergence criterion. Limit to 50 iterations. Stop if derivative is near 0
 do
 
   initialize I1 to I1 + 1
@@ -249,9 +250,127 @@ do
 
               if P3 is less than 0.005 then initialize P3 to 0.005  //Correct values that are too small in magnitude since later you divide by P3
 
-CURRENT LINE 975
+              initialize Q1 to 1.0-P1
 
-end
+              initialize Q2 to 1.0-P2
+
+              initialize P1Q1 to P1*Q1
+
+              initialize P2Q2 to P2*Q2
+
+              initialize D1 to D1 + SLOPE*(P1Q1-P2Q2)/P3  //Add up the first derivatives with respect to T across graded indicators
+
+              initialize D to (Q1-P1)*P1Q1 + (P2-Q2)*P2Q2
+
+              initialize D to D - sqr(P2Q2-P1Q1)/P3
+
+              initialize D2 to D2 - D*spr(SLOPE)/P3  //Add up the second derivatives with respect to T across graded indicators
+
+      if RSW
+
+        for I is MREGR to NREGR
+        do
+
+          if X[I] is not 0.0
+
+            initialize BETA to P[N*(S-1)+I,1]
+
+            initialize MU to P[N*(S-1)+I,2]
+
+            initialize SIGMA to P[N*(S-1)+I,3]
+
+            initialize ZD to (X[I]-BETA*T-MU)/SIGMA
+
+            initialize D1 to D1 + BETA*ZD/SIGMA  //Add up derivatives with respect to theta across continuous indicators
+
+            initialize D2 to D2 + sqr(BETA/SIGMA)
+
+        end
+
+      if D2 is less than zero then D2 is -D2 //If second derivative is negative, make it positive
+
+      if D2 is zero then D2 is 0.01  //If second derivative is 0, make it 0.01
+
+      initialize D4 to D1/D2
+
+      if D4 is greater than one then D4 is one
+
+      if D4 is less than -1 then D4 is -1
+
+      initialize T to T+D4  //Update the estimate
+
+      initialize E to D2  //Store second derivate to compute standard error
+
+      if (I1 > 2) and (D1*D3 < 0)  //If the derivative has changed sign since the last iteration, then you have overshot the maximum
+//and you instead average the estimates from the previous two iterations
+
+        if (D3 > 0) and (T < T0)
+
+          initialize T to (T0+T1)/2.0
+
+        if (D3 < 0) and (T > T0)
+
+          initialize T to (T0+T1)/2.0
+
+end while  //Convergence criterion. Limit to 50 iterations. Stop if derivative is near 0
+
+if D1 is greater than 0.0001
+
+  if RUNMODE is zero
+
+    print 'Algorithm did not converge...Beware of the results'
+
+initialize E to 1.0/sqrt(E)  //Inverse of second derivative is the variance
+
+if D1 is greater than 0.0001 then E is 9999 //Added to make E not the variance if it did not converge
+
+if T is less than zero
+
+  initialize T to zero
+
+  if RUNMODE is zero
+
+    print 'The estimated skeletal age is less than zero.'
+
+    print 'This probably means that all indicators entered are'
+
+    print 'in their immature state. No valid estimate exists.'
+
+    print 'The immature skeletal age code is ',T:6:2
+
+    print 'with an estimated standard error of ',E:5:2,' years.       '
+
+if ((S is one) and (T is greater than 18.00)) or ((S is two) and (T is greater than 18.00))
+
+  if s is one
+
+    initialize T to 18.00
+
+  else
+
+    initialize T to 18.00
+
+    if RUNMODE is zero
+
+      print 'The estimated skeletal age is greater than 18.'
+
+      print 'This means that all or nearly all indicators entered are'
+
+      print 'in their mature state. No valid estimate exists.'
+
+      print 'The mature skeletal age code is ',T:6:2
+
+      print 'with an estimated standard error of ',E:5:2,' years.          '
+
+  if (RUNMODE is zero) and (T is greater than zero) and (((S=1) and (T<18.00)) or ((s=2) and (t<18.00)))
+
+    print 'The estimated skeletal age is ',T:6:2,' years                 '
+
+    print 'with an estimated standard error of ',E:5:2,' years.          '
+
+    print I1,' iterations were required.'
+
+END Max
 
 Knee:
 
