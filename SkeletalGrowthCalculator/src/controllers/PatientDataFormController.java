@@ -1,4 +1,4 @@
-package main;
+package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,23 +7,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import main.SkeletalCalculator;
 
-public class TitleViewController implements Initializable {
+public class PatientDataFormController extends SkeletalCalculator implements Initializable {
 
-	
-	private static Scene TitleViewScene = null;
-	
-	private static TitleViewController instance = null;
+	private static Scene PatientDataFormScene = null;
+	private static PatientDataFormController instance = null;
 	
 	public Scene getScene() {
-		return TitleViewScene;
+		return PatientDataFormScene;
 	}
 	
-	public static TitleViewController getInstance() {
+	public static PatientDataFormController getInstance() {
 		
 		if( instance == null ) {
 			
-			FXMLLoader loader = new FXMLLoader( TitleViewController.class.getResource("TitleView.fxml" ) );
+			FXMLLoader loader = new FXMLLoader( SkeletalCalculator.class.getResource("PatientDataForm.fxml" ) );
 			
 			Parent titlePane = null;
 			
@@ -33,7 +32,7 @@ public class TitleViewController implements Initializable {
 				e.printStackTrace();
 			}
 			
-			TitleViewScene = new Scene( titlePane );
+			PatientDataFormScene = new Scene( titlePane );
 			
 			instance = loader.getController();
 		}
@@ -41,9 +40,8 @@ public class TitleViewController implements Initializable {
 		return instance;
 	}
 	
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-			
+		
 	}
 }
