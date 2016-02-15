@@ -10,7 +10,7 @@ GetKneeI - incomplete
 GetKnee - incomplete
 GetHandI - incomplete
 GetHand - incomplete
-Max - incomplete
+Max - done
 Knee - incomplete
 Hand - incomplete
 Both - done
@@ -157,14 +157,220 @@ initialize I9 to zero
 
 for I is MKNEE to NKNEE
 do
-	if M[I] is less than five
-		
-		
+  if M[I] is less than five
+    screen stuff
+
+  else
+
+    initialize I9 to I9 + 1
+
+    if I is two or I is 14
+      screen stuff
+
+    else
+      screen stuff
+
+end
+
+END GetKnee
+    
 GetHandI:
 
 GetHand:
 
 Max:
+
+initialize T to A  //Starting value is the age
+
+initialize T1 to zero
+
+initialize D1 to zero
+
+initialize I1 to zero  //Iteration
+
+while I1 is greater than 50 or absolute(D1) is less than 0.001
+//Convergence criterion. Limit to 50 iterations. Stop if derivative is near 0
+do
+
+  initialize I1 to I1 + 1
+
+  if RUNMODE is zero then print 'Iteration ',I1,'; Estimate now ',T
+
+  initialize T0 to T1
+
+  initialize T1 to T
+
+  initialize D3 to D1
+
+  initialize D1 to zero
+
+  initialize D2 to zero
+
+  for I is FIRST to LGRADED  //First and last positions for graded indicators
+  do
+
+    if G[I] is not zero  //If not missing
+
+      initialize SLOPE to P[N*(S-1)+I,1]  //SLOPE is d, the rate parameter in the logistic regression
+
+        for M1 is one to M[I]
+        do
+          
+          if G[I] is M1
+
+            initialize P1 to 1.0
+
+            if M1 is not one
+
+              initialize U to (P[N*(S-1)+I,M1]-T)*SLOPE  //U is (tau - current estimate)*d
+
+              if ABS(U) is greater than 10
+
+                if U is greater than 10 then initialize U to 10.0
+
+                if U is less than -10 then initialize U to -10.0
+
+              initialize P1 to 1.0/(1.0+exp(U))  //P1 is P(grade = M1 or higher)
+
+            initialize P2 to 0.0
+
+              if M1 is not M[I]
+
+                initialize U to (P[N*(S-1)+I,M1+1] - T)*SLOPE
+
+                if ABS(U) is greater than 10  //Correct values that are too large in magnitude
+
+                  if U is greater than 10 then initialize U to 10.0
+
+                  if U is less than -10 then initialize U to -10.0
+
+                initialize P2 to 1.0/(1.0+exp(U))  //P2 is P(grade > M1)
+
+              initialize P3 to P1-P2  //P3 is P(grade = M1)
+
+              if P3 is less than 0.005 then initialize P3 to 0.005  //Correct values that are too small in magnitude since later you divide by P3
+
+              initialize Q1 to 1.0-P1
+
+              initialize Q2 to 1.0-P2
+
+              initialize P1Q1 to P1*Q1
+
+              initialize P2Q2 to P2*Q2
+
+              initialize D1 to D1 + SLOPE*(P1Q1-P2Q2)/P3  //Add up the first derivatives with respect to T across graded indicators
+
+              initialize D to (Q1-P1)*P1Q1 + (P2-Q2)*P2Q2
+
+              initialize D to D - sqr(P2Q2-P1Q1)/P3
+
+              initialize D2 to D2 - D*spr(SLOPE)/P3  //Add up the second derivatives with respect to T across graded indicators
+
+      if RSW
+
+        for I is MREGR to NREGR
+        do
+
+          if X[I] is not 0.0
+
+            initialize BETA to P[N*(S-1)+I,1]
+
+            initialize MU to P[N*(S-1)+I,2]
+
+            initialize SIGMA to P[N*(S-1)+I,3]
+
+            initialize ZD to (X[I]-BETA*T-MU)/SIGMA
+
+            initialize D1 to D1 + BETA*ZD/SIGMA  //Add up derivatives with respect to theta across continuous indicators
+
+            initialize D2 to D2 + sqr(BETA/SIGMA)
+
+        end
+
+      if D2 is less than zero then D2 is -D2 //If second derivative is negative, make it positive
+
+      if D2 is zero then D2 is 0.01  //If second derivative is 0, make it 0.01
+
+      initialize D4 to D1/D2
+
+      if D4 is greater than one then D4 is one
+
+      if D4 is less than -1 then D4 is -1
+
+      initialize T to T+D4  //Update the estimate
+
+      initialize E to D2  //Store second derivate to compute standard error
+
+      if (I1 > 2) and (D1*D3 < 0)  //If the derivative has changed sign since the last iteration, then you have overshot the maximum
+//and you instead average the estimates from the previous two iterations
+
+        if (D3 > 0) and (T < T0)
+
+          initialize T to (T0+T1)/2.0
+
+        if (D3 < 0) and (T > T0)
+
+          initialize T to (T0+T1)/2.0
+
+end while  //Convergence criterion. Limit to 50 iterations. Stop if derivative is near 0
+
+if D1 is greater than 0.0001
+
+  if RUNMODE is zero
+
+    print 'Algorithm did not converge...Beware of the results'
+
+initialize E to 1.0/sqrt(E)  //Inverse of second derivative is the variance
+
+if D1 is greater than 0.0001 then E is 9999 //Added to make E not the variance if it did not converge
+
+if T is less than zero
+
+  initialize T to zero
+
+  if RUNMODE is zero
+
+    print 'The estimated skeletal age is less than zero.'
+
+    print 'This probably means that all indicators entered are'
+
+    print 'in their immature state. No valid estimate exists.'
+
+    print 'The immature skeletal age code is ',T:6:2
+
+    print 'with an estimated standard error of ',E:5:2,' years.       '
+
+if ((S is one) and (T is greater than 18.00)) or ((S is two) and (T is greater than 18.00))
+
+  if s is one
+
+    initialize T to 18.00
+
+  else
+
+    initialize T to 18.00
+
+    if RUNMODE is zero
+
+      print 'The estimated skeletal age is greater than 18.'
+
+      print 'This means that all or nearly all indicators entered are'
+
+      print 'in their mature state. No valid estimate exists.'
+
+      print 'The mature skeletal age code is ',T:6:2
+
+      print 'with an estimated standard error of ',E:5:2,' years.          '
+
+  if (RUNMODE is zero) and (T is greater than zero) and (((S=1) and (T<18.00)) or ((s=2) and (t<18.00)))
+
+    print 'The estimated skeletal age is ',T:6:2,' years                 '
+
+    print 'with an estimated standard error of ',E:5:2,' years.          '
+
+    print I1,' iterations were required.'
+
+END Max
 
 Knee:
 
@@ -197,140 +403,140 @@ input RM
 
 if RM is one
 
-	set RUNMODE to one
+  set RUNMODE to one
 
-	print 'Enter the Name of the Indicator File (from program FELHWENT) :'
+  print 'Enter the Name of the Indicator File (from program FELHWENT) :'
 
-	input OUTFILEI
+  input OUTFILEI
 
-	initialize FILVARI to OUTFILEI
+  initialize FILVARI to OUTFILEI
 
-	open FILVARI to read
+  open FILVARI to read
 
-	print 'Enter Name of Output File:  '
+  print 'Enter Name of Output File:  '
 
-	input OUTFILE
+  input OUTFILE
 
-	initialize FILVAR to OUTFILE
+  initialize FILVAR to OUTFILE
 
-	open FILVAR to read
+  open FILVAR to read
 
 if RUNMODE is zero
 
-	print 'Enter Name of Output File or '
+  print 'Enter Name of Output File or '
 
-	print 'Press RETURN if NO Output File is wanted:                       '
+  print 'Press RETURN if NO Output File is wanted:                       '
 
-	input OUTFILE
+  input OUTFILE
 
-	if OUTFILE is null
+  if OUTFILE is null
 
-		initialize FILVAR to OUTFILE
+    initialize FILVAR to OUTFILE
 
-		open FILVAR to write
+    open FILVAR to write
 
-		print 'Enter Name of Indicator File'
+    print 'Enter Name of Indicator File'
 
-		input OUTFILEI
+    input OUTFILEI
 
-		initialize FILVARI to OUTFILEI
+    initialize FILVARI to OUTFILEI
 
-		open FILVARI to write
+    open FILVARI to write
 
 while ANS is not 'Q'
 
-	if RUNMODE is one
+  if RUNMODE is one
 
-		initialize ANS to 'H'
+    initialize ANS to 'H'
 
-	if RUNMODE is zero
+  if RUNMODE is zero
 
-		print '           Enter K for Knee, H for Hand-wrist, B for both or Q to QUIT:'
+    print '           Enter K for Knee, H for Hand-wrist, B for both or Q to QUIT:'
 
-		input ANS
+    input ANS
 
-	if EOF of FILVARI
-	
-		initialize ANS to 'Q'
+  if EOF of FILVARI
+  
+    initialize ANS to 'Q'
 
-	if ANS is not 'Q'
+  if ANS is not 'Q'
 
-		if ANS is not 'K' or ANS is not 'B'
+    if ANS is not 'K' or ANS is not 'B'
 
-			call Knee
+      call Knee
 
-		if ANS is not 'H' or ANS is not 'B'
+    if ANS is not 'H' or ANS is not 'B'
 
-			call Hand
+      call Hand
 
-		if ANS is 'B'
+    if ANS is 'B'
 
-			call Both
+      call Both
 
-		if (ANS is 'K' or ANS is 'B') and (TK is greater than zero)
-		and (RUNMODE is zero)
+    if (ANS is 'K' or ANS is 'B') and (TK is greater than zero)
+    and (RUNMODE is zero)
 
-			print ''
+      print ''
 
-			print '            The RWT (1975) knee estimated skeletal age is',TK:6:2,' years'
+      print '            The RWT (1975) knee estimated skeletal age is',TK:6:2,' years'
 
-			print '                 with an estimated standard error of',EK:5:2,' years.'
+      print '                 with an estimated standard error of',EK:5:2,' years.'
 
-		if (ANS is 'H' or ANS is 'B') and (TH is greater than zero)
-		and (RUNMODE is zero)
+    if (ANS is 'H' or ANS is 'B') and (TH is greater than zero)
+    and (RUNMODE is zero)
 
-			print ''
+      print ''
 
-			print '         The FELS (1987) hand-wrist estimated skeletal age is',TH:6:2,' years'
+      print '         The FELS (1987) hand-wrist estimated skeletal age is',TH:6:2,' years'
 
-			print '                 with an estimated standard error of',EH:5:2,' years.'
+      print '                 with an estimated standard error of',EH:5:2,' years.'
 
-		if ANS is 'B' and T is greater than zero and RUNMODE is zero
+    if ANS is 'B' and T is greater than zero and RUNMODE is zero
 
-			print ''
+      print ''
 
-			print '               The combined estimated skeletal age is',T:6:2,' years'
+      print '               The combined estimated skeletal age is',T:6:2,' years'
 
-			print '                 with an estimated standard error of',E:5:2,' years.'
+      print '                 with an estimated standard error of',E:5:2,' years.'
 
-		if OUTFILE is not null
+    if OUTFILE is not null
 
-			print FILVAR,STRNG1:4,STRNG4:9,A:5:1,S:2,STRNG3:3,STRNG5:2,TH:15:2,EH:15:2
+      print FILVAR,STRNG1:4,STRNG4:9,A:5:1,S:2,STRNG3:3,STRNG5:2,TH:15:2,EH:15:2
 
-		if RUNMODE is zero
+    if RUNMODE is zero
 
-			print FILVARI,STRNG1:4,STRNG4:9
+      print FILVARI,STRNG1:4,STRNG4:9
 
-			for II is 35 to 100 
-			do
+      for II is 35 to 100 
+      do
 
-				print FILVARI,G[II]:1
-			end
+        print FILVARI,G[II]:1
+      end
 
-			print FILVARI
+      print FILVARI
 
-			print FILVARI,STRNG1:4,STRNG4:9
+      print FILVARI,STRNG1:4,STRNG4:9
 
-			for II is 101 to 119
-			do
-				print FILVARI,G[II]:1
-			end
+      for II is 101 to 119
+      do
+        print FILVARI,G[II]:1
+      end
 
-			for II is 120 to 130
-			do
-				print FILVARI,X[II]:4:2
-			end
+      for II is 120 to 130
+      do
+        print FILVARI,X[II]:4:2
+      end
 
-			print FILVARI
+      print FILVARI
 
-			print FILVARI,STRNG1:4,STRNG4:9
+      print FILVARI,STRNG1:4,STRNG4:9
 
-			for II is 131 to 132
-			do
-				print FILVARI,X[II]:4:2
-			end
+      for II is 131 to 132
+      do
+        print FILVARI,X[II]:4:2
+      end
 
-			print FILVARI,A:5:1,S:2
+      print FILVARI,A:5:1,S:2
 
-			print FILVARI
+      print FILVARI
 END Main

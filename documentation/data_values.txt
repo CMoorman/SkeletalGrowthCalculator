@@ -340,11 +340,6 @@
         (12,11),(10.5,10),(11,10.5));
 
 
-   {REM***character strings for indicators, knee*******}
-
-   KD : array[1..6,1..2] of string[3]
-      = ((' EW',' MW'),(' EW',' EH'),('WLC','HLC'),
-         (' EW',' MW'),(' EW',' EH'),(' EW',' MW'));
 
 
     {REM***ratio-category boundaries*******************}        {These seem to only be used for KNEE}
