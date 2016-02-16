@@ -78,7 +78,6 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 	@FXML TextField txtS2;
 	@FXML TextField txtS3;
 	
-	
 	// -- Metacarpal I
 	@FXML TextField txtMETI1;
 	//@FXML TextField txtMETI2; Not needed?
@@ -158,8 +157,37 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 	@FXML TextField txtMCV5;
 	@FXML TextField txtMCV6;
 	
+	// -- Middle Phalanx III
+	@FXML TextField txtMPIII1;
+	@FXML TextField txtMPIII2EW;
+	@FXML TextField txtMPIII2MW;
+	@FXML TextField txtMPIII3;
+	@FXML TextField txtMPIII4;
+	@FXML TextField txtMPIII5;
 	
-		
+	// -- Distal Phalanx III
+	@FXML TextField txtDPIII1;
+	@FXML TextField txtDPIII2EW;
+	@FXML TextField txtDPIII2MW;
+	@FXML TextField txtDPIII3;
+	@FXML TextField txtDPIII4;
+	
+	// -- Proximal Phalanx I
+	@FXML TextField txtPPI1;
+	@FXML TextField txtPPI2EW;
+	@FXML TextField txtPPI2MW;
+	@FXML TextField txtPPI3;
+	@FXML TextField txtPPI4;
+	@FXML TextField txtPPI5;
+	@FXML TextField txtPPI6;
+	
+	// -- Distal Phalanx V
+	@FXML TextField txtDPV1;
+	@FXML TextField txtDPV2EW;
+	@FXML TextField txtDPV2MW;
+	@FXML TextField txtDPV3;
+	@FXML TextField txtDPV4;
+	
 	
 	
 	public Scene getScene() {
