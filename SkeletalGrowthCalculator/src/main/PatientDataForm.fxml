@@ -69,7 +69,7 @@
                     <Label fx:id="lblR8" layoutX="37.0" layoutY="310.0" text="R-8" />
                     <Label fx:id="lblR2EW" layoutX="48.0" layoutY="103.0" text="(EW)" />
                     <Label id="lblR2ME" fx:id="lblR2MW" layoutX="46.0" layoutY="131.0" text="(MW)" />
-                    <TextField fx:id="txtR1" layoutX="73.0" layoutY="55.0" prefWidth="69.0" />
+                    <TextField fx:id="txtR1" layoutX="73.0" layoutY="55.0" onKeyTyped="#validateInputCharacter" prefWidth="69.0" />
                     <TextField fx:id="txtR3" layoutX="73.0" layoutY="161.0" prefWidth="69.00009999999747" />
                     <TextField fx:id="txtR4" layoutX="73.0" layoutY="190.0" prefWidth="69.0" />
                     <TextField fx:id="txtR5" layoutX="73.0" layoutY="220.0" prefWidth="69.0" />
@@ -232,7 +232,7 @@
                     <TextField fx:id="txtMCV1" layoutX="92.0" layoutY="1145.0" prefWidth="69.0" />
                     <TextField fx:id="txtMCV3" layoutX="95.0" layoutY="1242.0" prefWidth="69.0" />
                     <TextField fx:id="txtMCV4" layoutX="95.0" layoutY="1270.0" prefWidth="69.0" />
-                    <TextField fx:id="txtMCV5" layoutX="95.0" layoutY="1300.0" prefWidth="69.0" />
+                    <TextField fx:id="txtMCV5" layoutX="95.0" layoutY="1303.0" prefWidth="69.0" />
                     <Label id="lblMETI2EW" layoutX="69.0" layoutY="1190.0" text="(EW)" />
                     <Label id="lblMETI2ME" layoutX="67.0" layoutY="1218.0" text="(MW)" />
                     <TextField id="txtMETI2EW" fx:id="txtMCV2EW" layoutX="109.0" layoutY="1188.0" prefWidth="55.0" />

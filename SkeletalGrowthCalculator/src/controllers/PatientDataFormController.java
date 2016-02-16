@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import main.SkeletalCalculator;
 
 public class PatientDataFormController extends SkeletalCalculator implements Initializable {
@@ -191,6 +192,30 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 	@FXML TextField txtDPV3;
 	@FXML TextField txtDPV4;
 	
+	
+	// -- Used to limit the input within the range of numbers or an ".";
+	@FXML
+	private void validateInputCharacter( KeyEvent ev ) {
+		try{
+			boolean bShouldConsume = false;
+			TextField txtField = (TextField) ev.getSource();
+			
+			// -- If the key typed is not contained in this string, we want to ignore it.
+			if( !".1234567890".contains(ev.getCharacter()) )
+				bShouldConsume = true;
+			
+			// -- Make sure that the field is not null, safety check.
+			if( txtField.getText() != null ) {
+				// -- Check if we already have a "." in the text field.
+				if( ev.getCharacter().contains(".") && txtField.getText().contains(".") )
+					bShouldConsume = true;
+			}
+			
+			if( bShouldConsume )
+				ev.consume();
+			
+		}catch( Exception e ){ } // -- Do nothing.
+	}
 	
 	
 	public Scene getScene() {
