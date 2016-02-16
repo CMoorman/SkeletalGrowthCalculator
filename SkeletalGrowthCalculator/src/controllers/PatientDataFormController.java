@@ -66,6 +66,9 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 	@FXML TextField txtL1;
 	@FXML TextField txtL2;
 	
+	// -- Adductor Sesamoid
+	@FXML TextField txtAS1;
+	
 	// -- Ulna
 	@FXML TextField txtU1;
 	//@FXML TextField txtU2; Not needed?
