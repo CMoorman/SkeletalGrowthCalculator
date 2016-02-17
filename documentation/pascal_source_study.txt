@@ -5,6 +5,7 @@ constants of the program.
 
 Procedures progress:
 
+HeadIn - incomplete
 HeadOut - incomplete
 GetKneeI - incomplete
 GetKnee - incomplete
@@ -110,8 +111,7 @@ real SIGMA
 real ZD
 
 string array ANS size 3
-This string is used in the main procedure. It is used to determine the function
-of the current run, such as which measurements to take (hand or knee or both).
+This string is used in the main procedure. It is used to determine the function of the current run, such as which measurements to take (hand or knee or both).
 
 string array OUTFILE, OUTFILEI size 20 each
 
@@ -134,6 +134,8 @@ int FIRST
 int LGRADED
 
 boolean RSW
+This is being used as a flag to indicate if the knee is being measured/calculated. If it is false, then the FELS method calculation will not be preformed.
+
 boolean head
 boolean OK
 
@@ -175,6 +177,8 @@ end
 END GetKnee
     
 GetHandI:
+
+
 
 GetHand:
 
