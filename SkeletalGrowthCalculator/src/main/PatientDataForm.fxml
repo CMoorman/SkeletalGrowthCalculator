@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
@@ -9,51 +10,15 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.PatientDataFormController">
   <children>
-    <TabPane layoutX="0.0" layoutY="0.0" prefHeight="2106.0" prefWidth="601.0" style="" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="0.0" layoutY="195.0" prefHeight="1911.0" prefWidth="601.0" style="" tabClosingPolicy="UNAVAILABLE">
       <tabs>
         <Tab fx:id="tabFELS" style="width:200px;&#10;-fx-background-color:#eee" text="FELS Method">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="2025.0" prefWidth="601.0" style="-fx-background-color:#eee">
               <children>
-                <Pane fx:id="panePatientInfo" layoutX="0.0" layoutY="0.0" prefHeight="194.9998779296875" prefWidth="601.0" style="-fx-background-color:#eee">
-                  <children>
-                    <Label fx:id="lblPatientInfo" layoutX="14.0" layoutY="6.0" style="-fx-font-weight:bold;" text="Patient Information" underline="false">
-                      <font>
-                        <Font size="15.0" />
-                      </font>
-                    </Label>
-                    <Text fx:id="lblStudy" layoutX="49.0" layoutY="50.0" scaleX="1.0000035338370918" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" />
-                    <Text fx:id="lblID" layoutX="70.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-                    <Text fx:id="lblCronAge" layoutX="13.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chron. Age" />
-                    <Text fx:id="lblSex" layoutX="61.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sex" />
-                    <SplitMenuButton fx:id="mnuSex" layoutX="91.0" layoutY="128.0" mnemonicParsing="false" prefWidth="79.99990610351816" text="---">
-                      <items>
-                        <MenuItem mnemonicParsing="false" text="Male" />
-                        <MenuItem mnemonicParsing="false" text="Female" />
-                      </items>
-                    </SplitMenuButton>
-                    <TextField fx:id="txtStudy" layoutX="90.0" layoutY="34.0" prefWidth="80.0" />
-                    <TextField fx:id="txtID" layoutX="91.0" layoutY="65.0" prefWidth="80.0" />
-                    <TextField fx:id="txtCronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
-                    <Label fx:id="lblAssessorNum" layoutX="231.0" layoutY="38.0" text="Assessor #" />
-                    <Label fx:id="lblAssessmentNum" layoutX="212.0" layoutY="70.0" text="Assessment #" />
-                    <Label fx:id="lblBirthDate" layoutX="237.0" layoutY="101.0" text="Birth Date" />
-                    <Label fx:id="lblXrayDate" layoutX="231.0" layoutY="133.0" text="X-ray Date" />
-                    <Label fx:id="lblAsmDate" layoutX="192.0" layoutY="164.0" text="Assessment Date" />
-                    <TextField fx:id="txtAssessorNum" layoutX="309.0" layoutY="35.0" prefWidth="92.0001220703125" />
-                    <TextField fx:id="txtAssessmentNum" layoutX="309.0" layoutY="66.0" prefWidth="92.0" />
-                    <TextField fx:id="txtBirthDate" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
-                    <TextField fx:id="txtXrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
-                    <TextField fx:id="txtAsmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
-                    <Text fx:id="lblSA" layoutX="453.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A." />
-                    <Text fx:id="lblSEE" layoutX="444.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.E.E." />
-                    <TextField fx:id="txtSEE" layoutX="484.0" layoutY="97.0" prefWidth="92.0" />
-                    <TextField fx:id="txtSA" layoutX="484.0" layoutY="66.0" prefWidth="92.0" />
-                  </children>
-                </Pane>
-                <ScrollPane id="ScrollPane" layoutX="0.0" layoutY="195.0" prefHeight="518.0" prefViewportHeight="1704.0" prefViewportWidth="601.0" prefWidth="601.0" vbarPolicy="ALWAYS">
+                <ScrollPane id="ScrollPane" layoutX="0.0" layoutY="0.0" prefHeight="386.0" prefViewportHeight="1704.0" prefViewportWidth="601.0" prefWidth="601.0" vbarPolicy="ALWAYS">
                   <content>
-                    <Pane fx:id="paneMeasurementInputs" prefHeight="1817.0" prefWidth="589.0">
+                    <Pane fx:id="paneMeasurementInputs" prefHeight="1721.0" prefWidth="591.0">
                       <children>
                         <Label id="lblPatientInfo" fx:id="lblMeasurments" layoutX="14.0" layoutY="11.0" style="-fx-font-weight:bold;" text="Measurements" />
                         <Label fx:id="lblRadius" layoutX="27.0" layoutY="33.0" style="-fx-font-weight:bold;&#10;" text="Radius">
@@ -332,5 +297,44 @@
         </Tab>
       </tabs>
     </TabPane>
+    <Pane fx:id="panePatientInfo" layoutX="0.0" layoutY="0.0" prefHeight="194.9998779296875" prefWidth="601.0" style="-fx-background-color:#eee">
+      <children>
+        <Label fx:id="lblPatientInfo" layoutX="14.0" layoutY="6.0" style="-fx-font-weight:bold;" text="Patient Information" underline="false">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Label>
+        <Text fx:id="lblStudy" layoutX="49.0" layoutY="50.0" scaleX="1.0000035338370918" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Study" />
+        <Text fx:id="lblID" layoutX="70.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+        <Text fx:id="lblCronAge" layoutX="13.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chron. Age" />
+        <Text fx:id="lblSex" layoutX="61.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sex" />
+        <TextField fx:id="txtStudy" layoutX="90.0" layoutY="34.0" prefWidth="80.0" />
+        <TextField fx:id="txtID" layoutX="91.0" layoutY="65.0" prefWidth="80.0" />
+        <TextField fx:id="txtCronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
+        <Label fx:id="lblAssessorNum" layoutX="231.0" layoutY="38.0" text="Assessor #" />
+        <Label fx:id="lblAssessmentNum" layoutX="212.0" layoutY="70.0" text="Assessment #" />
+        <Label fx:id="lblBirthDate" layoutX="237.0" layoutY="101.0" text="Birth Date" />
+        <Label fx:id="lblXrayDate" layoutX="231.0" layoutY="133.0" text="X-ray Date" />
+        <Label fx:id="lblAsmDate" layoutX="192.0" layoutY="164.0" text="Assessment Date" />
+        <TextField fx:id="txtAssessorNum" layoutX="309.0" layoutY="35.0" prefWidth="92.0001220703125" />
+        <TextField fx:id="txtAssessmentNum" layoutX="309.0" layoutY="66.0" prefWidth="92.0" />
+        <TextField fx:id="txtBirthDate" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
+        <TextField fx:id="txtXrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
+        <TextField fx:id="txtAsmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
+        <Text fx:id="lblSA" layoutX="453.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A." />
+        <Text fx:id="lblSEE" layoutX="444.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.E.E." />
+        <TextField fx:id="txtSEE" layoutX="484.0" layoutY="97.0" prefWidth="92.0" />
+        <TextField fx:id="txtSA" layoutX="484.0" layoutY="66.0" prefWidth="92.0" />
+        <ComboBox id="combobox" fx:id="cmbGender" layoutX="93.0" layoutY="128.0" promptText="---" visibleRowCount="2">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+      </children>
+    </Pane>
   </children>
 </AnchorPane>

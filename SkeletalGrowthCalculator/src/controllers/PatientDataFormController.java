@@ -3,11 +3,14 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -17,12 +20,12 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 
 	private static Scene PatientDataFormScene = null;
 	private static PatientDataFormController instance = null;
-	
+	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	// -- Form FXML -- Patient Info ************
 	@FXML TextField txtStudy;
 	@FXML TextField txtID;
 	@FXML TextField txtChronAge;
-	@FXML SplitMenuButton mnuSex;
+	@FXML ComboBox<String> cmbGender;
 	@FXML TextField txtAssessorNum;
 	@FXML TextField txtAssessmentNum;
 	@FXML TextField txtBirthDate;
@@ -246,6 +249,6 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		cmbGender.setItems(genderList);
 	}
 }
