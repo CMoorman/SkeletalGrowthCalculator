@@ -11,15 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import main.SkeletalCalculator;
 
-public class PatientDataFormController extends SkeletalCalculator implements Initializable {
+public class FELSDataFormController extends SkeletalCalculator implements Initializable {
 
 	private static Scene PatientDataFormScene = null;
-	private static PatientDataFormController instance = null;
+	private static FELSDataFormController instance = null;
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	// -- Form FXML -- Patient Info ************
 	@FXML TextField txtStudy;
@@ -225,7 +224,7 @@ public class PatientDataFormController extends SkeletalCalculator implements Ini
 		return PatientDataFormScene;
 	}
 	
-	public static PatientDataFormController getInstance() {
+	public static FELSDataFormController getInstance() {
 		
 		if( instance == null ) {
 			

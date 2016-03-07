@@ -30,7 +30,7 @@ public class TitleViewController extends SkeletalCalculator implements Initializ
 		Object buttonSource = e.getSource();
 		
 		if( buttonSource == btnStart ) {
-			setScene( PatientDataFormController.getInstance().getScene() );
+			setScene( FELSDataFormController.getInstance().getScene() );
 		}
 		else if( buttonSource == btnOptions ) {
 			
