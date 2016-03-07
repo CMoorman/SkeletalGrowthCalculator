@@ -30,8 +30,11 @@ public class FELS_method {
 	double deriv1;
 	double deriv2;
 	double deriv_holder;
+	
+	int NGRADED = 84;
+	int LGRADED = TOTAL_INDICATORS;
+	
 	int FIRST = 0;
-	int LGRADED = 0;
 	
 	int MREGR = 86;
 	int NREGR = TOTAL_INDICATORS;
