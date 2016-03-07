@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +22,13 @@ import java.util.List;
 public class Indicator {
 	private String name = "";
 	private String description = "";
-	private int maleStartRange = 0;
-	private int maleEndRange = 0;
-	private int femaleStartRange = 0;
-	private int femaleEndRange = 0;
+	private double maleStartRange = 0;
+	private double maleEndRange = 0;
+	private double femaleStartRange = 0;
+	private double femaleEndRange = 0;
 
-	public Indicator(String name, String description, int maleStartRange, int maleEndRange, int femaleStartRange,
-			int femaleEndRange) {
+	public Indicator(String name, String description, double maleStartRange, double maleEndRange, double femaleStartRange,
+			double femaleEndRange) {
 		this.name = name;
 		this.description = description;
 		this.maleStartRange = maleStartRange;
@@ -52,35 +53,35 @@ public class Indicator {
 		this.description = description;
 	}
 
-	public int getMaleStartRange() {
+	public double getMaleStartRange() {
 		return maleStartRange;
 	}
 
-	public void setMaleStartRange(int maleStartRange) {
+	public void setMaleStartRange(double maleStartRange) {
 		this.maleStartRange = maleStartRange;
 	}
 
-	public int getMaleEndRange() {
+	public double getMaleEndRange() {
 		return maleEndRange;
 	}
 
-	public void setMaleEndRange(int maleEndRange) {
+	public void setMaleEndRange(double maleEndRange) {
 		this.maleEndRange = maleEndRange;
 	}
 
-	public int getFemaleStartRange() {
+	public double getFemaleStartRange() {
 		return femaleStartRange;
 	}
 
-	public void setFemaleStartRange(int femaleStartRange) {
+	public void setFemaleStartRange(double femaleStartRange) {
 		this.femaleStartRange = femaleStartRange;
 	}
 
-	public int getFemaleEndRange() {
+	public double getFemaleEndRange() {
 		return femaleEndRange;
 	}
 
-	public void setFemaleEndRange(int femaleEndRange) {
+	public void setFemaleEndRange(double femaleEndRange) {
 		this.femaleEndRange = femaleEndRange;
 	}
 
@@ -89,7 +90,11 @@ public class Indicator {
 		if (filePath == null) {
 			return indicators;
 		}
-		File inputFile = new File(filePath);
+		URL url = Indicator.class.getResource(filePath);
+		if(url == null){
+			return indicators;
+		}
+		File inputFile = new File(url.getPath());
 		if (!inputFile.exists()) {
 			System.out.println("File does not exist");
 			return indicators;
@@ -98,19 +103,19 @@ public class Indicator {
 		InputStreamReader isr = null;
 		BufferedReader br = null;
 		try {
-			fileStream = new FileInputStream(filePath);
+			fileStream = new FileInputStream(url.getPath());
 			isr = new InputStreamReader(fileStream, Charset.forName("UTF-8"));
 			br = new BufferedReader(isr);
 			String line = "";
 			while ((line = br.readLine()) != null) {
 		       String[] indicatorFields = line.split(",");
-		       if(indicatorFields.length == 6){
+		       if(indicatorFields != null && indicatorFields.length == 6){
 		    	   String name = indicatorFields[0];
 		    	   String description = indicatorFields[1];
-		    	   int maleStart = Integer.parseInt(indicatorFields[2]);
-		    	   int maleEnd = Integer.parseInt(indicatorFields[3]);
-		    	   int femaleStart = Integer.parseInt(indicatorFields[4]);
-		    	   int femaleEnd = Integer.parseInt(indicatorFields[3]);
+		    	   double maleStart = Double.parseDouble(indicatorFields[2]);
+		    	   double maleEnd = Double.parseDouble(indicatorFields[3]);
+		    	   double femaleStart = Double.parseDouble(indicatorFields[4]);
+		    	   double femaleEnd = Double.parseDouble(indicatorFields[3]);
 		    	   indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd));
 		       }
 		    }

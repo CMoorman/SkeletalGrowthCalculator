@@ -32,5 +32,8 @@ public class SkeletalMaturityMethod {
 	public void setInputFilePath(String inputFilePath) {
 		this.inputFilePath = inputFilePath;
 	}
+	public void load() {
+		addIndicators(Indicator.loadIndicators(this.inputFilePath));
+	}
 	
 }

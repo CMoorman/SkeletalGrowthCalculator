@@ -14,12 +14,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import main.SkeletalCalculator;
+import main.SkeletalMaturityMethod;
 
 public class FELSDataFormController extends SkeletalCalculator implements Initializable {
 
 	private static Scene PatientDataFormScene = null;
 	private static FELSDataFormController instance = null;
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
+	private SkeletalMaturityMethod felsMethod;
+	private final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
 	// -- Form FXML -- Patient Info ************
 	@FXML TextField txtStudy;
 	@FXML TextField txtID;
@@ -249,5 +252,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cmbGender.setItems(genderList);
+		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
+		felsMethod.load();
 	}
 }
