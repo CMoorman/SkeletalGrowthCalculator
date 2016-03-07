@@ -3,7 +3,8 @@ package main;
 public class FELS_method {
 
 	
-	int TOTAL_INDICATORS = 98; // -- Not 132, we are not including KNEE indicators.
+	// -- Only 97 (98) indicators for hand/wrist.  We are not including the knee indicators.
+	int TOTAL_INDICATORS = 97;
 	int MAX_VALUES[];
 	double parameters[][];
 	int grade[];
@@ -13,6 +14,7 @@ public class FELS_method {
 	int RUNMODE;
 	int M1;
 	int iterator;
+	double E;
 	double U;
 	double grade1;
 	double grade2;
@@ -31,6 +33,8 @@ public class FELS_method {
 	int FIRST = 0;
 	int LGRADED = 0;
 	
+	int MREGR = 86;
+	int NREGR = TOTAL_INDICATORS;
 
 	public double Calculate() {
 		
@@ -132,23 +136,24 @@ public class FELS_method {
 				}
 			}
 			
-			if( RSW ) {
+			// -- Don't think we need RSW.
+			//if( RSW ) {
 				
-				for(iterator = MREGR; iterator <= NREGR;iterator++){
+				for(iterator = MREGR; iterator <= NREGR; iterator++){
 					
 					if( cubed_ratio[ iterator ] != 0.0 ){
 						
-						BETA = parameters[ TOTAL_INDICATORS * ( sex - 1 ) + iterator] [1];
-						MU = parameters[ TOTAL_INDICATORS * ( sex - 1 ) + iterator ] [2];
-						SIGMA = parameters[ TOTAL_INDICATORS * ( sex - 1 ) + iterator] [3];
-						ZD = (cubed_ratio[iterator] - BETA * current_estimate - MU) / SIGMA;
+						double BETA = parameters[ TOTAL_INDICATORS * ( sex - 1 ) + iterator] [1];
+						double MU = parameters[ TOTAL_INDICATORS * ( sex - 1 ) + iterator ] [2];
+						double SIGMA = parameters[ TOTAL_INDICATORS * ( sex - 1 ) + iterator] [3];
+						double ZD = (cubed_ratio[iterator] - BETA * current_estimate - MU) / SIGMA;
 						
 						// Add up derivatives with respect to theta across continuous indicators
 						deriv1 = deriv1 + BETA * ZD / SIGMA;
-						deriv2 = deriv2 * sqr( BETA / SIGMA);
+						deriv2 = deriv2 * Math.sqrt( BETA / SIGMA);
 					}
 				}
-			}
+			//}
 			
 			// If second derivative is negative, make it positive
 			if(deriv2<0) {
@@ -162,7 +167,7 @@ public class FELS_method {
 				deriv2=0.01;
 			}
 			
-			deriv_end = deriv1 / deriv2;
+			double deriv_end = deriv1 / deriv2;
 			
 			if(deriv_end > 1){
 				
@@ -190,7 +195,7 @@ public class FELS_method {
 				
 				if(deriv_holder<0 && current_estimate>T0){
 					
-					current_estimate=(T0+T1)/2.0;
+					current_estimate = (T0 + T1) / 2.0;
 				}
 			}
 
@@ -250,11 +255,10 @@ public class FELS_method {
 			System.out.printf("with an estimated standard error of %f.2 years.", E);
 			System.out.printf("%d iterations were required.", iterator1);
 		}
+		
+		return current_estimate;
 	}
-
-	
-	
-	
+};
 	/* UPPER BOUNDS
 	 * {REM***parameters, male first, then female,hand******}
         (2.50,     1.24,     1.67,    0,0),                 {R-1}
@@ -488,8 +492,7 @@ public class FELS_method {
         (0.140,    0.136,    0.257,    0,0),                {DP I-2}
         (0.175,   -0.149,    0.205,    0,0),                {DP III-2}
         (0.203,   -0.345,    0.294,    0,0));               {DP V-2}
-	 * */
-	 */
+	 * 
 	 
 	 /*
 	  *  {REM***lower age boundaries, male, then female,knee*}
@@ -552,4 +555,3 @@ public class FELS_method {
         (12,11),(10.5,10),(11,10.5));
 
 	  */
-}
