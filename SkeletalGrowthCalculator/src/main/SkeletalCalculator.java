@@ -52,11 +52,11 @@ public class SkeletalCalculator extends Application implements Runnable {
 	}
 	
 	public void setStage( Stage newStage ) {
-		this.activeStage = newStage;
+		SkeletalCalculator.activeStage = newStage;
 	}
 	
 	public Stage getStage() {
-		return this.activeStage;
+		return SkeletalCalculator.activeStage;
 	}
 	
 	public static void main( String[] args ) {
