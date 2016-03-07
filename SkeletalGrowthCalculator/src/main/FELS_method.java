@@ -3,9 +3,9 @@ package main;
 public class FELS_method {
 
 	
-	const int TOTAL_INDICATORS = 132;
-	const int MAX_VALUES[];
-	const double parameters[][];
+	int TOTAL_INDICATORS = 132;
+	int MAX_VALUES[];
+	double parameters[][];
 	int grade[];
 	int cubed_ratio[];
 	int sex;
@@ -29,8 +29,8 @@ public class FELS_method {
 	double deriv2;
 	double deriv_holder;
 	
-	
-	
+}
+/*	
 	do{
 		iterator1++;
 
@@ -249,4 +249,4 @@ public class FELS_method {
 		print("with an estimated standard error of %f.2 years.", E);
 		print("%d iterations were required.", iterator1);
 	}
-}
+}*/
