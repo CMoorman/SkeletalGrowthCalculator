@@ -334,8 +334,12 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button fx:id="btnSubmit" layoutX="518.0" layoutY="164.0" mnemonicParsing="false" text="Submit" />
-        <Label layoutX="427.0" layoutY="167.0" text="Submit ALL data" />
+        <Button fx:id="btnSubmit" defaultButton="true" layoutX="489.0" layoutY="152.0" mnemonicParsing="false" text="Submit">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Button>
+        <Button id="btnSubmit" fx:id="btnClear" cancelButton="true" layoutX="501.0" layoutY="11.0" mnemonicParsing="false" style=" -fx-background-color: linear-gradient(#ff5400, #be1d00);&#10; -fx-background-radius: 30;&#10; -fx-background-insets: 0;&#10; -fx-text-fill: white;" text="Clear Data" textAlignment="CENTER" />
       </children>
     </Pane>
   </children>
