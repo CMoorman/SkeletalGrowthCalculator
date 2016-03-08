@@ -4,7 +4,7 @@ public class FELS_method {
 
 	
 	// -- Only 97 (98) indicators for hand/wrist.  We are not including the knee indicators.
-	int TOTAL_INDICATORS = 97;
+	int TOTAL_INDICATORS = 108;
 	int MAX_VALUES[];
 	double parameters[][];
 	int grade[];
@@ -31,12 +31,12 @@ public class FELS_method {
 	double deriv2;
 	double deriv_holder;
 	
-	int NGRADED = 84;
+	int NGRADED = 76; // -- Not sure if this is right.
 	int LGRADED = TOTAL_INDICATORS;
 	
 	int FIRST = 0;
 	
-	int MREGR = 86;
+	int MREGR = 76; // -- Not sure if this is right.
 	int NREGR = TOTAL_INDICATORS;
 
 	public double Calculate() {
