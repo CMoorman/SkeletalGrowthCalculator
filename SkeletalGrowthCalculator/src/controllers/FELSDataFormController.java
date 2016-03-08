@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -23,6 +24,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	private SkeletalMaturityMethod felsMethod;
 	private final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
+	
 	// -- Form FXML -- Patient Info ************
 	@FXML TextField txtStudy;
 	@FXML TextField txtID;
@@ -197,6 +199,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@FXML TextField txtDPV3;
 	@FXML TextField txtDPV4;
 	
+	@FXML Button btnSubmit;
+	
+	private String s_FormHeaderData = "";
+	private String s_MeasurementData = "";
 	
 	// -- Used to limit the input within the range of numbers or an ".";
 	@FXML
