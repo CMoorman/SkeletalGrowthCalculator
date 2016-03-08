@@ -290,157 +290,157 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		s_MeasurementData = "";
 		
 		// -- Radius
-		txtCurrentTextField = txtR1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR5; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR6; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR7; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtR8; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtR1 );  
+		AddMeasurementInputToString( txtR2EW );  
+		AddMeasurementInputToString( txtR2MW );  
+		AddMeasurementInputToString( txtR3 );  
+		AddMeasurementInputToString( txtR4 );  
+		AddMeasurementInputToString( txtR5 );  
+		AddMeasurementInputToString( txtR6 );  
+		AddMeasurementInputToString( txtR7 );  
+		AddMeasurementInputToString( txtR8 );  
 		
 		// -- Triquetral
-		txtCurrentTextField = txtTRI1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTRI2; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTRI3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTRI4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtTRI1 );  
+		AddMeasurementInputToString( txtTRI2 );  
+		AddMeasurementInputToString( txtTRI3 );  
+		AddMeasurementInputToString( txtTRI4 );  
 		
 		// -- Trapezoid
-		txtCurrentTextField = txtTPD1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPD2; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPD3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPD4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPD5; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPD6; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPD7; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtTPD1 );  
+		AddMeasurementInputToString( txtTPD2 );  
+		AddMeasurementInputToString( txtTPD3 );  
+		AddMeasurementInputToString( txtTPD4 );  
+		AddMeasurementInputToString( txtTPD5 );  
+		AddMeasurementInputToString( txtTPD6 );  
+		AddMeasurementInputToString( txtTPD7 );  
 		
 		// -- PISIForm
-		txtCurrentTextField = txtP1; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtP1 );  
 		
 		// -- Lunate
-		txtCurrentTextField = txtL1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtL2; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtL1 );  
+		AddMeasurementInputToString( txtL2 );  
 		
 		// -- Adductor Sesamoid
-		txtCurrentTextField = txtAS1; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtAS1 );  
 		
 		// -- Ulna
-		txtCurrentTextField = txtU1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtU2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtU2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtU3; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtU1 );  
+		AddMeasurementInputToString( txtU2EW );  
+		AddMeasurementInputToString( txtU2MW );  
+		AddMeasurementInputToString( txtU3 );  
 		
 		// -- Scaphoid
-		txtCurrentTextField = txtS1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtS2; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtS3; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtS1 );  
+		AddMeasurementInputToString( txtS2 );  
+		AddMeasurementInputToString( txtS3 );  
 		
 		// -- Metacarpal I
-		txtCurrentTextField = txtMETI1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI5; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI6; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETI7; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtMETI1 );  
+		AddMeasurementInputToString( txtMETI2EW );  
+		AddMeasurementInputToString( txtMETI2MW );  
+		AddMeasurementInputToString( txtMETI3 );  
+		AddMeasurementInputToString( txtMETI4 );  
+		AddMeasurementInputToString( txtMETI5 );  
+		AddMeasurementInputToString( txtMETI6 );  
+		AddMeasurementInputToString( txtMETI7 );  
 		
 		// -- Capitate
-		txtCurrentTextField = txtC1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtC2; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtC3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtC4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtC1 );  
+		AddMeasurementInputToString( txtC2 );  
+		AddMeasurementInputToString( txtC3 );  
+		AddMeasurementInputToString( txtC4 );  
 		
 		// -- Trapezium
-		txtCurrentTextField = txtTPM1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPM2; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPM3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtTPM4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtTPM1 );  
+		AddMeasurementInputToString( txtTPM2 );  
+		AddMeasurementInputToString( txtTPM3 );  
+		AddMeasurementInputToString( txtTPM4 );  
 		
 		// -- Hamate
-		txtCurrentTextField = txtH1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtH2; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtH3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtH4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtH1 );  
+		AddMeasurementInputToString( txtH2 );  
+		AddMeasurementInputToString( txtH3 );  
+		AddMeasurementInputToString( txtH4 );  
 		
 		// -- Proximal Phalanx III
-		txtCurrentTextField = txtPPIII1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPIII2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPIII2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPIII3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPIII4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPIII5; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPIII6; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtPPIII1 );  
+		AddMeasurementInputToString( txtPPIII2EW );  
+		AddMeasurementInputToString( txtPPIII2MW );  
+		AddMeasurementInputToString( txtPPIII3 );  
+		AddMeasurementInputToString( txtPPIII4 );  
+		AddMeasurementInputToString( txtPPIII5 );  
+		AddMeasurementInputToString( txtPPIII6 );  
 		
 		// -- Middle Phalanx V
-		txtCurrentTextField = txtMPV1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPVEW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPVMW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPV3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPV4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPV5; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtMPV1 );  
+		AddMeasurementInputToString( txtMPVEW );  
+		AddMeasurementInputToString( txtMPVMW );  
+		AddMeasurementInputToString( txtMPV3 );  
+		AddMeasurementInputToString( txtMPV4 );  
+		AddMeasurementInputToString( txtMPV5 );  
 		
 		// -- Metacarpal III
-		txtCurrentTextField = txtMETIII1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETIII2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETIII2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETIII3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETIII4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMETIII5; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtMETIII1 );  
+		AddMeasurementInputToString( txtMETIII2EW );  
+		AddMeasurementInputToString( txtMETIII2MW );  
+		AddMeasurementInputToString( txtMETIII3 );  
+		AddMeasurementInputToString( txtMETIII4 );  
+		AddMeasurementInputToString( txtMETIII5 );  
 		
 		// -- Proximal Phalanx V
-		txtCurrentTextField = txtPPV1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPV2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPV2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPV3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPV4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPV5; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtPPV1 );  
+		AddMeasurementInputToString( txtPPV2EW );  
+		AddMeasurementInputToString( txtPPV2MW );  
+		AddMeasurementInputToString( txtPPV3 );  
+		AddMeasurementInputToString( txtPPV4 );  
+		AddMeasurementInputToString( txtPPV5 );  
 		
 		// -- Distal Phalanx I
-		txtCurrentTextField = txtDPI2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPI2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPI4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtDPI2EW );  
+		AddMeasurementInputToString( txtDPI2MW );  
+		AddMeasurementInputToString( txtDPI4 );  
 		
 		// -- Metacarpal V
-		txtCurrentTextField = txtMCV1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMCV2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMCV2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMCV3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMCV4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMCV5; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMCV6; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtMCV1 );  
+		AddMeasurementInputToString( txtMCV2EW );  
+		AddMeasurementInputToString( txtMCV2MW );  
+		AddMeasurementInputToString( txtMCV3 );  
+		AddMeasurementInputToString( txtMCV4 );  
+		AddMeasurementInputToString( txtMCV5 );  
+		AddMeasurementInputToString( txtMCV6 );  
 		
 		// -- Middle Phalanx III
-		txtCurrentTextField = txtMPIII1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPIII2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPIII2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPIII3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPIII4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtMPIII5; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtMPIII1 );  
+		AddMeasurementInputToString( txtMPIII2EW );  
+		AddMeasurementInputToString( txtMPIII2MW );  
+		AddMeasurementInputToString( txtMPIII3 );  
+		AddMeasurementInputToString( txtMPIII4 );  
+		AddMeasurementInputToString( txtMPIII5 );  
 		
 		// -- Distal Phalanx III
-		txtCurrentTextField = txtDPIII1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPIII2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPIII2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPIII3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPIII4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtDPIII1 );  
+		AddMeasurementInputToString( txtDPIII2EW );  
+		AddMeasurementInputToString( txtDPIII2MW );  
+		AddMeasurementInputToString( txtDPIII3 );  
+		AddMeasurementInputToString( txtDPIII4 );  
 		
 		// -- Proximal Phalanx I
-		txtCurrentTextField = txtPPI1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPI2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPI2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPI3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPI4; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPI5; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtPPI6; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtPPI1 );  
+		AddMeasurementInputToString( txtPPI2EW );  
+		AddMeasurementInputToString( txtPPI2MW );  
+		AddMeasurementInputToString( txtPPI3 );  
+		AddMeasurementInputToString( txtPPI4 );  
+		AddMeasurementInputToString( txtPPI5 );  
+		AddMeasurementInputToString( txtPPI6 );  
 		
 		// -- Distal Phalanx V
-		txtCurrentTextField = txtDPV1; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPV2EW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPV2MW; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPV3; AddMeasurementInputToString( txtCurrentTextField );
-		txtCurrentTextField = txtDPV4; AddMeasurementInputToString( txtCurrentTextField );
+		AddMeasurementInputToString( txtDPV1 );  
+		AddMeasurementInputToString( txtDPV2EW );  
+		AddMeasurementInputToString( txtDPV2MW );  
+		AddMeasurementInputToString( txtDPV3 );  
+		AddMeasurementInputToString( txtDPV4 );
 		
 		if( m_ErrorIDList.size() > 0 ){
 			// -- We found errors.  Uh oh.
