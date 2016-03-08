@@ -225,6 +225,50 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		}catch( Exception e ){ } // -- Do nothing.
 	}
 	
+	private void AddHeaderInfoToString( Object inputObject ) {
+		// TODO: Do we need some sort of validation per header input text field??
+		String sCurrentInput = "";
+		
+		if( inputObject.getClass() == TextField.class ){
+			sCurrentInput = ((TextField)inputObject).getText().trim();
+		}
+		else if( inputObject.getClass() == ComboBox.class ) {
+			// -- We only have one combobox.
+			sCurrentInput = ((ComboBox)inputObject).getSelectionModel().getSelectedItem().toString();
+		}
+		
+		// TODO: What about the combo box?
+		if( sCurrentInput.isEmpty() && inputObject.getClass() == TextField.class )
+			m_ErrorIDList.add( (TextField)inputObject );
+		
+		s_FormHeaderData += sCurrentInput;
+	}
+	
+	private boolean LoadHeaderInput() {
+		boolean rval = true;
+		
+		Object txtCurrentTextField = null;
+		
+		txtCurrentTextField = txtStudy; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtID; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtChronAge; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = cmbGender; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtAssessorNum; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtAssessmentNum; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtBirthDate; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtXrayDate; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtAsmDate; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtSA; AddHeaderInfoToString( txtCurrentTextField );
+		txtCurrentTextField = txtSEE; AddHeaderInfoToString( txtCurrentTextField );
+		
+		if( m_ErrorIDList.size() > 0 ){
+			// -- We found errors.  Uh oh.
+			rval = false;
+		}
+		
+		return rval;
+	}
+	
 	private void AddMeasurementInputToString( TextField  inputTextField ) {
 		String sCurrentInput = "";
 		sCurrentInput = inputTextField.getText().trim();
@@ -237,7 +281,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		}
 	}
 	
-	private boolean LoadInput() {	
+	private boolean LoadMeasurementInput() {	
 		
 		boolean rval = true;
 		TextField txtCurrentTextField = null;
@@ -422,7 +466,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private void ButtonClicked( ActionEvent E ) {
 		
 		if( E.getSource() == btnSubmit ) {
-			if( LoadInput() ) {
+			if( LoadMeasurementInput() && LoadHeaderInput() ) {
 				SaveAllData();
 			}
 			else{
