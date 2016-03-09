@@ -247,19 +247,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private boolean LoadHeaderInput() {
 		boolean rval = true;
 		
-		Object txtCurrentTextField = null;
-		
-		txtCurrentTextField = txtStudy; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtID; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtChronAge; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = cmbGender; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtAssessorNum; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtAssessmentNum; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtBirthDate; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtXrayDate; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtAsmDate; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtSA; AddHeaderInfoToString( txtCurrentTextField );
-		txtCurrentTextField = txtSEE; AddHeaderInfoToString( txtCurrentTextField );
+		AddHeaderInfoToString( txtStudy );
+		AddHeaderInfoToString( txtID );
+		AddHeaderInfoToString( txtChronAge );
+		AddHeaderInfoToString( cmbGender );
+		AddHeaderInfoToString( txtAssessorNum );
+		AddHeaderInfoToString( txtAssessmentNum );
+		AddHeaderInfoToString( txtBirthDate );
+		AddHeaderInfoToString( txtXrayDate );
+		AddHeaderInfoToString( txtAsmDate );
+		AddHeaderInfoToString( txtSA );
+		AddHeaderInfoToString( txtSEE );
 		
 		if( m_ErrorIDList.size() > 0 ){
 			// -- We found errors.  Uh oh.
@@ -284,7 +282,6 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private boolean LoadMeasurementInput() {	
 		
 		boolean rval = true;
-		TextField txtCurrentTextField = null;
 		
 		// -- Make sure to have clean measurement data before we begin.
 		s_MeasurementData = "";
