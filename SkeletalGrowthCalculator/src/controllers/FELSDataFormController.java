@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
 
@@ -27,6 +30,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private static Scene PatientDataFormScene = null;
 	private static FELSDataFormController instance = null;
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
+	private final String maleColor = "#ADD8E6;";
+	private final String femaleColor = "#FAAFBA;";
+	private final String whiteColor = "#000000;";
+	private final String fxBckgrndStyleConst = "-fx-background-color: ";
 	private SkeletalMaturityMethod felsMethod;
 	private final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
 	private List<TextField> inputs = new ArrayList<TextField>();
@@ -364,6 +371,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cmbGender.setItems(genderList);
+		cmbGender.valueProperty().addListener(new ChangeListener<String>() {
+	        @Override public void changed(ObservableValue ov, String old, String current) {
+	        	if(current.equals("Male")){
+	        		paneMeasurementInputs.setStyle(fxBckgrndStyleConst + maleColor);
+	        	} else if(current.equals("Female")){
+	        		paneMeasurementInputs.setStyle(fxBckgrndStyleConst + femaleColor);
+	        	} else {
+	        		paneMeasurementInputs.setStyle(fxBckgrndStyleConst + whiteColor);
+	        	}
+	        }    
+	    });
 		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
 		felsMethod.load();
 		initializeInputList();
