@@ -391,6 +391,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	        }    
 	    });
 		
+		for(TextField text : inputs ){
+			text.setOnKeyTyped( e -> validateInputCharacter(e) );
+		}
+		
 	}
 
 	private void initializeInputList() {

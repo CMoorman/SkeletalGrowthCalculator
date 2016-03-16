@@ -36,7 +36,7 @@
                         <Label fx:id="lblR8" layoutX="37.0" layoutY="310.0" text="R-8" />
                         <Label fx:id="lblR2EW" layoutX="48.0" layoutY="103.0" text="(EW)" />
                         <Label id="lblR2ME" fx:id="lblR2MW" layoutX="46.0" layoutY="131.0" text="(MW)" />
-                        <TextField fx:id="txtR1" layoutX="73.0" layoutY="55.0" onKeyTyped="#validateInputCharacter" prefWidth="69.0" />
+                        <TextField fx:id="txtR1" layoutX="73.0" layoutY="55.0" prefWidth="69.0" />
                         <TextField fx:id="txtR3" layoutX="73.0" layoutY="161.0" prefWidth="69.00009999999747" />
                         <TextField fx:id="txtR4" layoutX="73.0" layoutY="190.0" prefWidth="69.0" />
                         <TextField fx:id="txtR5" layoutX="73.0" layoutY="220.0" prefWidth="69.0" />
