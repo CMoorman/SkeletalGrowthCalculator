@@ -21,7 +21,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
 
@@ -371,6 +370,15 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cmbGender.setItems(genderList);
+		initializeInputList();
+		addListeners();
+		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
+		felsMethod.load();
+		btnSubmit.setOnAction( e -> ButtonClicked(e) );
+		
+	}
+
+	private void addListeners() {
 		cmbGender.valueProperty().addListener(new ChangeListener<String>() {
 	        @Override public void changed(ObservableValue ov, String old, String current) {
 	        	if(current.equals("Male")){
@@ -382,10 +390,6 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	        	}
 	        }    
 	    });
-		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
-		felsMethod.load();
-		initializeInputList();
-		btnSubmit.setOnAction( e -> ButtonClicked(e) );
 		
 	}
 
@@ -395,6 +399,5 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				inputs.add((TextField)child);
 			}
 		}
-		
 	}
 }
