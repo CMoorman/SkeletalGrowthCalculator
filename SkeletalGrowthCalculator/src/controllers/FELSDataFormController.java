@@ -2,6 +2,7 @@ package controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -10,12 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
 
@@ -26,7 +29,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	private SkeletalMaturityMethod felsMethod;
 	private final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
+	private List<TextField> inputs = new ArrayList<TextField>();
 	
+	@FXML Pane paneMeasurementInputs;
 	// -- Form FXML -- Patient Info ************
 	@FXML TextField txtStudy;
 	@FXML TextField txtID;
@@ -229,12 +234,12 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		// TODO: Do we need some sort of validation per header input text field??
 		String sCurrentInput = "";
 		
-		if( inputObject.getClass() == TextField.class ){
+		if( inputObject instanceof TextField ){
 			sCurrentInput = ((TextField)inputObject).getText().trim();
 		}
-		else if( inputObject.getClass() == ComboBox.class ) {
+		else if( inputObject instanceof ComboBox ) {
 			// -- We only have one combobox.
-			sCurrentInput = ((ComboBox)inputObject).getSelectionModel().getSelectedItem().toString();
+			sCurrentInput = ((ComboBox<?>)inputObject).getSelectionModel().getSelectedItem().toString();
 		}
 		
 		// TODO: What about the combo box?
@@ -511,8 +516,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		cmbGender.setItems(genderList);
 		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
 		felsMethod.load();
-		
+		initializeInputList();
 		btnSubmit.setOnAction( e -> ButtonClicked(e) );
+		
+	}
+
+	private void initializeInputList() {
+		for(Node child : paneMeasurementInputs.getChildren()){
+			if(child instanceof TextField){
+				inputs.add((TextField)child);
+			}
+		}
 		
 	}
 }
