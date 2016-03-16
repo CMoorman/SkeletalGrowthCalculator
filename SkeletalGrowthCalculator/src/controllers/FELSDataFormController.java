@@ -271,10 +271,13 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		String sCurrentInput = "";
 		sCurrentInput = inputTextField.getText().trim();
 		// -- Check if editable AND the value is a double.
-		if( inputTextField.isEditable() && IsDoubleValue( sCurrentInput ) ) s_MeasurementData += sCurrentInput + ",";
-		else { 
+		if( inputTextField.isEditable() && IsDoubleValue( sCurrentInput ) ){
+			s_MeasurementData += sCurrentInput + ",";
+			inputTextField.setStyle("-fx-background-color: white;");
+		}else { 
 			// -- Make sure that if we had a problem, we are looking at an editable field.
 			if( inputTextField.isEditable() ) 
+				inputTextField.setStyle("-fx-background-color: #FAFE8C;");
 				m_ErrorIDList.add(inputTextField);
 		}
 	}
