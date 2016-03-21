@@ -68,146 +68,146 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@FXML TextField R8;						// 8
 	
 	// -- Triquetral
-	@FXML TextField txtTRI1;					// 9
-	@FXML TextField txtTRI2;					// 10
-	@FXML TextField txtTRI3;					// 11
-	@FXML TextField txtTRI4;					// 12
+	@FXML TextField TRI1;					// 9
+	@FXML TextField TRI2;					// 10
+	@FXML TextField TRI3;					// 11
+	@FXML TextField TRI4;					// 12
 	
 	// -- Trapezoid
-	@FXML TextField txtTPD1;					// 13
-	@FXML TextField txtTPD2;					// 14
-	@FXML TextField txtTPD3;					// 15
-	@FXML TextField txtTPD4;					// 16
-	@FXML TextField txtTPD5;					// 17
-	@FXML TextField txtTPD6;					// 18
-	@FXML TextField txtTPD7;					// 19
+	@FXML TextField TPD1;					// 13
+	@FXML TextField TPD2;					// 14
+	@FXML TextField TPD3;					// 15
+	@FXML TextField TPD4;					// 16
+	@FXML TextField TPD5;					// 17
+	@FXML TextField TPD6;					// 18
+	@FXML TextField TPD7;					// 19
 	
 	// -- PISIForm
-	@FXML TextField txtP1;						// 20
+	@FXML TextField P1;						// 20
 	
 	// -- Lunate
-	@FXML TextField txtL1;						// 21
-	@FXML TextField txtL2;						// 22
+	@FXML TextField L1;						// 21
+	@FXML TextField L2;						// 22
 	
 	// -- Adductor Sesamoid
-	@FXML TextField txtAS1;						// 23
+	@FXML TextField AS1;						// 23
 	
 	// -- Ulna
-	@FXML TextField txtU1;						// 24		
-	@FXML TextField txtU2EW;					// 25
-	@FXML TextField txtU2MW;					// 26
-	@FXML TextField txtU3;						// 27
+	@FXML TextField U1;						// 24		
+	@FXML TextField U2EW;					// 25
+	@FXML TextField U2MW;					// 26
+	@FXML TextField U3;						// 27
 	
 	// -- Scaphoid
-	@FXML TextField txtS1;						// 28
-	@FXML TextField txtS2;						// 29
-	@FXML TextField txtS3;						// 30
+	@FXML TextField S1;						// 28
+	@FXML TextField S2;						// 29
+	@FXML TextField S3;						// 30
 	
 	// -- Metacarpal I
-	@FXML TextField txtMETI1;					// 31
-	@FXML TextField txtMETI2EW;					// 32
-	@FXML TextField txtMETI2MW;					// 33
-	@FXML TextField txtMETI3;					// 34
-	@FXML TextField txtMETI4;					// 35
-	@FXML TextField txtMETI5;					// 36
-	@FXML TextField txtMETI6;					// 37
-	@FXML TextField txtMETI7;					// 38
+	@FXML TextField METI1;					// 31
+	@FXML TextField METI2EW;					// 32
+	@FXML TextField METI2MW;					// 33
+	@FXML TextField METI3;					// 34
+	@FXML TextField METI4;					// 35
+	@FXML TextField METI5;					// 36
+	@FXML TextField METI6;					// 37
+	@FXML TextField METI7;					// 38
 	
 	// -- Capitate
-	@FXML TextField txtC1;						// 39
-	@FXML TextField txtC2;						// 40
-	@FXML TextField txtC3;						// 41
-	@FXML TextField txtC4;						// 42
+	@FXML TextField C1;						// 39
+	@FXML TextField C2;						// 40
+	@FXML TextField C3;						// 41
+	@FXML TextField C4;						// 42
 	
 	// -- Trapezium
-	@FXML TextField txtTPM1;					// 43
-	@FXML TextField txtTPM2;					// 44
-	@FXML TextField txtTPM3;					// 45
-	@FXML TextField txtTPM4;					// 46
+	@FXML TextField TPM1;					// 43
+	@FXML TextField TPM2;					// 44
+	@FXML TextField TPM3;					// 45
+	@FXML TextField TPM4;					// 46
 	
 	// -- Hamate
-	@FXML TextField txtH1;						// 47
-	@FXML TextField txtH2;						// 48
-	@FXML TextField txtH3;						// 49
-	@FXML TextField txtH4;						// 50
+	@FXML TextField H1;						// 47
+	@FXML TextField H2;						// 48
+	@FXML TextField H3;						// 49
+	@FXML TextField H4;						// 50
 	
 	// -- Proximal Phalanx III
-	@FXML TextField txtPPIII1;					// 51
-	@FXML TextField txtPPIII2EW;				// 52
-	@FXML TextField txtPPIII2MW;				// 53
-	@FXML TextField txtPPIII3;					// 54
-	@FXML TextField txtPPIII4;					// 55
-	@FXML TextField txtPPIII5;					// 56
-	@FXML TextField txtPPIII6;					// 57
+	@FXML TextField PPIII1;					// 51
+	@FXML TextField PPIII2EW;				// 52
+	@FXML TextField PPIII2MW;				// 53
+	@FXML TextField PPIII3;					// 54
+	@FXML TextField PPIII4;					// 55
+	@FXML TextField PPIII5;					// 56
+	@FXML TextField PPIII6;					// 57
 	
 	// -- Middle Phalanx V
-	@FXML TextField txtMPV1;					// 58
-	@FXML TextField txtMPVEW;					// 59
-	@FXML TextField txtMPVMW;					// 60
-	@FXML TextField txtMPV3;					// 61
-	@FXML TextField txtMPV4;					// 62
-	@FXML TextField txtMPV5;					// 63
+	@FXML TextField MPV1;					// 58
+	@FXML TextField MPVEW;					// 59
+	@FXML TextField MPVMW;					// 60
+	@FXML TextField MPV3;					// 61
+	@FXML TextField MPV4;					// 62
+	@FXML TextField MPV5;					// 63
 	
 	// -- Metacarpal III
-	@FXML TextField txtMETIII1;					// 64
-	@FXML TextField txtMETIII2EW;				// 65
-	@FXML TextField txtMETIII2MW;				// 66
-	@FXML TextField txtMETIII3;					// 67
-	@FXML TextField txtMETIII4;					// 68
-	@FXML TextField txtMETIII5;					// 69
+	@FXML TextField METIII1;					// 64
+	@FXML TextField METIII2EW;				// 65
+	@FXML TextField METIII2MW;				// 66
+	@FXML TextField METIII3;					// 67
+	@FXML TextField METIII4;					// 68
+	@FXML TextField METIII5;					// 69
 	
 	// -- Proximal Phalanx V
-	@FXML TextField txtPPV1;					// 70
-	@FXML TextField txtPPV2EW;					// 71
-	@FXML TextField txtPPV2MW;					// 72
-	@FXML TextField txtPPV3;					// 73
-	@FXML TextField txtPPV4;					// 74
-	@FXML TextField txtPPV5;					// 75
+	@FXML TextField PPV1;					// 70
+	@FXML TextField PPV2EW;					// 71
+	@FXML TextField PPV2MW;					// 72
+	@FXML TextField PPV3;					// 73
+	@FXML TextField PPV4;					// 74
+	@FXML TextField PPV5;					// 75
 	
 	// -- Distal Phalanx I
-	@FXML TextField txtDPI2EW;					// 76
-	@FXML TextField txtDPI2MW;					// 77
-	@FXML TextField txtDPI4;					// 78
+	@FXML TextField DPI2EW;					// 76
+	@FXML TextField DPI2MW;					// 77
+	@FXML TextField DPI4;					// 78
 	
 	// -- Metacarpal V
-	@FXML TextField txtMCV1;					// 79
-	@FXML TextField txtMCV2EW;					// 80
-	@FXML TextField txtMCV2MW;					// 81
-	@FXML TextField txtMCV3;					// 82
-	@FXML TextField txtMCV4;					// 83
-	@FXML TextField txtMCV5;					// 84
-	@FXML TextField txtMCV6;					// 85
+	@FXML TextField MCV1;					// 79
+	@FXML TextField MCV2EW;					// 80
+	@FXML TextField MCV2MW;					// 81
+	@FXML TextField MCV3;					// 82
+	@FXML TextField MCV4;					// 83
+	@FXML TextField MCV5;					// 84
+	@FXML TextField MCV6;					// 85
 	
 	// -- Middle Phalanx III
-	@FXML TextField txtMPIII1;					// 86
-	@FXML TextField txtMPIII2EW;				// 87
-	@FXML TextField txtMPIII2MW;				// 88
-	@FXML TextField txtMPIII3;					// 89
-	@FXML TextField txtMPIII4;					// 90
-	@FXML TextField txtMPIII5;					// 91
+	@FXML TextField MPIII1;					// 86
+	@FXML TextField MPIII2EW;				// 87
+	@FXML TextField MPIII2MW;				// 88
+	@FXML TextField MPIII3;					// 89
+	@FXML TextField MPIII4;					// 90
+	@FXML TextField MPIII5;					// 91
 	
 	// -- Distal Phalanx III
-	@FXML TextField txtDPIII1;					// 92
-	@FXML TextField txtDPIII2EW;				// 93
-	@FXML TextField txtDPIII2MW;				// 94
-	@FXML TextField txtDPIII3;					// 95
-	@FXML TextField txtDPIII4;					// 96
+	@FXML TextField DPIII1;					// 92
+	@FXML TextField DPIII2EW;				// 93
+	@FXML TextField DPIII2MW;				// 94
+	@FXML TextField DPIII3;					// 95
+	@FXML TextField DPIII4;					// 96
 	
 	// -- Proximal Phalanx I
-	@FXML TextField txtPPI1;					// 97
-	@FXML TextField txtPPI2EW;					// 98
-	@FXML TextField txtPPI2MW;					// 99
-	@FXML TextField txtPPI3;					// 100
-	@FXML TextField txtPPI4;					// 101
-	@FXML TextField txtPPI5;					// 102
-	@FXML TextField txtPPI6;					// 103
+	@FXML TextField PPI1;					// 97
+	@FXML TextField PPI2EW;					// 98
+	@FXML TextField PPI2MW;					// 99
+	@FXML TextField PPI3;					// 100
+	@FXML TextField PPI4;					// 101
+	@FXML TextField PPI5;					// 102
+	@FXML TextField PPI6;					// 103
 	
 	// -- Distal Phalanx V
-	@FXML TextField txtDPV1;					// 104
-	@FXML TextField txtDPV2EW;					// 105
-	@FXML TextField txtDPV2MW;					// 106
-	@FXML TextField txtDPV3;					// 107
-	@FXML TextField txtDPV4;					// 108
+	@FXML TextField DPV1;					// 104
+	@FXML TextField DPV2EW;					// 105
+	@FXML TextField DPV2MW;					// 106
+	@FXML TextField DPV3;					// 107
+	@FXML TextField DPV4;					// 108
 	
 	@FXML Button btnSubmit;
 	
@@ -391,7 +391,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	        	} else {
 	        		paneMeasurementInputs.setStyle(fxBckgrndStyleConst + whiteColor);
 	        	}
-	        }    
+	        	enableDisableInputs();
+	        } 
 	    });
 		
 		for(TextField text : inputs ){
@@ -411,6 +412,24 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			}
 
 	    });
+		
+	}
+
+	protected void enableDisableInputs() {
+		String current = txtChronAge.getText();
+		if(current == null || current.isEmpty()){
+			return;
+		}
+		double age = -1.0;
+		try{
+			age = Double.parseDouble(current);
+			if(age < 0){
+				return;
+			}
+		} catch(NumberFormatException e){
+			return;
+		}
+		enabledDisableInputs(age);
 		
 	}
 
@@ -448,6 +467,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		}
 		return isMale;
 	}
+	
 	private void enabledDisableInputs(double age){
 		String sex = cmbGender.getValue();
 		if(sex == null || sex.isEmpty()){
