@@ -317,13 +317,13 @@
         <Label fx:id="lblAsmDate" layoutX="192.0" layoutY="164.0" text="Assessment Date" />
         <TextField fx:id="txtStudy" layoutX="90.0" layoutY="34.0" prefWidth="80.0" />
         <TextField fx:id="txtID" layoutX="91.0" layoutY="65.0" prefWidth="80.0" />
-        <TextField fx:id="txtCronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
+        <TextField fx:id="txtChronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
         <ComboBox id="combobox" fx:id="cmbGender" layoutX="93.0" layoutY="128.0" promptText="---" visibleRowCount="2" />
         <TextField fx:id="txtAssessorNum" layoutX="309.0" layoutY="35.0" prefWidth="92.0001220703125" />
         <TextField fx:id="txtAssessmentNum" layoutX="309.0" layoutY="66.0" prefWidth="92.0" />
-        <DatePicker fx:id="datePicker" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
-        <TextField fx:id="txtXrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
-        <TextField fx:id="txtAsmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
+        <DatePicker fx:id="birthDate" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
+        <DatePicker fx:id="xrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
+        <DatePicker fx:id="asmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
         <TextField fx:id="txtSA" layoutX="484.0" layoutY="66.0" prefWidth="92.0" />
         <TextField fx:id="txtSEE" layoutX="484.0" layoutY="97.0" prefWidth="92.0" />
         <Button fx:id="btnSubmit" defaultButton="true" layoutX="489.0" layoutY="152.0" mnemonicParsing="false" text="Submit">

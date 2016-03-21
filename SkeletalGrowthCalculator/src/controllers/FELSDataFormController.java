@@ -1,8 +1,6 @@
 package controllers;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,7 +37,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private final String whiteColor = "#000000;";
 	private final String fxBckgrndStyleConst = "-fx-background-color: ";
 	private SkeletalMaturityMethod felsMethod;
-	private final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
+	private static final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
+	private static final String NOT_APPLICABLE = "N/A";
 	private List<TextField> inputs = new ArrayList<TextField>();
 	@FXML Pane paneMeasurementInputs;
 	// -- Form FXML -- Patient Info ************
@@ -49,9 +48,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@FXML ComboBox<String> cmbGender;
 	@FXML TextField txtAssessorNum;
 	@FXML TextField txtAssessmentNum;
-	@FXML DatePicker datePicker;
-	@FXML TextField txtXrayDate;
-	@FXML TextField txtAsmDate;
+	@FXML DatePicker birthDate;
+	@FXML DatePicker xrayDate;
+	@FXML DatePicker asmDate;
 	@FXML TextField txtSA;
 	@FXML TextField txtSEE;
 	
@@ -269,8 +268,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		AddHeaderInfoToString( txtAssessorNum );
 		AddHeaderInfoToString( txtAssessmentNum );
 		//AddHeaderInfoToString( txtBirthDate );
-		AddHeaderInfoToString( txtXrayDate );
-		AddHeaderInfoToString( txtAsmDate );
+		//AddHeaderInfoToString( txtXrayDate );
+		//AddHeaderInfoToString( txtAsmDate );
 		AddHeaderInfoToString( txtSA );
 		AddHeaderInfoToString( txtSEE );
 		
@@ -405,29 +404,43 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				text.setTooltip(tooltip);
 			}
 		}
-		datePicker.valueProperty().addListener(new ChangeListener<LocalDate>() {
+		txtChronAge.textProperty().addListener(new ChangeListener<String>() {
 			@Override
-			public void changed(ObservableValue<? extends LocalDate> ov, LocalDate old, LocalDate current) {
+			public void changed(ObservableValue<? extends String> ov, String old, String current) {
 				ageChanged(old, current);
 			}
+
 	    });
 		
 	}
 
-	protected void ageChanged(LocalDate old, LocalDate current) {
-		LocalDate today = LocalDate.now();
-		if(today.isBefore(current)){
-			//person hasnt been born, 
-			datePicker.setValue(old);
+	protected void ageChanged(String old, String current) {
+		if(current == null || current.isEmpty()){
+			enableAllInputs();
 			return;
 		}
-		long years = ChronoUnit.YEARS.between(current, today);
-		long months = ChronoUnit.MONTHS.between(current, today);
-		long days = ChronoUnit.DAYS.between(current, today);
-		double actualAge = years + (months / 12.0);
-		System.out.println(actualAge);
-		enabledDisableInputs(actualAge);
+		double age = -1.0;
+		try{
+			age = Double.parseDouble(current);
+			if(age < 0){
+				txtChronAge.setText(old);
+				return;
+			}
+		} catch(NumberFormatException e){
+			txtChronAge.setText(old);
+			return;
+		}
+		enabledDisableInputs(age);
 	}
+	private void enableAllInputs() {
+		for (TextField text : inputs) {
+			text.setDisable(false);
+			text.setEditable(true);
+			text.setText("");
+		}
+		
+	}
+
 	private boolean isMale(String sex){
 		boolean isMale = false;
 		if(sex.equals("Male")){
@@ -457,10 +470,11 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 					if (startRange <= age && age <= endRange){
 						text.setDisable(false);
 						text.setEditable(true);
-						text.setTooltip(new Tooltip(i.getDescription()));
+						text.setText("");
 					}else{
 						text.setDisable(true);
 						text.setEditable(false);
+						text.setText(NOT_APPLICABLE);
 					}
 				}
 			}
