@@ -1,6 +1,8 @@
 package controllers;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,9 +20,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.Indicator;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
 
@@ -36,7 +41,6 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private SkeletalMaturityMethod felsMethod;
 	private final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
 	private List<TextField> inputs = new ArrayList<TextField>();
-	
 	@FXML Pane paneMeasurementInputs;
 	// -- Form FXML -- Patient Info ************
 	@FXML TextField txtStudy;
@@ -45,7 +49,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@FXML ComboBox<String> cmbGender;
 	@FXML TextField txtAssessorNum;
 	@FXML TextField txtAssessmentNum;
-	@FXML TextField txtBirthDate;
+	@FXML DatePicker datePicker;
 	@FXML TextField txtXrayDate;
 	@FXML TextField txtAsmDate;
 	@FXML TextField txtSA;
@@ -54,15 +58,15 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	// -- Form FXML -- Measurements *************
 	
 	// -- Radius
-	@FXML TextField txtR1;						// 0
-	@FXML TextField txtR2EW;					// 1
-	@FXML TextField txtR2MW;					// 2
-	@FXML TextField txtR3;						// 3
-	@FXML TextField txtR4;						// 4
-	@FXML TextField txtR5;						// 5
-	@FXML TextField txtR6;						// 6
-	@FXML TextField txtR7;						// 7
-	@FXML TextField txtR8;						// 8
+	@FXML TextField R1;						// 0
+	@FXML TextField R2EW;					// 1
+	@FXML TextField R2MW;					// 2
+	@FXML TextField R3;						// 3
+	@FXML TextField R4;						// 4
+	@FXML TextField R5;						// 5
+	@FXML TextField R6;						// 6
+	@FXML TextField R7;						// 7
+	@FXML TextField R8;						// 8
 	
 	// -- Triquetral
 	@FXML TextField txtTRI1;					// 9
@@ -264,7 +268,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		AddHeaderInfoToString( cmbGender );
 		AddHeaderInfoToString( txtAssessorNum );
 		AddHeaderInfoToString( txtAssessmentNum );
-		AddHeaderInfoToString( txtBirthDate );
+		//AddHeaderInfoToString( txtBirthDate );
 		AddHeaderInfoToString( txtXrayDate );
 		AddHeaderInfoToString( txtAsmDate );
 		AddHeaderInfoToString( txtSA );
@@ -314,7 +318,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private boolean IsDoubleValue( String dInput ) {
 		try {
 			Double.parseDouble(dInput);
-		}catch (Exception e ){
+		}catch (NumberFormatException e ){
 			return false;
 		}
 		return true;
@@ -335,7 +339,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				
 				
 				// -- We displayed our errors.  Clear it out for the next round.
-				m_ErrorIDList = new ArrayList<>();
+				m_ErrorIDList.clear();
 				s_MeasurementData = "";
 			}
 		}
@@ -370,17 +374,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cmbGender.setItems(genderList);
-		initializeInputList();
-		addListeners();
 		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
 		felsMethod.load();
+		initializeInputList();
+		addListeners();
 		btnSubmit.setOnAction( e -> ButtonClicked(e) );
 		
 	}
 
 	private void addListeners() {
 		cmbGender.valueProperty().addListener(new ChangeListener<String>() {
-	        @Override public void changed(ObservableValue ov, String old, String current) {
+	        @Override public void changed(ObservableValue<? extends String> ov, String old, String current) {
 	        	if(current.equals("Male")){
 	        		paneMeasurementInputs.setStyle(fxBckgrndStyleConst + maleColor);
 	        	} else if(current.equals("Female")){
@@ -393,10 +397,75 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		
 		for(TextField text : inputs ){
 			text.setOnKeyTyped( e -> validateInputCharacter(e) );
+			Indicator i = felsMethod.getIndicatorMap().get(text.getId());
+			if(i != null){
+				text.setUserData(i);
+				final Tooltip tooltip = new Tooltip();
+				tooltip.setText(i.getDescription());
+				text.setTooltip(tooltip);
+			}
 		}
+		datePicker.valueProperty().addListener(new ChangeListener<LocalDate>() {
+			@Override
+			public void changed(ObservableValue<? extends LocalDate> ov, LocalDate old, LocalDate current) {
+				ageChanged(old, current);
+			}
+	    });
 		
 	}
 
+	protected void ageChanged(LocalDate old, LocalDate current) {
+		LocalDate today = LocalDate.now();
+		if(today.isBefore(current)){
+			//person hasnt been born, 
+			datePicker.setValue(old);
+			return;
+		}
+		long years = ChronoUnit.YEARS.between(current, today);
+		long months = ChronoUnit.MONTHS.between(current, today);
+		long days = ChronoUnit.DAYS.between(current, today);
+		double actualAge = years + (months / 12.0);
+		System.out.println(actualAge);
+		enabledDisableInputs(actualAge);
+	}
+	private boolean isMale(String sex){
+		boolean isMale = false;
+		if(sex.equals("Male")){
+			isMale = true;
+		}
+		return isMale;
+	}
+	private void enabledDisableInputs(double age){
+		String sex = cmbGender.getValue();
+		if(sex == null || sex.isEmpty()){
+			return;
+		}
+		
+		for(TextField text : inputs){
+			if(text.getUserData() != null && text.getUserData() instanceof Indicator){
+				Indicator i = (Indicator) text.getUserData();
+				double startRange = 0.0;
+				double endRange = 0.0;
+				if(i != null){
+					if(isMale(sex)){
+						startRange = i.getMaleStartRange();
+						endRange = i.getMaleEndRange();
+					}else{
+						startRange = i.getFemaleStartRange();
+						endRange = i.getFemaleEndRange();
+					}
+					if (startRange <= age && age <= endRange){
+						text.setDisable(false);
+						text.setEditable(true);
+						text.setTooltip(new Tooltip(i.getDescription()));
+					}else{
+						text.setDisable(true);
+						text.setEditable(false);
+					}
+				}
+			}
+		}
+	}
 	private void initializeInputList() {
 		for(Node child : paneMeasurementInputs.getChildren()){
 			if(child instanceof TextField){

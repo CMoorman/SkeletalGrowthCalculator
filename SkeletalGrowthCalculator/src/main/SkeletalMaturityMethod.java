@@ -1,7 +1,9 @@
 package main;
 
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SkeletalMaturityMethod {
 	private String methodName = "";
@@ -34,6 +36,16 @@ public class SkeletalMaturityMethod {
 	}
 	public void load() {
 		addIndicators(Indicator.loadIndicators(this.inputFilePath));
+	}
+	
+	Map<String, Indicator> idMap = new HashMap<String, Indicator>();
+	public Map<String, Indicator> getIndicatorMap(){
+		if(idMap.isEmpty()){
+			for(Indicator ind : indicators){
+				idMap.put(ind.getName(), ind);
+			}
+		}
+		return idMap;
 	}
 	
 }

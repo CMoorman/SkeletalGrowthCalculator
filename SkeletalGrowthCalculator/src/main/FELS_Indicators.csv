@@ -1,2 +1,10 @@
-R-1,Epiphyseal ossification and shape,0.25,4.5,0.833,3.5
-R-2,The ration of epiphyseal width to metaphyseal width,0.5,12.5,0.5,12.5
+Radius,,,,,
+R1,Epiphyseal ossification and shape,0.25,4.5,0.833,3.5
+R2EW,Epiphyseal width,0.5,12.5,0.5,12.5
+R2MW,Metaphyseal width,0.5,12.5,0.5,12.5
+R3,Terminal plate of the epiphysis,0.5,6.5,0.75,4.5
+R4,Radiopaque line on or within the distal margin of the epiphysis,0.5,8,0.75,6
+R5,Styloid process of the epiphysis,2,11.5,2,10.5
+R6,Capping and fusion of the medial third of the epiphyseo-diaphyseal junction,10,22,8.5,22
+R7,Capping and fusion of the lateral third of the epiphyseo-diaphyseal junction,11,22,9,22
+R8,Capping and fusion of the central third of the epiphyseo-diaphyseal junction,13.5,20,12,20

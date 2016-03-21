@@ -36,15 +36,15 @@
                         <Label fx:id="lblR8" layoutX="37.0" layoutY="310.0" text="R-8" />
                         <Label fx:id="lblR2EW" layoutX="48.0" layoutY="103.0" text="(EW)" />
                         <Label id="lblR2ME" fx:id="lblR2MW" layoutX="46.0" layoutY="131.0" text="(MW)" />
-                        <TextField fx:id="txtR1" layoutX="73.0" layoutY="55.0" prefWidth="69.0" />
-                        <TextField fx:id="txtR3" layoutX="73.0" layoutY="161.0" prefWidth="69.00009999999747" />
-                        <TextField fx:id="txtR4" layoutX="73.0" layoutY="190.0" prefWidth="69.0" />
-                        <TextField fx:id="txtR5" layoutX="73.0" layoutY="220.0" prefWidth="69.0" />
-                        <TextField fx:id="txtR6" layoutX="73.0" layoutY="251.0" prefWidth="69.0" />
-                        <TextField fx:id="txtR7" layoutX="73.0" layoutY="280.0" prefWidth="69.0" />
-                        <TextField fx:id="txtR8" layoutX="73.0" layoutY="307.0" prefWidth="69.00009999999747" />
-                        <TextField fx:id="txtR2EW" layoutX="84.0" layoutY="100.0" prefWidth="55.0" />
-                        <TextField fx:id="txtR2MW" layoutX="84.0" layoutY="128.0" prefWidth="55.0" />
+                        <TextField fx:id="R1" layoutX="73.0" layoutY="55.0" prefWidth="69.0" />
+                        <TextField fx:id="R2EW" layoutX="84.0" layoutY="100.0" prefWidth="55.0" />
+                        <TextField fx:id="R2MW" layoutX="84.0" layoutY="128.0" prefWidth="55.0" />
+                        <TextField fx:id="R3" layoutX="73.0" layoutY="161.0" prefWidth="69.00009999999747" />
+                        <TextField fx:id="R4" layoutX="73.0" layoutY="190.0" prefWidth="69.0" />
+                        <TextField fx:id="R5" layoutX="73.0" layoutY="220.0" prefWidth="69.0" />
+                        <TextField fx:id="R6" layoutX="73.0" layoutY="251.0" prefWidth="69.0" />
+                        <TextField fx:id="R7" layoutX="73.0" layoutY="280.0" prefWidth="69.0" />
+                        <TextField fx:id="R8" layoutX="73.0" layoutY="307.0" prefWidth="69.00009999999747" />
                         <Text fill="$x1" layoutX="197.0" layoutY="43.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Triquetral" />
                         <Text layoutX="210.0" layoutY="71.0" scaleX="0.9541323112729819" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRI-1" />
                         <Text layoutX="211.0" layoutY="101.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRI-2" />
@@ -308,32 +308,24 @@
         <Text fx:id="lblID" layoutX="70.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
         <Text fx:id="lblCronAge" layoutX="13.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chron. Age" />
         <Text fx:id="lblSex" layoutX="61.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sex" />
-        <TextField fx:id="txtStudy" layoutX="90.0" layoutY="34.0" prefWidth="80.0" />
-        <TextField fx:id="txtID" layoutX="91.0" layoutY="65.0" prefWidth="80.0" />
-        <TextField fx:id="txtCronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
         <Label fx:id="lblAssessorNum" layoutX="231.0" layoutY="38.0" text="Assessor #" />
         <Label fx:id="lblAssessmentNum" layoutX="212.0" layoutY="70.0" text="Assessment #" />
         <Label fx:id="lblBirthDate" layoutX="237.0" layoutY="101.0" text="Birth Date" />
         <Label fx:id="lblXrayDate" layoutX="231.0" layoutY="133.0" text="X-ray Date" />
-        <Label fx:id="lblAsmDate" layoutX="192.0" layoutY="164.0" text="Assessment Date" />
-        <TextField fx:id="txtAssessorNum" layoutX="309.0" layoutY="35.0" prefWidth="92.0001220703125" />
-        <TextField fx:id="txtAssessmentNum" layoutX="309.0" layoutY="66.0" prefWidth="92.0" />
-        <TextField fx:id="txtBirthDate" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
-        <TextField fx:id="txtXrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
-        <TextField fx:id="txtAsmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
         <Text fx:id="lblSA" layoutX="453.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A." />
         <Text fx:id="lblSEE" layoutX="444.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.E.E." />
-        <TextField fx:id="txtSEE" layoutX="484.0" layoutY="97.0" prefWidth="92.0" />
+        <Label fx:id="lblAsmDate" layoutX="192.0" layoutY="164.0" text="Assessment Date" />
+        <TextField fx:id="txtStudy" layoutX="90.0" layoutY="34.0" prefWidth="80.0" />
+        <TextField fx:id="txtID" layoutX="91.0" layoutY="65.0" prefWidth="80.0" />
+        <TextField fx:id="txtCronAge" layoutX="91.0" layoutY="97.0" prefWidth="80.0" />
+        <ComboBox id="combobox" fx:id="cmbGender" layoutX="93.0" layoutY="128.0" promptText="---" visibleRowCount="2" />
+        <TextField fx:id="txtAssessorNum" layoutX="309.0" layoutY="35.0" prefWidth="92.0001220703125" />
+        <TextField fx:id="txtAssessmentNum" layoutX="309.0" layoutY="66.0" prefWidth="92.0" />
+        <DatePicker fx:id="datePicker" layoutX="309.0" layoutY="98.0" prefWidth="92.0" />
+        <TextField fx:id="txtXrayDate" layoutX="309.0" layoutY="130.0" prefWidth="92.00014414062753" />
+        <TextField fx:id="txtAsmDate" layoutX="309.0" layoutY="161.0" prefWidth="92.0" />
         <TextField fx:id="txtSA" layoutX="484.0" layoutY="66.0" prefWidth="92.0" />
-        <ComboBox id="combobox" fx:id="cmbGender" layoutX="93.0" layoutY="128.0" promptText="---" visibleRowCount="2">
-          <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
-          </items>
-        </ComboBox>
+        <TextField fx:id="txtSEE" layoutX="484.0" layoutY="97.0" prefWidth="92.0" />
         <Button fx:id="btnSubmit" defaultButton="true" layoutX="489.0" layoutY="152.0" mnemonicParsing="false" text="Submit">
           <font>
             <Font size="18.0" />
