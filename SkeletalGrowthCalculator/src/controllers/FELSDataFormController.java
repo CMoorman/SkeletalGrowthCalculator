@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -307,7 +309,21 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		}
 		
 		if( m_ErrorIDList.size() > 0 ){
-			// -- We found errors.  Uh oh.
+			
+			Alert eAlert = new Alert(AlertType.ERROR);
+			eAlert.setTitle("Invalid Indicators");
+			eAlert.setHeaderText("There are invalid indicators on the form.  Please review them below.");
+			
+			String sAlertString = "";
+			
+			for(int i = 0; i < m_ErrorIDList.size(); i++) {			
+				sAlertString += m_ErrorIDList.get(i).getId().toString() + "; ";
+			}
+			
+			eAlert.setContentText( sAlertString );
+			
+			eAlert.showAndWait();
+			
 			rval = false;
 			s_MeasurementData = "";
 		}
