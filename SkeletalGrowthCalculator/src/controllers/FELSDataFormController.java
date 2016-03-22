@@ -277,6 +277,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		
 		if( m_ErrorIDList.size() > 0 ){
 			// -- We found errors.  Uh oh.
+			ShowErrorAlert();
 			rval = false;
 		}
 		
@@ -310,24 +311,27 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		
 		if( m_ErrorIDList.size() > 0 ){
 			
-			Alert eAlert = new Alert(AlertType.ERROR);
-			eAlert.setTitle("Invalid Indicators");
-			eAlert.setHeaderText("There are invalid indicators on the form.  Please review them below.");
-			
-			String sAlertString = "";
-			
-			for(int i = 0; i < m_ErrorIDList.size(); i++) {			
-				sAlertString += m_ErrorIDList.get(i).getId().toString() + "; ";
-			}
-			
-			eAlert.setContentText( sAlertString );
-			
-			eAlert.showAndWait();
-			
-			rval = false;
+			ShowErrorAlert();				
+			rval = false;			
 			s_MeasurementData = "";
 		}
 		return rval;
+	}
+	
+	private void ShowErrorAlert() {
+		Alert eAlert = new Alert(AlertType.ERROR);
+		eAlert.setTitle("Invalid Indicators");
+		eAlert.setHeaderText("There are invalid indicators on the form.  Please review them below.");
+		
+		String sAlertString = "";
+		
+		for(int i = 0; i < m_ErrorIDList.size(); i++) {			
+			sAlertString += m_ErrorIDList.get(i).getId().toString() + "; ";
+		}
+		
+		eAlert.setContentText( sAlertString );
+		
+		eAlert.showAndWait();
 	}
 	
 	private boolean IsDoubleValue( String dInput ) {
