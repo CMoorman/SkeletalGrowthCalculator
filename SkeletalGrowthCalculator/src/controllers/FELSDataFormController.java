@@ -422,6 +422,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				inputTextField.setStyle("-fx-background-color: #FAFE8C;");
 				m_ErrorIDList.add(inputTextField);
 			}
+			else {
+				// -- Not editable, we want to set and empty value for this.
+				s_MeasurementData += ",";
+			}
 		}
 	}
 
