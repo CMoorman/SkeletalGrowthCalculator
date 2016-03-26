@@ -28,6 +28,8 @@ public class Indicator {
 	private double femaleEndRange = 0;
 	private int maximumValue = 0;
 
+	private String indicatorValue = "";
+	
 	public Indicator(String name, String description, double maleStartRange, double maleEndRange, double femaleStartRange,
 			double femaleEndRange) {
 		this.name = name;
@@ -84,6 +86,14 @@ public class Indicator {
 
 	public void setFemaleEndRange(double femaleEndRange) {
 		this.femaleEndRange = femaleEndRange;
+	}
+	
+	public String getIndicatorValue() {
+		return indicatorValue;
+	}
+
+	public void setIndicatorValue(String indicatorValue) {
+		this.indicatorValue = indicatorValue;
 	}
 
 	public static List<Indicator> loadIndicators(String filePath) {

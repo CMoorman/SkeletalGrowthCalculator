@@ -498,6 +498,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			setScene( TitleViewController.getInstance().getScene() );
 		}
 	}
+	
+	public String getIndicatorFilePath() {
+		return INDICATOR_FILE_PATH;
+	}
 
 	public Scene getScene() {
 		return PatientDataFormScene;
