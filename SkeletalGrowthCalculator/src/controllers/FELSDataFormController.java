@@ -581,9 +581,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			@Override
 			public void handle(ActionEvent arg0) {
 				for(TextField input: inputs){
-					input.setText("");
-					input.setDisable(false);
-					input.setEditable(true);
+					if(input.isEditable() && !input.isDisable()){
+						input.setText("");
+					}
 				}
 				
 			}
