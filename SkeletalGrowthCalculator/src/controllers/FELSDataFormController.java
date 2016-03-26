@@ -12,6 +12,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -338,7 +339,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	Button btnSubmit;
 	@FXML
 	Button btnGoBack;
-
+	@FXML
+	Button btnClear;
 	private String s_FormHeaderData = "";
 	private String s_MeasurementData = "";
 	private ArrayList<TextField> m_ErrorIDList = new ArrayList<>();
@@ -540,7 +542,6 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		addListeners();
 		btnSubmit.setOnAction(e -> ButtonClicked(e));
 		btnGoBack.setOnAction(e -> ButtonClicked(e));
-
 	}
 
 	private void addListeners() {
@@ -575,7 +576,19 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			}
 
 		});
+		btnClear.setOnAction(new EventHandler<ActionEvent>(){
 
+			@Override
+			public void handle(ActionEvent arg0) {
+				for(TextField input: inputs){
+					input.setText("");
+					input.setDisable(false);
+					input.setEditable(true);
+				}
+				
+			}
+			
+		});
 	}
 
 	protected void enableDisableInputs() {
