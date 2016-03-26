@@ -67,7 +67,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	TextField txtSA;
 	@FXML
 	TextField txtSEE;
-
+	
 	// -- Form FXML -- Measurements *************
 
 	// -- Radius
@@ -334,6 +334,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 	@FXML
 	Button btnSubmit;
+	@FXML
+	Button btnGoBack;
 
 	private String s_FormHeaderData = "";
 	private String s_MeasurementData = "";
@@ -491,6 +493,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				s_MeasurementData = "";
 			}
 		}
+		else if(E.getSource() == btnGoBack){
+			// -- NEED TO RESET DATA BEFORE GOING BACK OR ELSE IT PERSISTS.
+			setScene( TitleViewController.getInstance().getScene() );
+		}
 	}
 
 	public Scene getScene() {
@@ -527,6 +533,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		initializeInputList();
 		addListeners();
 		btnSubmit.setOnAction(e -> ButtonClicked(e));
+		btnGoBack.setOnAction(e -> ButtonClicked(e));
 
 	}
 

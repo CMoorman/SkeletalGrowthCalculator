@@ -26,6 +26,7 @@ public class Indicator {
 	private double maleEndRange = 0;
 	private double femaleStartRange = 0;
 	private double femaleEndRange = 0;
+	private int maximumValue = 0;
 
 	public Indicator(String name, String description, double maleStartRange, double maleEndRange, double femaleStartRange,
 			double femaleEndRange) {
