@@ -196,16 +196,16 @@
                         <Text layoutX="32.0" layoutY="1258.0" scaleX="1.0" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-3" />
                         <Text layoutX="32.0" layoutY="1286.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-4" />
                         <Text layoutX="32.0" layoutY="1316.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-5" />
-                        <TextField fx:id="MCV1" layoutX="92.0" layoutY="1145.0" prefWidth="69.0" />
-                        <TextField fx:id="MCV3" layoutX="95.0" layoutY="1242.0" prefWidth="69.0" />
-                        <TextField fx:id="MCV4" layoutX="95.0" layoutY="1270.0" prefWidth="69.0" />
-                        <TextField fx:id="MCV5" layoutX="95.0" layoutY="1303.0" prefWidth="69.0" />
+                        <TextField fx:id="METV1" layoutX="92.0" layoutY="1145.0" prefWidth="69.0" />
+                        <TextField fx:id="METV3" layoutX="95.0" layoutY="1242.0" prefWidth="69.0" />
+                        <TextField fx:id="METV4" layoutX="95.0" layoutY="1270.0" prefWidth="69.0" />
+                        <TextField fx:id="METV5" layoutX="95.0" layoutY="1303.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="69.0" layoutY="1190.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="67.0" layoutY="1218.0" text="(MW)" />
-                        <TextField fx:id="MCV2EW" layoutX="109.0" layoutY="1188.0" prefWidth="55.0" />
-                        <TextField fx:id="MCV2MW" layoutX="109.0" layoutY="1215.0" prefWidth="55.0" />
+                        <TextField fx:id="METV2EW" layoutX="109.0" layoutY="1188.0" prefWidth="55.0" />
+                        <TextField fx:id="METV2MW" layoutX="109.0" layoutY="1215.0" prefWidth="55.0" />
                         <Text layoutX="32.0" layoutY="1346.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-6" />
-                        <TextField fx:id="MCV6" layoutX="95.0" layoutY="1330.0" prefWidth="69.0" />
+                        <TextField fx:id="METV6" layoutX="95.0" layoutY="1330.0" prefWidth="69.0" />
                         <Text fill="$x2" layoutX="184.0" layoutY="961.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Proximal Phalanx V" />
                         <Text layoutX="198.0" layoutY="989.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP V-1" />
                         <Text layoutX="198.0" layoutY="1012.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP V-2" />

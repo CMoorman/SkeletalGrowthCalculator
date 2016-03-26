@@ -264,19 +264,19 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 	// -- Metacarpal V
 	@FXML
-	TextField MCV1; // 79
+	TextField METV1; // 79
 	@FXML
-	TextField MCV2EW; // 80
+	TextField METV2EW; // 80
 	@FXML
-	TextField MCV2MW; // 81
+	TextField METV2MW; // 81
 	@FXML
-	TextField MCV3; // 82
+	TextField METV3; // 82
 	@FXML
-	TextField MCV4; // 83
+	TextField METV4; // 83
 	@FXML
-	TextField MCV5; // 84
+	TextField METV5; // 84
 	@FXML
-	TextField MCV6; // 85
+	TextField METV6; // 85
 
 	// -- Middle Phalanx III
 	@FXML
