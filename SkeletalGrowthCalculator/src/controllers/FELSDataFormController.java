@@ -2,7 +2,9 @@ package controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -669,5 +671,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				inputs.add((TextField) child);
 			}
 		}
+	}
+	public Map<String, String> getInputValueMap(){
+		Map<String, String> inputMap = new HashMap<String, String>();
+		for(TextField input: inputs){
+			if(input != null){
+				String val = input.getText();
+				if(!val.trim().isEmpty() && !val.equals(NOT_APPLICABLE)){
+					inputMap.put(input.getId(), val);
+				}
+			}
+		}
+		return inputMap;
 	}
 }
