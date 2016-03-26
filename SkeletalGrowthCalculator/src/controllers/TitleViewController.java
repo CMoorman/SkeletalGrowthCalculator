@@ -33,7 +33,7 @@ public class TitleViewController extends SkeletalCalculator implements Initializ
 			setScene( FELSDataFormController.getInstance().getScene() );
 		}
 		else if( buttonSource == btnOptions ) {
-			
+			setScene( ApplicationOptionsController.getInstance().getScene() );
 		}
 	}
 	

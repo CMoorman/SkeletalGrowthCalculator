@@ -332,6 +332,7 @@
           </font>
         </Button>
         <Button id="btnSubmit" fx:id="btnClear" cancelButton="true" layoutX="501.0" layoutY="11.0" mnemonicParsing="false" style=" -fx-background-color: linear-gradient(#ff5400, #be1d00);&#10; -fx-background-radius: 30;&#10; -fx-background-insets: 0;&#10; -fx-text-fill: white;" text="Clear Data" textAlignment="CENTER" />
+        <Button id="btnSubmit" fx:id="btnGoBack" cancelButton="true" layoutX="408.0" layoutY="161.0" mnemonicParsing="false" style=" -fx-background-color: grey;&#10; -fx-background-radius: 30;&#10; -fx-background-insets: 0;&#10; -fx-text-fill: white;" text="Go Back" textAlignment="CENTER" />
       </children>
     </Pane>
   </children>
