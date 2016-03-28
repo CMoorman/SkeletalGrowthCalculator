@@ -53,8 +53,10 @@ public class FELS_method {
 	public void LoadData() {
 
 		int i, j;
-		//String pattern = "(?:\\d*\\.)?\\d+";
-		
+		String[] matcher = new String[5];
+		// String pattern = "(?:\\d*\\.)?\\d+";
+		i = j = 0;
+
 		try {
 			URL url = Indicator.class.getResource(CALIBRATION_DATA_FILE);
 			FileInputStream fileStream = new FileInputStream(url.getPath());
@@ -62,12 +64,20 @@ public class FELS_method {
 			BufferedReader br = new BufferedReader(isr);
 			String line = "";
 			while ((line = br.readLine()) != null) {
-				
-				line.split("(?:\\d*\\.)?\\d+");
+
+				i++;
+				j = 0;
+
+				matcher = line.split("(?:\\d*\\.)?\\d+");
+
+				for (String pull : matcher) {
+
+					parameters[i][j++] = Double.parseDouble(pull);
+				}
+
 			}
 
 			br.close();
-
 
 		} catch (Exception e) {
 			// -- Unable to find the list.
