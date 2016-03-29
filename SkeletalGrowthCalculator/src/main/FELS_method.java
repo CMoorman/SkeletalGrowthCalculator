@@ -39,6 +39,7 @@ public class FELS_method {
 	double deriv1;
 	double deriv2;
 	double deriv_holder;
+	double age;
 
 	int NGRADED = 76; // -- Not sure if this is right.
 	int LGRADED = TOTAL_INDICATORS;
@@ -94,6 +95,11 @@ public class FELS_method {
 
 	public double Calculate() {
 
+		current_estimate = age;
+		T1 = 0;
+		deriv1 = 0;
+		iterator1 = 0;
+		
 		do {
 			iterator1++;
 

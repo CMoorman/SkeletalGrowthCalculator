@@ -1,0 +1,1230 @@
+Program FELShw;
+
+{Program FELShw
+ by David Thissen, Dept. of Psychology, University of Kansas, 66045
+
+ Revision History:
+ 9/29/2010: Ramzi W. Nahhas. FELHWBT6.PAS
+                             Corrected error in batch mode (RUNMODE=1). The code that set indicators to their min or max value if out of age range was
+                             not in a loop.
+                             Corrected age boundaries for PPV-3 from (0.75,2.5) to (0.75,0.5) for minage (Y) and from (9,13) to (4.5,3.5) for maxage (Z)
+                             I also added lots of comments so I could understand the program.
+                             Compared to FELSHW.PAS. These corrections match the corrections made to that program in 1995.
+                             Changed label for DPI-1 to DPI-4.
+                             Compared every line here to those in FELSHW.PAS and they match.
+                             Changed the format of the output file.
+                             Fixed the batch mode so that T<0 is set to 0 as in the interactive mode.
+                             Set E to 9999 if the algorithm does not converge
+ 8/2/99: removed correction made 3/20/98                
+ 3/20/98: Change boundaries for PPV-3 & label for DPI-1
+ 8/9/88: Traps inserted for out-of-range estimates (version 1.0).
+         Missing data changed to zero for all indicators (9 still ok input).
+ 11/17/86: Original (beta test, version 1.0b) completed.
+
+ To would-be modifiers of the program:
+ This source file is written for the Turbo Pascal compiler for
+ IBM PCs and compatibles, version 3.0.  Most of the program
+ handles the screen-input.  The essential parts of the program
+ (for doing the estimation of skeletal maturity) are the constants
+ in the "const" section, and Procedure Max (which computes the
+ estimates).  Procedure Max probably should not be modified (except
+ as may be necessary to port the program to other Pascal compilers).
+ The input and output sections of the program may be changed
+ as desired.}
+
+const
+   M0=5;            {Not sure what this is... It does not appear anywhere below}
+   TOTAL_INDICATORS=132;           {Total number of indicators}
+   MKNEE=1;         {The first 34 positions in the array are for knee indicators}
+   NKNEE=34;
+   MHW=35;          {The next 98 are for hand-wrist indicators}
+   NHW=132;
+   NGRADED=119;     {The position of the last graded indicator}
+   MREGR=120;       {The position of the first continuous indicator}
+   NREGR=132;       {The position of the last continuous indicator}
+
+  {REM***category number vector, knee******************}    {Max values for each indicator}
+   max_value : array[1..NGRADED] of integer
+     =(5,5,5,3,2,2,2,3,2,3,3,3,
+       5,5,2,2,2,2,2,2,2,2,2,2,2,2,3,3,
+       5,2,3,2,2,4,
+  {REM***category number vector, hand******************}
+       3,2,2,2,4,4,3,3,2,2,2,3,2,3,2,2,2,3,3,2,
+       2,2,5,2,4,4,2,5,3,2,2,2,2,2,2,2,2,2,2,2,3,
+       2,2,2,2,3,4,2,2,3,2,2,2,3,2,2,2,2,3,2,
+       2,2,2,2,3,2,2,2,2,3,2,2,2,3,2,2,2,3,3,2,
+       2,3,2,2,3);
+
+  {REM***parameters, male first, then female, knee*****}
+   parameters : array[1..264,1..5] of real
+     = ((3.39,0.49,1.36,2.30,3.25),                         {FEM-A}
+        (3.31,1.31,1.88,2.50,3.23),                         {FEM-B}
+        (3.40,1.50,1.89,2.37,2.95),                         {FEM-C}
+        (8.11,0.39,1.02,0,0),                               {FEM-D}
+        (2.95,0.74,0,0,0),                                  {FEM-E}
+        (0.66,10.27,0,0,0),                                 {FEM-F}
+        (0.80,10.52,0,0,0),                                 {FEM-G}
+        (1.00,3.26,7.04,0,0),                               {FEM-H}
+        (1.05,9.39,0,0,0),                                  {FEM-J}
+        (1.27,11.63,14.42,0,0),                             {FEM-K}
+        (1.18,15.88,17.47,0,0),                             {FEM-L}
+        (1.37,14.89,16.74,0,0),                             {FEM-M}
+        (2.09,0.80,2.39,3.95,5.32),                         {TIB-A}
+        (1.10,5.00,6.37,8.28,10.50),                        {TIB-B}
+        (5.79,0.26,0,0,0),                                  {TIB-C}
+        (3.84,-0.60,0,0,0),                                 {TIB-D}
+        (0.63,10.59,0,0,0),                                 {TIB-E}
+        (0.83,6.67,0,0,0),                                  {TIB-F}
+        (0.70,8.89,0,0,0),                                  {TIB-G}
+        (0.87,12.43,0,0,0),                                 {TIB-H}
+        (0.81,12.48,0,0,0),                                 {TIB-J}
+        (0.82,13.78,0,0,0),                                 {TIB-K}
+        (0.67,5.84,0,0,0),                                  {TIB-L}
+        (0.98,6.95,0,0,0),                                  {TIB-M}
+        (1.15,13.72,0,0,0),                                 {TIB-N}
+        (1.69,14.35,0,0,0),                                 {TIB-P}
+        (1.54,15.55,16.87,0,0),                             {TIB-Q}
+        (1.50,15.41,17.01,0,0),                             {TIB-R}
+        (1.53,4.02,5.15,7.11,10.30),                        {FIB-A}
+        (1.03,4.81,0,0,0),                                  {FIB-B}
+        (1.68,3.92,5.21,0,0),                               {FIB-C}
+        (0.54,9.10,0,0,0),                                  {FIB-D}
+        (1.07,10.75,0,0,0),                                 {FIB-E}
+        (1.43,15.48,16.94,17.49,0),                         {FIB-F}
+  {REM***parameters, male first, then female,hand******}
+        (2.50,     1.24,     1.67,    0,0),                 {R-1}
+        (1.12,     2.73,    0,0,0),                         {R-3}
+        (1.11,     3.27,    0,0,0),                         {R-4}
+        (0.73,     6.46,    0,0,0),                         {R-5}
+        (1.43,    13.32,    16.93,    18.28, 0),            {R-6}
+        (1.69,    14.48,    16.77,    17.87, 0),            {R-7}
+        (1.48,    16.33,    17.05,    0,0),                 {R-8}
+        (1.15,     6.99,     9.28,    0,0),                 {U-1}
+        (1.57,    18.09,    0,0,0),                         {U-3}
+        (10.39,    0.25,    0,0,0),                         {C-1}
+        (1.83,     0.08,    0,0,0),                         {C-2}
+        (0.61,     2.50,     4.86,    0,0),                 {C-3}
+        (0.71,    12.84,    0,0,0),                         {C-4}
+        (2.68,     0.13,     0.73,    0,0),                 {H-1}
+        (1.24,     5.68,    0,0,0),                         {H-2}
+        (1.23,     9.45,    0,0,0),                         {H-3}
+        (1.53,    12.65,    0,0,0),                         {H-4}
+        (1.01,     2.52,     3.27,    0,0),                 {TRI-1}
+        (0.88,     8.00,     9.49,    0,0),                 {TRI-2}
+        (0.97,     7.70,    0,0,0),                         {TRI-3}
+        (0.96,    10.22,    0,0,0),                         {TRI-4}
+        (1.26,    10.66,    0,0,0),                         {P-1}
+        (1.12,     4.16,     4.68,     6.45,    10.12),     {L-1}
+        (0.76,    11.07,    0,0,0),                         {L-2}
+        (1.28,     6.02,     6.56,     7.18,    0),         {S-1}
+        (1.19,     7.99,     8.48,     9.37,     0),        {S-2}
+        (1.09,    11.71,    0,0,0),                         {S-3}
+        (1.14,     6.11,     6.50,     8.20,     9.49),     {TPM-1}
+        (1.11,     8.58,    11.09,    0,0),                 {TPM-2}
+        (1.09,    11.20,    0,0,0),                         {TPM-3}
+        (0.94,    12.35,    0,0,0),                         {TPM-4}
+        (1.16,    12.63,    0,0,0),                         {TPM-5}
+        (1.47,     6.13,    0,0,0),                         {TPD-1}
+        (1.15,     8.87,    0,0,0),                         {TPD-2}
+        (0.68,     9.44,    0,0,0),                         {TPD-3}
+        (1.04,     9.34,    0,0,0),                         {TPD-4}
+        (1.35,     8.95,    0,0,0),                         {TPD-5}
+        (0.84,    10.83,    0,0,0),                         {TPD-6}
+        (0.92,    11.13,    0,0,0),                         {TPD-7}
+        (1.68,    12.63,    0,0,0),                         {AS-1}
+        (2.08,     2.74,     2.99,    0,0),                 {MET I-1}
+        (0.77,     4.87,    0,0,0),                         {MET I-3}
+        (1.04,     9.09,    0,0,0),                         {MET I-4}
+        (0.99,    13.05,    0,0,0),                         {MET I-5}
+        (1.21,    14.13,    0,0,0),                         {MET I-6}
+        (1.69,    15.23,    15.91,    0,0),                 {MET I-7}
+        (2.36,     1.75,     2.04,     3.48,    0),         {MET III-1}
+        (0.63,    13.43,    0,0,0),                         {MET III-3}
+        (0.77,    10.16,    0,0,0),                         {MET III-4}
+        (1.54,    15.67,    16.63,    0,0),                 {MET III-5}
+        (2.89,     2.10,    0,0,0),                         {MET V-1}
+        (1.18,    11.93,    0,0,0),                         {MET V-3}
+        (1.22,    12.26,    0,0,0),                         {MET V-4}
+        (1.07,    15.27,    16.78,    0,0),                 {MET V-5}
+        (0.88,    10.12,    0,0,0),                         {MET V-6}
+        (2.43,     2.69,    0,0,0),                         {PP I-1}
+        (1.14,     3.93,    0,0,0),                         {PP I-3}
+        (0.71,    11.38,    0,0,0),                         {PP I-4}
+        (1.60,    15.59,    16.23,    0,0),                 {PP I-5}
+        (0.85,    10.34,    0,0,0),                         {PP I-6}
+        (1.34,    13.87,    0,0,0),                         {PP I-7}
+        (4.67,     1.24,    0,0,0),                         {PP III-1}
+        (1.21,     4.14,    0,0,0),                         {PP III-3}
+        (0.87,    10.42,    0,0,0),                         {PP III-4}
+        (1.42,    15.53,    16.37,    0,0),                 {PP III-5}
+        (0.75,     7.75,    0,0,0),                         {PP III-6}
+        (3.81,     1.77,    0,0,0),                         {PP V-1}
+        (1.06,     4.30,    0,0,0),                         {PP V-3}
+        (0.87,    12.12,    0,0,0),                         {PP V-4}
+        (1.56,    15.61,    16.05,    0,0),                 {PP V-5}
+        (3.01,     1.95,    0,0,0),                         {MP III-1}
+        (0.98,     5.15,    0,0,0),                         {MP III-3}
+        (0.86,    12.77,    0,0,0),                         {MP III-4}
+        (1.55,    15.43,    16.37,    0,0),                 {MP III-5}
+        (1.58,     3.21,    0,0,0),                         {MP V-1}
+        (1.07,     6.07,    0,0,0),                         {MP V-3}
+        (0.82,    13.79,    0,0,0),                         {MP V-4}
+        (1.51,    15.75,    16.25,    0,0),                 {MP V-5}
+        (1.67,    14.95,    15.48,    0,0),                 {DP I-4}
+        (2.78,     2.26,    0,0,0),                         {DP III-1}
+        (0.95,     6.38,    0,0,0),                         {DP III-3}
+        (1.71,    15.13,    15.80,    0,0),                 {DP III-4}
+        (2.40,     3.09,    0,0,0),                         {DP V-1}
+        (0.91,     8.05,    0,0,0),                         {DP V-3}
+        (1.59,    15.37,    15.95,    0,0),                 {DP V-4}
+        (0.103,   -0.086,    0.129,    0,0),                {R-2}
+        (0.159,   -1.117,    0.202,    0,0),                {U-2}
+        (0.116,   -0.401,    0.138,    0,0),                {MET I-2}
+        (0.071,    0.008,    0.105,    0,0),                {MET III-2}
+        (0.083,   -0.092,    0.148,    0,0),                {MET V-2}
+        (0.118,   -0.207,    0.181,    0,0),                {PP I-2}
+        (0.076,    0.074,    0.102,    0,0),                {PP III-2}
+        (0.090,   -0.128,    0.142,    0,0),                {PP V-2}
+        (0.082,   -0.080,    0.115,    0,0),                {MP III-2}
+        (0.093,   -0.305,    0.154,    0,0),                {MP V-2}
+        (0.134,   -0.083,    0.223,    0,0),                {DP I-2}
+        (0.179,   -0.402,    0.213,    0,0),                {DP III-2}
+        (0.198,   -0.628,    0.260,    0,0),                {DP V-2}
+{REM***parameters, female start here**********************}
+        (5.30,0.43,1.00,1.73,2.28),                         {FEM-A}
+        (5.15,1.05,1.39,1.88,2.32),                         {FEM-B}
+        (4.09,1.09,1.39,1.69,2.11),                         {FEM-C}
+        (8.85,0.18,0.71,0,0),                               {FEM-D}
+        (6.19,0.40,0,0,0),                                  {FEM-E}
+        (0.90,7.79,0,0,0),                                  {FEM-F}
+        (0.84,9.14,0,0,0),                                  {FEM-G}
+        (1.09,2.35,5.28,0,0),                               {FEM-H}
+        (1.30,6.85,0,0,0),                                  {FEM-J}
+        (1.45,10.19,13.60,0,0),                             {FEM-K}
+        (1.45,14.10,16.12,0,0),                             {FEM-L}
+        (1.19,12.72,15.39,0,0),                             {FEM-M}
+        (2.31,0.55,1.75,2.94,4.01),                         {TIB-A}
+        (1.16,3.84,4.82,6.35,8.30),                         {TIB-B}
+        (7.98,0.26,0,0,0),                                  {TIB-C}
+        (5.92,0.20,0,0,0),                                  {TIB-D}
+        (0.43,10.65,0,0,0),                                 {TIB-E}
+        (0.58,6.05,0,0,0),                                  {TIB-F}
+        (0.73,6.44,0,0,0),                                  {TIB-G}
+        (0.60,11.54,0,0,0),                                 {TIB-H}
+        (0.62,11.66,0,0,0),                                 {TIB-J}
+        (0.53,12.11,0,0,0),                                 {TIB-K}
+        (0.73,4.51,0,0,0),                                  {TIB-L}
+        (1.33,5.34,0,0,0),                                  {TIB-M}
+        (1.38,11.34,0,0,0),                                 {TIB-N}
+        (1.23,12.72,0,0,0),                                 {TIB-P}
+        (1.50,14.47,15.55,0,0),                             {TIB-Q}
+        (1.37,14.44,15.93,0,0),                             {TIB-R}
+        (1.61,3.25,4.16,5.99,8.74),                         {FIB-A}
+        (1.50,3.41,0,0,0),                                  {FIB-B}
+        (1.80,2.94,3.91,0,0),                               {FIB-C}
+        (0.69,7.44,0,0,0),                                  {FIB-D}
+        (0.98,9.97,0,0,0),                                  {FIB-E}
+        (1.37,14.39,15.47,16.11,0),                         {FIB-F}
+        (3.24,     0.92,     1.42,    0,0),                 {R-1}
+        (1.79,     2.26,    0,0,0),                         {R-3}
+        (1.58,     2.37,    0,0,0),                         {R-4}
+        (0.80,     6.30,    0,0,0),                         {R-5}
+        (1.48,    11.49,    15.20,    17.42,    0),         {R-6}
+        (1.63,    12.32,    15.06,    17.05,    0),         {R-7}
+        (1.49,    14.67,    15.67,    0,0),                 {R-8}
+        (1.37,     5.78,     7.42,    0,0),                 {U-1}
+        (1.19,    17.14,    0,0,0),                         {U-3}
+        (11.13,     0.18,    0,0,0),                        {C-1}
+        (2.41,     0.22,    0,0,0),                         {C-2}
+        (0.74,     2.10,     4.63,    0,0),                 {C-3}
+        (0.80,    10.68,    0,0,0),                         {C-4}
+        (4.21,     0.09,     0.49,    0,0),                 {H-1}
+        (1.35,     4.63,    0,0,0),                         {H-2}
+        (1.21,     7.70,    0,0,0),                         {H-3}
+        (1.41,    10.50,    0,0,0),                         {H-4}
+        (1.42,     1.82,     2.40,    0,0),                 {TRI-1}
+        (0.82,     6.26,     7.83,    0,0),                 {TRI-2}
+        (1.01,     6.57,    0,0,0),                         {TRI-3}
+        (0.99,     8.20,    0,0,0),                         {TRI-4}
+        (1.46,     8.32,    0,0,0),                         {P-1}
+        (1.32,     3.00,     3.57,     5.12,     8.62),     {L-1}
+        (0.65,     9.31,    0,0,0),                         {L-2}
+        (1.52,     4.38,     4.83,     5.31,    0),         {S-1}
+        (1.36,     6.42,     6.85,     7.37,    0),         {S-2}
+        (0.85,     9.91,    0,0,0),                         {S-3}
+        (1.27,     4.34,     4.62,     6.60,     7.90),     {TPM-1}
+        (1.43,     7.12,     9.39,    0,0),                 {TPM-2}
+        (1.08,     9.88,    0,0,0),                         {TPM-3}
+        (0.85,    10.78,    0,0,0),                         {TPM-4}
+        (1.57,    10.16,    0,0,0),                         {TPM-5}
+        (1.71,     4.30,    0,0,0),                         {TPD-1}
+        (1.23,     7.10,    0,0,0),                         {TPD-2}
+        (0.52,     8.17,    0,0,0),                         {TPD-3}
+        (1.19,     7.74,    0,0,0),                         {TPD-4}
+        (1.46,     7.36,    0,0,0),                         {TPD-5}
+        (0.98,     9.28,    0,0,0),                         {TPD-6}
+        (0.77,     9.94,    0,0,0),                         {TPD-7}
+        (1.76,    10.57,    0,0,0),                         {AS-1}
+        (3.70,     1.60,     1.75,    0,0),                 {MET I-1}
+        (0.81,     4.53,    0,0,0),                         {MET I-3}
+        (1.19,     7.05,    0,0,0),                         {MET I-4}
+        (0.93,    11.15,    0,0,0),                         {MET I-5}
+        (1.10,    12.29,    0,0,0),                         {MET I-6}
+        (1.32,    13.15,    14.51,    0,0),                 {MET I-7}
+        (3.11,     1.21,     1.43,     2.64,    0),         {MET III-1}
+        (0.81,    10.95,    0,0,0),                         {MET III-3}
+        (0.74,     8.15,    0,0,0),                         {MET III-4}
+        (1.34,    13.04,    15.23,    0,0),                 {MET III-5}
+        (4.72,     1.38,    0,0,0),                         {MET V-1}
+        (1.45,     9.68,    0,0,0),                         {MET V-3}
+        (1.45,    10.00,    0,0,0),                         {MET V-4}
+        (1.20,    13.55,    15.28,    0,0),                 {MET V-5}
+        (1.15,     8.13,    0,0,0),                         {MET V-6}
+        (3.17,     1.62,    0,0,0),                         {PP I-1}
+        (0.70,     2.23,    0,0,0),                         {PP I-3}
+        (0.93,     8.82,    0,0,0),                         {PP I-4}
+        (1.79,    13.41,    13.97,    0,0),                 {PP I-5}
+        (1.03,     8.08,    0,0,0),                         {PP I-6}
+        (1.31,    11.50,    0,0,0),                         {PP I-7}
+        (7.99,     0.81,    0,0,0),                         {PP III-1}
+        (1.42,     2.68,    0,0,0),                         {PP III-3}
+        (0.92,     9.64,    0,0,0),                         {PP III-4}
+        (1.67,    13.37,    13.95,    0,0),                 {PP III-5}
+        (0.83,     6.18,    0,0,0),                         {PP III-6}
+        (5.08,     1.20,    0,0,0),                         {PP V-1}
+        (1.30,     3.21,    0,0,0),                         {PP V-3}
+        (1.02,    10.21,    0,0,0),                         {PP V-4}
+        (1.56,    13.05,    13.98,    0,0),                 {PP V-5}
+        (4.13,     1.20,    0,0,0),                         {MP III-1}
+        (0.66,     3.47,    0,0,0),                         {MP III-3}
+        (0.72,    11.21,    0,0,0),                         {MP III-4}
+        (1.79,    13.23,    14.26,    0,0),                 {MP III-5}
+        (2.74,     1.95,    0,0,0),                         {MP V-1}
+        (1.34,     4.56,    0,0,0),                         {MP V-3}
+        (0.64,    12.57,    0,0,0),                         {MP V-4}
+        (1.40,    13.37,    14.37,    0,0),                 {MP V-5}
+        (1.84,    12.73,    13.19,    0,0),                 {DP I-4}
+        (3.98,     1.45,    0,0,0),                         {DP III-1}
+        (0.85,     4.86,    0,0,0),                         {DP III-3}
+        (1.74,    12.90,    13.38,    0,0),                 {DP III-4}
+        (3.23,     1.95,    0,0,0),                         {DP V-1}
+        (0.88,     7.16,    0,0,0),                         {DP V-3}
+        (1.50,    13.01,    13.68,    0,0),                 {DP V-4}
+        (0.114,   -0.042,    0.130,    0,0),                {R-2}
+        (0.181,   -1.070,    0.188,    0,0),                {U-2}
+        (0.111,   -0.184,    0.128,    0,0),                {MET I-2}
+        (0.079,    0.065,    0.123,    0,0),                {MET III-2}
+        (0.091,   -0.030,    0.151,    0,0),                {MET V-2}
+        (0.128,   -0.036,    0.199,    0,0),                {PP I-2}
+        (0.078,    0.169,    0.111,    0,0),                {PP III-2}
+        (0.094,   -0.028,    0.191,    0,0),                {PP V-2}
+        (0.094,   -0.040,    0.124,    0,0),                {MP III-2}
+        (0.088,   -0.137,    0.149,    0,0),                {MP V-2}
+        (0.140,    0.136,    0.257,    0,0),                {DP I-2}
+        (0.175,   -0.149,    0.205,    0,0),                {DP III-2}
+        (0.203,   -0.345,    0.294,    0,0));               {DP V-2}
+
+
+   {REM***lower age boundaries, male, then female,knee*}
+   Y : array[1..TOTAL_INDICATORS,1..2] of real
+     = ((0,0),(1,0.75),(1,0.75),(0,0),(0,0),(5.5,3),(5.5,4),(1,0.75),
+        (5,4.5),(8,7.5),(11,11),(11,9),
+        (0,0),(4.5,3.5),(0,0),(0,0),(5,3),(1,1),(2.5,1.5),(7,7),
+        (7,7),(9,6),(1,0.75),(2.5,2.5),(10,8.5),(12,9.5),(12,11),
+        (11,11),(3.5,3),(1,0.25),(1,1),(3.5,2),(7,6),(11,10),
+   {REM***lower age boundaries, male, then female,hand*}
+        (0.25,0),(0.5,0.75),(0.5,0.75),(2,2),(10,8.5),
+        (11,9),(13.5,12),(2.5,1.5),(15.5,13.5),(0,0),
+        (0,0),(0,0),(8,6),(0,0),(2.5,1.5),
+        (4,3),(9.5,7.5),(0,0),(2.5,2),(3,2),
+        (6.5,2.5),(6.5,5),(0,0.25),(4.5,3.5),(2.5,2),
+        (5,2.5),(7,5.5),(1,1.5),(4.5,3.5),(7,5.5),
+        (7,6.5),(8.5,7),(2,1),(4.5,3),(4.5,2.5),
+        (5,3),(5.5,4),(6.5,4.5),(7.5,5.5),(8.5,7.5),(0.75,0.5),
+        (1.5,1.5),(3.5,2),(8.5,7),(10.5,10),(13,10),
+        (0.5,0.25),(5.5,6),(4.5,3.5),(13.5,8.5),(0.5,0.5),
+        (7.5,5),(8,6),(10.5,10),(5.5,3),
+        (1,0),(1.5,1),(6.5,4),(13.5,10.5),(5.5,3.5),
+        (11,8),(0.25,0.25),(0.5,0.5),(6,4),(13.5,10.5),
+        (2.5,0.75),(0,0.5),(0.75,0.5),(8,7),(13,10.5),
+        (0.5,0),(1.5,1.5),(7.5,5),(13,10.5),(0.75,0.25),
+        (2.5,1.5),(8.5,8),(13,10.5),(12,10.5),(0.5,0.25),
+        (2.5,2),(13,10.5),(1,0.75),(3.5,3),(13,10),
+        (0.5,0.5),(7,5.5),(3.5,1.5),(3,2.5),(1.5,1),
+        (2.5,2.5),(2.5,2),(1.5,0.75),(1.5,0.75),(3.5,1),
+        (1,1.5),(2.5,1.5),(2.5,1.5));
+
+   {REM***upper age boundaries, male, then female,knee*}
+   Z : array[1..TOTAL_INDICATORS,1..2] of real
+     = ((6.5,5.5),(6.0,5.5),(5.5,3.5),(2,2),(2.5,2),(18,13),
+        (14,15),(11,11),(17,11),(17,16),(18,18),(18,18),
+        (12,12),(12,12),(1.5,1.5),(2,1),(18,18),(14,16),(14,12),
+        (18,18),(18,18),(18,18),(10,9),(12,9),(17,16),
+        (17,17),(18,18),(18,18),
+        (16,14),(9,7),(9,7),(15,14),(16,14),(18,18),
+   {REM***upper age boundaries, male, then female,hand*}
+        (4.5,3.5),(6.5,4.5),(8,6),(11.5,10.5),(22,22),
+        (22,22),(20,20),(14.5,12),(22,20),(2,1),
+        (3.5,3),(13,10),(22,22),(3.5,3),(10,7.5),
+        (13.5,10.5),(15.5,17.5),(8,7),(13.5,14.5),(13.5,12),
+        (16,12.5),(14.5,10.5),(14,11.5),(15.5,17.5),(12,8.5),
+        (12.5,10.5),(15.5,15),(14,11),(15.5,12.5),(15.5,14),
+        (20,22),(17.5,14),(10,8.5),(12.5,10.5),(16,15.5),
+        (13.5,11.5),(12.5,10),(16.5,15),(15.5,14),(16,13),(7,4),
+        (8,9.5),(13.5,10.5),(22,22),(16.5,20),(20,20),
+        (6.5,5.5),(22,15),(14.5,12.5),(22,18),(4.5,3),
+        (15.5,13),(15.5,15),(20,20),(14.5,12),
+        (5.5,3.5),(10,10),(16.5,14),(20,16.5),(15,12.5),
+        (16.5,14.5),(3,2),(8,7),(14,14.5),(22,16.5),
+        (14.5,11.5),(3.5,3),(4.5,3.5),(16.5,14.5),(20,17.5),
+        (4,3),(10.5,10.5),(22,15.5),(20,16.5),(7,4.5),
+        (10,8.5),(22,22),(22,20),(18,15.5),(5,4),
+        (13,11.5),(20,17),(6,4.5),(13.5,12),(22,16.5),
+        (12.5,12.5),(13.5,12),(13,13),(13.5,13),(16,15),
+        (13,11),(11.5,12),(14.5,14),(13.5,12),(14,11),
+        (12,11),(10.5,10),(11,10.5));
+
+
+   {REM***character strings for indicators, knee*******}
+
+   KD : array[1..6,1..2] of string[3]
+      = ((' EW',' MW'),(' EW',' EH'),('WLC','HLC'),
+         (' EW',' MW'),(' EW',' EH'),(' EW',' MW'));
+
+   ID : array[1..TOTAL_INDICATORS] of string[9]
+      = ('FEM-A','FEM-B','FEM-C','FEM-D','FEM-E',
+        'FEM-F','FEM-G','FEM-H','FEM-J','FEM-K',
+        'FEM-L','FEM-M',
+        'TIB-A','TIB-B','TIB-C','TIB-D','TIB-E',
+        'TIB-F','TIB-G','TIB-H','TIB-J','TIB-K',
+        'TIB-L','TIB-M','TIB-N','TIB-P','TIB-Q',
+        'TIB-R',
+        'FIB-A','FIB-B','FIB-C','FIB-D',
+        'FIB-E','FIB-F',
+   {REM***character strings for indicators, hand*******}
+         'R-1','R-3','R-4','R-5','R-6',
+         'R-7','R-8','U-1','U-3','C-1',
+         'C-2','C-3','C-4','H-1','H-2',
+         'H-3','H-4','TRI-1','TRI-2','TRI-3',
+         'TRI-4','P-1  ','L-1  ','L-2  ','S-1  ',
+         'S-2  ','S-3  ','TPM-1','TPM-2','TPM-3',
+         'TPM-4','TPM-5','TPD-1  ','TPD-2  ','TPD-3  ',
+         'TPD-4  ','TPD-5  ','TPD-6  ','TPD-7  ','AS-1   ','MET I-1',
+         'MET I-3','MET I-4','MET I-5','MET I-6','MET I-7',
+         'MET III-1','MET III-3','MET III-4','MET III-5','MET V-1  ',
+         'MET V-3  ','MET V-4  ','MET V-5  ','MET V-6  ',
+         'PP I-1   ','PP I-3   ','PP I-4   ','PP I-5   ','PP I-6   ',
+         'PP I-7   ','PP III-1','PP III-3','PP III-4','PP III-5',
+         'PP III-6','PP V-1  ','PP V-3  ','PP V-4  ','PP V-5  ',
+         'MP III-1','MP III-3','MP III-4','MP III-5','MP V-1  ',
+         'MP V-3  ','MP V-4  ','MP V-5  ','DP I-4  ','DP III-1',
+         'DP III-3','DP III-4','DP V-1  ','DP V-3  ','DP V-4  ',
+         'R-2','U-2','MET I-2','MET III-2','MET V-2',
+         'PP I-2','PP III-2','PP V-2','MP III-2','MP V-2',
+         'DP I-2','DP III-2','DP V-2');
+
+
+    {REM***ratio-category boundaries*******************}        {These seem to only be used for KNEE}
+   C  : array[1..6,1..6] of real
+      = ((0,0.5,0.6,0.7,0.8,999999.0),
+         (0,2.0,2.25,2.5,2.75,999999.0),
+         (0,1.0,1.1,1.2,1.3,999999.0),
+         (0,0.6,0.7,0.8,0.9,999999.0),
+         (0,2.5,2.7,2.9,3.1,999999.0),
+         (0,0.3,0.5,0.7,0.9,999999.0));
+
+    {REM***screen locations for IBM PC, knee************}
+   XY : array[1..N,1..2] of integer
+      = ((1,5),(1,7),(1,8),(1,10),(1,11),(1,12),(1,13),(1,14),
+         (21,5),(21,6),(21,7),(21,8),(21,9),(21,11),(21,12),(21,13),(21,14),
+         (41,5),(41,6),(41,7),(41,8),(41,9),(41,10),(41,11),(41,12),(41,13),
+         (41,14),(41,15),
+         (61,5),(61,7),(61,8),(61,9),(61,10),(61,11),
+ {REM***screen locations for IBM PC, hand********************}
+         (1,4),(1,5),(1,6),(1,7),(1,8),
+         (1,9),(1,10),(1,11),(1,12),(1,13),
+         (1,14),(1,15),(1,16),(1,17),(1,18),
+         (1,19),(1,20),(8,4),(8,5),(8,6),
+         (8,7),(8,8),(8,9),(8,10),(8,11),
+         (8,12),(8,13),(8,14),(8,15),(8,16),
+         (8,17),(8,18),(16,4),(16,5),(16,6),
+         (16,7),(16,8),(16,9),(16,10),(16,11),(16,12),
+         (16,13),(16,14),(16,15),(16,16),(16,17),
+         (26,4),(26,5),(26,6),(26,7),(26,8),
+         (26,9),(26,10),(26,11),(26,12),
+         (26,13),(26,14),(26,15),(26,16),(26,17),
+         (26,18),(39,4),(39,5),(39,6),(39,7),
+         (39,8),(39,9),(39,10),(39,11),(39,12),
+         (39,13),(39,14),(39,15),(39,16),(50,4),
+         (50,5),(50,6),(50,7),(50,8),(50,9),
+         (50,10),(50,11),(50,12),(50,13),(50,14),
+         (61,6),(61,9),(61,12),(61,15),(61,18),
+         (61,21),(71,4),(71,7),(71,10),(71,13),
+         (71,16),(71,19),(71,22));
+
+type
+   str36 = string[36];
+
+var
+   grade : array[1..NGRADED] of integer;            {grade[i] = grade for indicator i}
+   X : array[MREGR..NREGR] of real;             {X[i] = cubed ratio for indicator i}
+   sex,iterator,II,iterator1,I8,I9,M1,RUNMODE,RM : integer;     {S = Sex}
+   age,R,C1,C2 : real;                            {A = Age}
+   current_estimate,T0,T1,D,deriv1,deriv2,deriv_holder,D4,E : real;
+   P1,P2,P3,U,Q1,Q2 : real;
+   SLOPE,P1Q1,P2Q2 :real;
+   MU,BETA,SIGMA,ZD :real;
+   ANS : string[3];
+   OUTFILE,OUTFILEI : string[20];
+   STRNG1 : string[4];                {STRNG1 is ptno, length 4}
+   STRNG3 : string[2];                {STRNG3 is assessor, length 2}
+   STRNG4 : string[8];                {STRNG4 is x-ray date, length 8}
+   STRNG5 : string[1];                {STRNG5 is assessment number, length 1}
+ STRNG,STRNG2 : string[36];           {STRNG2 is sex. Why is it given length 36? In FELSHW.PAS, all of the strings are given length 36. I think the others were...}
+   C1_2,C1_14 : real;                 {...changed for the batch processing.}
+   TK,TH,EK,EH :real;
+   FIRST,LGRADED : integer;
+   RSW,head,OK : boolean;
+   FILVAR,FILVARI: text;
+
+function upper(s : str36) : str36;
+var
+ i : integer;
+
+begin
+ upper:=s;
+ for i:=1 to length(s) do upper[i]:=UpCase(s[i]);
+end;
+
+Procedure HeadIn;
+begin
+ gotoXY(1,1);
+ HighVideo;
+ Writeln('FELShw Skeletal Maturity                ID #');
+ LowVideo;
+ Writeln('C.A.      Sex        Assessor           X-ray date           Assessment');
+
+ gotoXY(41,1);
+ Highvideo;
+ Write('ID # ');
+ Read(STRNG1);
+ gotoXY(41,1);
+ LowVideo;
+ Write('ID # ',STRNG1);
+ HighVideo;
+ repeat
+  gotoXY(1,2);
+  Write('C.A. ');
+  {$I-}Read(age);{$I+}
+  OK := (IOresult = 0);
+  if OK then
+   begin
+    Lowvideo;
+    gotoXY(1,2);
+    Write('C.A. ',age:4:1);
+   end
+  else
+   begin
+    gotoXY(1,2);
+    Write('C.A. ?');
+   end;
+ until OK;
+ Highvideo;
+ repeat
+  gotoXY(11,2);
+  Write('Sex ');
+  Read(STRNG2);
+  if (UpCase(STRNG2[1])='M') or ((STRNG2[1])='1') then sex:=1;
+  if (UpCase(STRNG2[1])='F') or ((STRNG2[1])='2') then sex:=2;
+  Lowvideo;
+  gotoXY(11,2);
+  if (UpCase(STRNG2[1])='M') or ((STRNG2[1])='1') then Write('Sex Male') else
+  if (UpCase(STRNG2[1])='F') or ((STRNG2[1])='2') then Write('Sex Female') else
+   begin
+    gotoXY(11,2);
+    Write('Sex ?');
+   end;
+ until (UpCase(STRNG2[1])='M') or (UpCase(STRNG2[1])='F') or ((STRNG2[1])='1')
+ or ((STRNG2[1])='2');
+ Highvideo;
+ gotoXY(22,2);
+ Write('Assessor ');
+ Read(STRNG3);
+ Lowvideo;
+ gotoXY(22,2);
+ Write('Assessor ',STRNG3);
+ Highvideo;
+ gotoXY(41,2);
+ Write('X-ray date ');
+ Read(STRNG4);
+ Lowvideo;
+ gotoXY(41,2);
+ Write('X-ray date ',STRNG4);
+ Highvideo;
+ gotoXY(62,2);
+ Write('Assessment ');
+ Read(STRNG5);
+ Lowvideo;
+ gotoXY(62,2);
+ Write('Assessment ',STRNG5);
+ head:=true;
+end;
+
+Procedure HeadOut;
+begin
+ gotoXY(1,1);
+ HighVideo;
+ Writeln('FELShw Skeletal Maturity               ');
+ LowVideo;
+ gotoXY(41,1);
+ Write('id # ',STRNG1);
+ gotoXY(1,2);
+ Write('C.A. ',age:4:1);
+ gotoXY(11,2);
+ gotoXY(11,2);
+ if (UpCase(STRNG2[1])='M') OR ((STRNG2[1])='1') then Write('Sex Male');
+ if (UpCase(STRNG2[1])='F') OR ((STRNG2[1])='2') then Write('Sex Female');
+ gotoXY(22,2);
+ Write('Assessor ',STRNG3);
+ gotoXY(41,2);
+ Write('X-ray date ',STRNG4);
+ gotoXY(62,2);
+ Write('Assessment ',STRNG5);
+end;
+
+Procedure GetKneeI;
+begin
+ HighVideo;
+ if max_value[iterator]<5 then
+  begin
+   repeat
+    gotoXY(XY[iterator,1],XY[iterator,2]);
+    Write(ID[iterator],': ');
+    {$I-}Read(grade[iterator]); {$I+}
+    OK:=(IOresult = 0);
+    if OK and ((grade[iterator]=9) or ((grade[iterator]>=0) and (grade[iterator]<=max_value[iterator]))) then
+     begin
+      LowVideo;
+      gotoXY(XY[iterator,1],XY[iterator,2]);
+      if grade[iterator]=9 then grade[iterator]:=0;
+      Write(ID[iterator],': ',grade[iterator]);
+     end
+    else
+     begin
+      gotoXY(XY[iterator,1],XY[iterator,2]);
+      Write(ID[iterator],': ?');
+     end;
+   until OK and ((grade[iterator]=9) or ((grade[iterator]>=0) and (grade[iterator]<=max_value[iterator])));
+  end
+ else
+  begin
+   if (iterator=2) or (iterator=14) then
+    begin
+     repeat
+      if iterator=2 then C1:=C1_2;
+      if iterator=14 then C1:=C1_14;
+      C2:=0;
+      HighVideo;
+      gotoXY(XY[iterator,1],XY[iterator,2]);
+      Write(ID[iterator],': (',KD[I9,2],') ');
+      {$I-}Read(C2);{$I+}
+      OK:=(IOresult = 0);
+      if OK and ((C2>=0) and (C2<99)) then
+       begin
+        LowVideo;
+        gotoXY(XY[iterator,1],XY[iterator,2]);
+        Write(ID[iterator],': (',KD[I9,2],') ',C2:5:2);
+       end
+      else
+       begin
+        gotoXY(XY[iterator,1],XY[iterator,2]);
+        Write(ID[iterator],': (',KD[I9,2],') ?');
+       end;
+     until OK and ((C2>=0) and (C2<99));
+    end
+   else
+    begin
+     C1:=0;
+     C2:=0;
+      repeat
+       HighVideo;
+       gotoXY(XY[iterator,1],XY[iterator,2]);
+       Write(ID[iterator],': (',KD[I9,1],') ');
+       {$I-}Read(C1);{$I+}
+       OK:=(IOresult = 0);
+       if OK and ((C1>=0) and (C1<99)) then
+        begin
+         if iterator=1 then C1_2:=C1;
+         if iterator=13 then C1_14:=C1;
+         LowVideo;
+         gotoXY(XY[iterator,1],XY[iterator,2]);
+         Write(ID[iterator],': (',KD[I9,1],') ',C1:5:2);
+        end
+       else
+        begin
+         gotoXY(XY[iterator,1],XY[iterator,2]);
+         Write(ID[iterator],': (',KD[I9,1],') ?');
+        end;
+      until OK and ((C1>=0) and (C1<99));
+     if ((iterator<>13) or ((iterator=13) and (age<=10.0))) then
+     begin
+      repeat
+       HighVideo;
+       gotoXY(XY[iterator,1],XY[iterator,2]+1);
+       Write(ID[iterator],': (',KD[I9,2],') ');
+       {$I-}Read(C2);{$I+}
+       OK:=(IOresult = 0);
+       if OK and ((C2>=0) and (C2<99)) then
+        begin
+         LowVideo;
+         gotoXY(XY[iterator,1],XY[iterator,2]+1);
+         Write(ID[iterator],': (',KD[I9,2],') ',C2:5:2);
+        end
+       else
+        begin
+         gotoXY(XY[iterator,1],XY[iterator,2]+1);
+         Write(ID[iterator],': (',KD[I9,2],') ?');
+        end;
+      until OK and ((C2>=0) and (C2<99));
+     end;
+    end;
+   if (C1=0) or (C2=0) then grade[iterator]:=0
+   else
+    begin
+     R:=C1/C2;
+     for I8:=1 to 5 do
+      begin
+       if (R>C[I9,I8]) and (R<=C[I9,I8+1]) then
+       grade[iterator]:=I8;
+      end;
+     gotoXY(1,22);
+     Write('The ratio is ',R:6:2,', grade ',grade[iterator]);
+    end;
+  end;
+end;
+
+Procedure GetKnee;
+begin
+ Clrscr;
+ LowVideo;
+ I9:=0;
+ for iterator:=MKNEE to NKNEE do
+ if max_value[iterator]<5 then
+  begin
+   gotoXY(XY[iterator,1],XY[iterator,2]);
+   Write(ID[iterator],': ');
+  end
+ else
+  begin
+   I9:=I9+1;
+   if (iterator=2) or (iterator=14) then
+    begin
+     gotoXY(XY[iterator,1],XY[iterator,2]);
+     Write(ID[iterator],': (',KD[I9,2],') ');
+    end
+   else
+    begin
+     gotoXY(XY[iterator,1],XY[iterator,2]);
+     Write(ID[iterator],': (',KD[I9,1],') ');
+     gotoXY(XY[iterator,1],XY[iterator,2]+1);
+     Write(ID[iterator],': (',KD[I9,2],') ');
+    end;
+  end;
+
+HeadIn;
+
+ I9:=0;
+ for iterator:=MKNEE to NKNEE do
+  begin
+   if max_value[iterator]=5 then I9:=I9+1;
+   grade[iterator]:=0;
+   if age<Y[iterator,sex] then grade[iterator]:=1;
+   if age>Z[iterator,sex] then grade[iterator]:=max_value[iterator];
+   if grade[iterator]=0 then
+   GetKneeI;
+  end;
+ repeat
+  HighVideo;
+  gotoXY(1,22);
+  Writeln('Enter the name of any indicator you wish to change');
+  Writeln('Press RETURN if you wish to change none');
+  Read(STRNG);
+  gotoXY(1,25);
+  Write('                                                         ');
+  gotoXY(1,25);
+  for iterator:=1 to length(STRNG) do STRNG[iterator]:=UpCase(STRNG[iterator]);
+  iterator:=0;
+  I8:=0;
+  for iterator1:=MKNEE to NKNEE do
+   begin
+    if max_value[iterator1]=5 then I8:=I8+1;
+    if STRNG=ID[iterator1] then
+     begin
+      iterator:=iterator1;
+      I9:=I8;
+      gotoXY(1,24);
+      Write('                            ');
+     end;
+   end;
+  if iterator>0 then GetKneeI
+  else if length(STRNG)>0 then
+  Write('Indicator name not recognized; try again');
+ until length(STRNG)=0;
+ gotoXY(1,22);
+ Writeln('                                                           ');
+ Writeln('                                                           ');
+
+end; {GetKnee}
+
+
+Procedure GetHandI;         {This procedure seems to be reading the value for indicator i in interactive mode}
+begin
+ HighVideo;
+ if iterator <= NGRADED then       {Categorical indicators}
+  begin
+   repeat
+    gotoXY(XY[iterator,1],XY[iterator,2]);
+    Write(ID[iterator],' ');
+    {$I-}Read(grade[iterator]); {$I+}
+    OK:=(IOresult = 0);
+    if OK and ((grade[iterator]=9) or ((grade[iterator]>=0) and (grade[iterator]<=max_value[iterator]))) then
+     begin
+      LowVideo;
+      gotoXY(XY[iterator,1],XY[iterator,2]);
+      if grade[iterator]=9 then grade[iterator]:=0;
+      Write(ID[iterator],' ',grade[iterator]);
+     end
+    else
+     begin
+      gotoXY(XY[iterator,1],XY[iterator,2]);
+      Write(ID[iterator],' ?');
+     end;
+   until OK and ((grade[iterator]=9) or ((grade[iterator]>=0) and (grade[iterator]<=max_value[iterator]))); {Values other than 9 and 0 to max possible for that indicator are not allowed}
+  end
+ else               {Continuous indicators}
+  begin
+   C1:=0;
+   C2:=0;
+   HighVideo;
+   gotoXY(XY[iterator,1],XY[iterator,2]);
+   Write(ID[iterator]);
+    repeat
+     gotoXY(XY[iterator,1],XY[iterator,2]+1);
+     Write('(EW) ');
+     {$I-}Read(C1);{$I+}
+       OK:=(IOresult = 0);
+       if OK and ((C1>=0) and (C1<99)) then
+        begin
+         LowVideo;
+         gotoXY(XY[iterator,1],XY[iterator,2]+1);
+         Write('(EW) ',C1:4:1);
+        end
+       else
+        begin
+         gotoXY(XY[iterator,1],XY[iterator,2]+1);
+         Write('(EW) ?');
+        end;
+      until OK and ((C1>=0) and (C1<99));       {Only values from 0-99 are allowed}
+     HighVideo;
+      repeat
+       gotoXY(XY[iterator,1],XY[iterator,2]+2);
+       Write('(MW) ');
+       {$I-}Read(C2);{$I+}
+       OK:=(IOresult = 0);
+       if OK and ((C2>=0) and (C2<99)) then
+        begin
+         LowVideo;
+         gotoXY(XY[iterator,1],XY[iterator,2]+2);
+         Write('(MW) ',C2:4:1);
+         gotoXY(XY[iterator,1],XY[iterator,2]);
+         Write(ID[iterator]);
+        end
+       else
+        begin
+         gotoXY(XY[iterator,1],XY[iterator,2]+2);
+         Write('(MW) ?');
+        end;
+      until OK and ((C2>=0) and (C2<99));
+   if (C1=0) or (C2=0) then X[iterator]:=0         {If EW or MW is 0, then cubed ratio is set to 0}
+   else
+    begin
+     X[iterator]:=C1/C2;                           {Compute ratio}
+     X[iterator]:=X[iterator]*X[iterator]*X[iterator];                  {Cube the ratio}
+    end;
+  end;
+end;
+
+Procedure GetHand;
+begin
+ Clrscr;
+ Lowvideo;
+ for iterator:=MHW to NGRADED do
+  begin
+   gotoXY(XY[iterator,1],XY[iterator,2]);
+   Write(ID[iterator]);
+  end;
+ for i:=MREGR to NREGR do
+  begin
+   gotoXY(XY[iterator,1],XY[iterator,2]);
+   Write(ID[iterator]);
+  end;
+
+if not head then HeadIn;
+if head then HeadOut;
+
+ for iterator:=MHW to NGRADED do
+  begin
+   grade[iterator]:=0;
+   if age<Y[iterator,sex] then grade[iterator]:=1;        {If age < minage, then set to min grade of 1}
+   if age>Z[iterator,sex] then grade[iterator]:=max_value[iterator];     {If age > maxage, then set to max grade for indicator i}
+   if grade[iterator]=0 then                   {Otherwise, read from screen}
+   GetHandI;
+  end;
+ for iterator:=MREGR to NREGR do
+  begin
+   X[iterator]:=0;                         {If age is in [minage, maxage] then read from screen. Otherwise, set to 0}
+   if (age>=Y[iterator,sex]) and
+      (age<=Z[iterator,sex]) then
+   GetHandI;
+  end;
+
+ repeat
+  HighVideo;
+  gotoXY(1,22);
+  Writeln('Enter the name of any indicator you wish to change');
+  Writeln('Press RETURN if you wish to change none');
+  Read(STRNG);
+  gotoXY(1,25);
+  Write('                                               ');
+   if length(STRNG)>0 then
+    begin
+     iterator:=0;
+     for iterator1:=MHW to NHW do
+      begin
+       if upper(STRNG)=copy(ID[iterator1],1,length(STRNG)) then
+        begin
+         iterator:=iterator1;
+         gotoXY(1,24);
+         Writeln('                            ');
+        end;
+      end;
+     if iterator>0 then GetHandI
+     else if length(STRNG)>0 then
+      begin
+       gotoXY(1,25);
+       Write('Indicator name not recognized; try again');
+      end;
+    end;
+  until length(STRNG)=0;
+ gotoXY(1,22);
+ Writeln('                                                           ');
+ Writeln('                                                           ');
+end; {Gethand}
+
+    {REM***start maximization**************************}
+
+Procedure Max;
+begin
+     gotoXY(1,22);
+     Writeln('Computing...please stand by...');
+     current_estimate:=age;                                          {Starting value is the age}
+     T1:=0;
+     deriv1:=0;
+     iterator1:=0;                                         {Iteration}
+     repeat
+       iterator1:=iterator1+1;
+       gotoXY(1,23);
+       IF RUNMODE=0 THEN Write('Iteration ',iterator1,'; Estimate now ',current_estimate);
+       T0:=T1;
+       T1:=current_estimate;
+       deriv_holder:=deriv1;
+       deriv1:=0;
+       deriv2:=0;
+       for iterator:=FIRST to LGRADED do                   {First and last positions for graded indicators}
+        begin
+         if grade[iterator]<>0 then                            {If not missing...}
+          begin
+           SLOPE := parameters[TOTAL_INDICATORS*(sex-1)+iterator,1];                 {SLOPE is d, the rate parameter in the logistic regression}
+           for M1:=1 to max_value[iterator] do                     {For each possible grade...}
+            begin
+             if grade[iterator]=M1 then
+              begin
+               P1:=1.0;
+               if M1<>1 then
+                begin
+                 U:=(parameters[TOTAL_INDICATORS*(sex-1)+iterator,M1] - current_estimate)*SLOPE;    {U is (tau - current estimate)*d}
+                 if ABS(U)>10 then                   {Correct values that are too large in magnitude}
+                  begin                
+                   if U >  10 then U:= 10.0;
+                   if U < -10 then U:=-10.0;              
+                  end;                 
+                 P1:=1.0/(1.0+exp(U));              {P1 is P(grade = M1 or higher)}
+                end;
+               P2:=0.0;
+               if M1<>max_value[iterator] then
+                begin
+                 U:=(parameters[TOTAL_INDICATORS*(sex-1)+iterator,M1+1] - current_estimate)*SLOPE;
+                 if ABS(U)>10 then                   {Correct values that are too large in magnitude}
+                  begin                
+                   if U >  10 then U:= 10.0;
+                   if U < -10 then U:=-10.0;              
+                  end;                 
+                 P2:=1.0/(1.0+exp(U));              {P2 is P(grade > M1)}
+                end;
+               P3:=P1-P2;                           {P3 is P(grade = M1)}
+               if P3<0.005 then P3:=0.005;          {Correct values that are too small in magnitude since later you divide by P3}
+               Q1:=1.0-P1;
+               Q2:=1.0-P2;
+               P1Q1:=P1*Q1;
+               P2Q2:=P2*Q2;
+               deriv1:=deriv1 + SLOPE*(P1Q1-P2Q2)/P3;       {Add up the first derivatives with respect to current_estimate across graded indicators}
+               D:=(Q1-P1)*P1Q1 + (P2-Q2)*P2Q2;
+               D:=D - sqr(P2Q2-P1Q1)/P3;
+               deriv2:=deriv2 - D*sqr(SLOPE)/P3;            {Add up the second derivatives with respect to current_estimate across graded indicators}
+              end;
+            end;
+          end;
+        end;
+       if RSW then
+       begin
+       for iterator:=MREGR to NREGR do
+        begin
+         if X[iterator]<>0.0 then
+          begin
+           BETA:=parameters[TOTAL_INDICATORS*(sex-1)+iterator,1];
+           MU:=parameters[TOTAL_INDICATORS*(sex-1)+iterator,2];
+           SIGMA:=parameters[TOTAL_INDICATORS*(sex-1)+iterator,3];
+           ZD:=(X[iterator]-BETA*current_estimate-MU)/SIGMA;
+           deriv1:=deriv1 + BETA*ZD/SIGMA;          {Add up derivatives with respect to theta across continuous indicators}
+           deriv2:=deriv2 + sqr(BETA/SIGMA);
+          end;
+        end;
+       end;
+       if deriv2<0 then                         {If second derivative is negative, make it positive}
+       deriv2:=-deriv2;
+       if deriv2=0 then
+       deriv2:=0.01;                            {If second derivative is 0, make it 0.01}
+       D4:=deriv1/deriv2;
+       if D4>1 then
+       D4:=1;
+       if D4<-1 then
+       D4:=-1;
+       current_estimate:=current_estimate+D4;                             {Update the estimate}
+       E:=deriv2;                               {Store second derivative to compute standard error}
+       if (iterator1>2) and (deriv1*deriv_holder<0) then         {If the derivative has changed sign since the last iteration, then you have overshot the maximum...}
+        begin                               {...and you instead average the estimates from the previous two iterations}
+         if (deriv_holder>0) and (current_estimate<T0) then
+          current_estimate:=(T0+T1)/2.0;
+         if (deriv_holder<0) and (current_estimate>T0) then
+          current_estimate:=(T0+T1)/2.0;
+        end;
+      until (iterator1>50) or (abs(deriv1)<0.0001);        {Convergence criterion. Limit to 50 iterations. Stop if derivative is near 0}
+     if deriv1>0.0001 then
+      begin
+      gotoXY(1,21);
+      IF RUNMODE=0 THEN Writeln('Algorithm did not converge...Beware of the results');
+      end;
+
+    {REM***output results******************************}
+
+     E:=1.0/sqrt(E);                    {Inverse of second derivative is the variance}
+     if (deriv1>0.0001) then E:=9999;       {I added this... If it did not converge, then E is not the variance}
+     gotoXY(1,22);
+     if (current_estimate<0) then
+      begin
+       current_estimate:=0;
+       if (RUNMODE = 0) then
+         begin
+           Writeln('The estimated skeletal age is less than zero.');
+           Writeln('This probably means that all indicators entered are');
+           Writeln('in their immature state. No valid estimate exists.');
+           Writeln('The immature skeletal age code is ',current_estimate:6:2);
+           Writeln('with an estimated standard error of ',E:5:2,' years.       ');
+         end;
+      end;
+     if ((sex=1) and (current_estimate>18.00)) or ((sex=2) and (current_estimate>18.00)) then     {I am guessing that having code for M and F separately is a vestige of an older version...}
+      begin                                                     {...where the max SA for females was less than 18}
+       if s=1 then
+        current_estimate:=18.00
+       else
+        current_estimate:=18.00;
+        IF RUNMODE=0 THEN BEGIN
+       Writeln('The estimated skeletal age is greater than 18.');
+       Writeln('This means that all or nearly all indicators entered are');
+       Writeln('in their mature state. No valid estimate exists.');
+       Writeln('The mature skeletal age code is ',current_estimate:6:2);
+       Writeln('with an estimated standard error of ',E:5:2,' years.          ');
+       END;
+      end;
+     if (RUNMODE=0) AND (current_estimate>0) and (((sex=1) and (current_estimate<18.00)) or ((s=2) and (t<18.00))) then
+      begin
+       Writeln('The estimated skeletal age is ',current_estimate:6:2,' years                 ');
+       Writeln('with an estimated standard error of ',E:5:2,' years.          ');
+       Writeln(iterator1,' iterations were required.');
+       Write('Press any key to continue...');
+      end;
+end;   {Max}
+
+Procedure Knee;
+begin
+ GetKnee;
+ FIRST:=MKNEE;
+ LGRADED:=NKNEE;
+ RSW:=false;
+ Max;
+ TK:=current_estimate;
+ EK:=E;
+ Repeat until Keypressed;
+end;
+
+Procedure Hand;                                 {This procedure is run for one record at a time... There is a repeat until EOF in the program below}
+begin
+ IF RUNMODE = 0 THEN GetHand                    {0 = Interactive. Get indicators from the user screen input}
+   ELSE BEGIN                                   {1 = Batch mode. Get indicators from a file}
+   READ(FILVARI,STRNG1,STRNG4);                 {Read in ptno and x-ray date}
+   FOR II:=35 TO 100 DO READ(FILVARI,grade[II]);    {Read in first 66 categorical indicators}
+   READLN(FILVARI);                             {Go to the next line}
+   READ(FILVARI,STRNG1,STRNG4);                 {Read in ptno and x-ray date}
+   FOR II:= 101 TO 119 DO READ(FILVARI,grade[II]);  {Read in the next 19 categorical indicators}
+   FOR II:= 120 TO 130 DO READ(FILVARI,X[II]);  {Read in first 11 continuous indicators}
+   READLN(FILVARI);                             {Go to the next line}
+   READ(FILVARI,STRNG1,STRNG4);                 {Read in ptno and x-ray date}
+   FOR II:=131 TO 132 DO READ(FILVARI,X[II]);   {Read in last 2 continuous indicators}
+   READ(FILVARI,age,sex,STRNG3,STRNG5);             {Read in age, sex, assessor, and assessment number}
+   READLN(FILVARI);                             {Go to the next line}
+   
+     for iterator:=MHW to NGRADED do   {This matches what happens in interactive mode... Only missing values are given default values. Of course, in interactive mode...}
+                                {...any value that is out of age range is not possible to enter... The user is never prompted for is, so it has to be missing...}
+                                {In batch mode, however, any indicators can be included, and it only makes sense to set missing ones to default values.}
+      begin
+       if ((grade[iterator]=0) and (age < Y[iterator,sex])) then grade[iterator]:=1;        {If missing and age < minage, then set to min grade of 1}
+       if ((grade[iterator]=0) and (age > Z[iterator,sex])) then grade[iterator]:=max_value[iterator];     {If missing and age > maxage, then set to max grade for indicator i}
+      end;
+     for iterator:=MREGR to NREGR do   {The next loop does nothing, but keep it in case you need to condition on other values that represent missing values, such as 9}
+      begin
+       if ((X[iterator]=0) and (age < Y[iterator,sex])) then X[iterator]:=0;        {If missing and age < minage, then set to 0}
+       if ((X[iterator]=0) and (age > Z[iterator,sex])) then X[iterator]:=0;        {If missing and age > maxage, then set to 0}
+      end;
+   END;
+ FIRST:=MHW;
+ LGRADED:=NGRADED;
+ RSW:=true;
+ Max;
+ TH:=current_estimate;
+ EH:=E;
+ IF RUNMODE=0 THEN Repeat until Keypressed;
+end;
+
+Procedure Both;
+begin
+ FIRST:=MKNEE;
+ LGRADED:=NGRADED;
+ RSW:=true;
+ Max;
+end;
+
+begin                   {This is where the program begins... Above are procedure definitions and constant declarations}
+ Clrscr;
+ ANS := 'Q';
+ RM:=0;
+ RUNMODE := 0;
+ WRITELN('To run in the BATCH mode enter the number 1  ');
+ READLN(RM);                                { Substitute this line with RM:=1 if you want to run this without any input }
+ IF RM=1 THEN BEGIN
+   RUNMODE := 1;
+   WRITELN('Enter the Name of the Indicator File (from program FELHWENT) :');
+   READLN(OUTFILEI);                        { Substitute this line with OUTFILEI := 'input.txt' if you want to run this without any input }
+   ASSIGN(FILVARI,OUTFILEI);
+   RESET(FILVARI);
+   WRITELN('Enter Name of Output File:  ');
+   READLN(OUTFILE);                         { Substitute this line with OUTFILE := 'output.txt' if you want to run this without any input }
+   ASSIGN(FILVAR,OUTFILE);
+   REWRITE(FILVAR);
+ END;
+ IF RUNMODE=0 THEN BEGIN
+   WRITELN('Enter Name of Output File or ');
+   WRITELN('Press RETURN if NO Output File is wanted:                       ');
+   READLN(OUTFILE);
+   IF OUTFILE <> '' THEN
+   BEGIN
+     ASSIGN(FILVAR,OUTFILE);
+     REWRITE(FILVAR);
+     WRITELN('Enter Name of Indicator File');
+     READLN(OUTFILEI);
+     ASSIGN(FILVARI,OUTFILEI);
+     REWRITE(FILVARI);
+   END;
+ END;
+ head:=false;
+  repeat
+   if head then HeadOut;
+   GotoXY(1,4);
+   HighVideo;
+   Writeln('                                  FELShw');
+   Writeln('                               Version 1.0 ');
+   LowVideo;
+   Writeln;
+   Writeln('                A program to compute RWT knee skeletal ages,');
+   Writeln('                    and/or FELS hand-wrist skeletal ages');
+   Writeln;
+   Writeln;
+   HighVideo;
+   if RUNMODE=1 THEN ANS[1]:='H';                           {Batch processing is strictly for Hand-Wrist skeletal age estimation... Not yet programmed for Knee}
+   IF RUNMODE=0 THEN BEGIN
+    Write('           Enter K for Knee, H for Hand-wrist, B for both or Q to QUIT:');
+    Readln(ANS);
+   END;
+   IF EOF(FILVARI) THEN ANS[1]:='Q';                        {For batch processing, quit automatically when you reach the end of the file}
+   LowVideo;
+   if UpCase(ANS[1])<>'Q' then
+    begin
+     head:=false;
+     if (UpCase(ANS[1])='K') or (UpCase(ANS[1])='B') then Knee;
+     if (UpCase(ANS[1])='H') or (UpCase(ANS[1])='B') then Hand;         {This is where the program reads in 1 record from file or screen and then does Max}
+     if (UpCase(ANS[1])='B') then Both;
+     Clrscr;
+     GotoXY(1,13);
+     if ((UpCase(ANS[1])='K') or (UpCase(ANS[1])='B')) and (TK>0)
+     AND (RUNMODE=0) THEN
+      begin
+       Writeln;
+       Writeln('            The RWT (1975) knee estimated skeletal age is',TK:6:2,' years');
+       Writeln('                 with an estimated standard error of',EK:5:2,' years.');
+      end;     if ((UpCase(ANS[1])='H') or (UpCase(ANS[1])='B')) and (TH>0)
+      AND (RUNMODE=0) THEN
+      begin
+       Writeln;
+       Writeln('         The FELS (1987) hand-wrist estimated skeletal age is',TH:6:2,' years');
+       Writeln('                 with an estimated standard error of',EH:5:2,' years.');
+      end;
+     if (UpCase(ANS[1])='B') and (current_estimate>0) AND (RUNMODE=0) then
+      begin
+       Writeln;
+       Writeln('               The combined estimated skeletal age is',current_estimate:6:2,' years');
+       Writeln('                 with an estimated standard error of',E:5:2,' years.');
+      end;
+      IF OUTFILE <> '' THEN
+        BEGIN
+{OLD      WRITELN(FILVAR,STRNG1:4,age:5:1,sex:2,STRNG3:3,STRNG5:2,STRNG4:9, }
+{OLD      TH:6:2,EH:5:2);                                               }
+          WRITELN(FILVAR,STRNG1:4,STRNG4:9,age:5:1,sex:2,STRNG3:3,STRNG5:2,TH:15:2,EH:15:2);        {9/30/2010 RWN - I changed this}
+        IF (RUNMODE=0) THEN BEGIN
+          WRITE(FILVARI,STRNG1:4,STRNG4:9);
+          FOR II := 35 TO 100 DO WRITE (FILVARI,grade[II]:1);
+          WRITELN(FILVARI);
+          WRITE(FILVARI,STRNG1:4,STRNG4:9);
+          FOR II := 101 TO 119 DO WRITE (FILVARI,grade[II]:1);
+          FOR II := 120 TO 130 DO WRITE (FILVARI,X[II]:4:2);
+          WRITELN(FILVARI);
+          WRITE(FILVARI,STRNG1:4,STRNG4:9);
+          FOR II := 131 TO 132 DO WRITE (FILVARI,X[II]:4:2);
+          WRITE (FILVARI,age:5:1,sex:2);
+          WRITELN(FILVARI);    END;
+        END;
+   end;
+  until UpCase(ANS[1])='Q';
+ Close(filvar);
+ close(filvari);
+ Clrscr;
+end.
+
