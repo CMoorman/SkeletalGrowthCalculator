@@ -12,7 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 import statistics.SkeletalEstimation;
 
 public class FELSMethod extends SkeletalEstimation {
-	
+
 	private static String[] pascalIndicatorOrder = { "R1", "R3", "R4", "R5", "R6", "R7", "R8", "U1", "U3", "C1", "C2",
 			"C3", "C4", "H1", "H2", "H3", "H4", "TRI1", "TRI2", "TRI3", "TRI4", "P1", "L1", "L2", "S1", "S2", "S3",
 			"TPM1", "TPM2", "TPM3", "TPM4", "TPM5", "TPD1", "TPD2", "TPD3", "TPD4", "TPD5", "TPD6", "TPD7", "AS1",
@@ -24,7 +24,9 @@ public class FELSMethod extends SkeletalEstimation {
 	// -- Only 97 (98) indicators for hand/wrist. We are not including the knee
 	// indicators.
 	int TOTAL_INDICATORS = 98;
-	int MAX_VALUES[];
+	int MAX_VALUES[] = { 3, 2, 2, 2, 4, 4, 3, 3, 2, 2, 2, 3, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 5, 2, 4, 4, 2, 5, 3, 2, 2, 2,
+			2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 4, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2, 2, 2,
+			2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 2, 2, 3, 2, 2, 3 };
 	double[][] parameters = new double[197/* Place holder */][5];
 	int grade[];
 	int cubed_ratio[];
@@ -122,18 +124,21 @@ public class FELSMethod extends SkeletalEstimation {
 			e.printStackTrace();
 		}
 	}
-	public void setAge(double age){
+
+	public void setAge(double age) {
 		this.age = age;
 	}
-	public void setSex(String sex){
-		if(sex != null && !sex.isEmpty()){
-			if(sex.equals("Male")){
+
+	public void setSex(String sex) {
+		if (sex != null && !sex.isEmpty()) {
+			if (sex.equals("Male")) {
 				this.sex = 1;
-			}else{
+			} else {
 				this.sex = 2;
 			}
 		}
 	}
+
 	public double performEstimation() {
 
 		current_estimate = age;
