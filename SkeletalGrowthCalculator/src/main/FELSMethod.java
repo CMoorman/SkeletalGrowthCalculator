@@ -151,7 +151,7 @@ public class FELSMethod extends SkeletalEstimation {
 
 			// Stands for non batch mode
 			if (RUNMODE == 0) {
-				System.out.printf("Iteration %d Estimate now: %d", iterator1, current_estimate);
+				System.out.printf("Iteration %d Estimate now: %f", iterator1, current_estimate);
 			}
 
 			T0 = T1;

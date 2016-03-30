@@ -232,9 +232,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	@FXML
 	TextField MPV1; // 58
 	@FXML
-	TextField MPVEW; // 59
+	TextField MPV2EW; // 59
 	@FXML
-	TextField MPVMW; // 60
+	TextField MPV2MW; // 60
 	@FXML
 	TextField MPV3; // 61
 	@FXML
@@ -415,8 +415,6 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		// AddHeaderInfoToString( txtBirthDate );
 		// AddHeaderInfoToString( txtXrayDate );
 		// AddHeaderInfoToString( txtAsmDate );
-		addHeaderInfoToString(txtSA);
-		addHeaderInfoToString(txtSEE);
 
 		if (m_ErrorIDList.size() > 0) {
 			// -- We found errors. Uh oh.
@@ -431,16 +429,23 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		String sCurrentInput = "";
 		sCurrentInput = inputTextField.getText().trim();
 		// -- Check if editable AND the value is a double.
+		try{
 		if (inputTextField.isEditable() && isDoubleValue(sCurrentInput)) {
 			Indicator currentIndicator = felsMethod.getIndicatorMap().get(inputTextField.getId());
-			
-			if(Double.parseDouble( sCurrentInput ) <= currentIndicator.getMaximumValue()) {
+			if(currentIndicator == null){
+				System.out.println("Null indicator in map " + inputTextField.getId());
+				return;
+			}
+			int maxVal = currentIndicator.getMaximumValue();
+			if(Double.parseDouble( sCurrentInput ) <= maxVal) {
 				s_MeasurementData += sCurrentInput + ",";
 				inputTextField.setStyle("-fx-background-color: white;");
 			}
 			else {
-				inputTextField.setStyle("-fx-background-color: #D178F0;");
-				m_ErrorIDList.add(inputTextField);
+				if(maxVal > 0){
+					inputTextField.setStyle("-fx-background-color: #D178F0;");
+					m_ErrorIDList.add(inputTextField);
+				}
 			}
 			
 		} else {
@@ -454,6 +459,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				// -- Not editable, we want to set and empty value for this.
 				s_MeasurementData += ",";
 			}
+		}}catch(Exception e){
+			boolean temp = false;
 		}
 	}
 
@@ -473,6 +480,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			rval = false;
 			s_MeasurementData = "";
 		}
+	
 		return rval;
 	}
 
@@ -507,8 +515,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		if (E.getSource() == btnSubmit) {
 			if (loadMeasurementInput() && loadHeaderInput()) {
 				fels.setAge(Double.parseDouble(txtChronAge.getText()));
+				fels.setSex(cmbGender.getValue());
 				fels.setInputList(getInputValueMap());
-				double generatedAge = fels.performEstimation();
+				//double generatedAge = fels.performEstimation();
 			} else {
 				// -- Loading the input Failed, why? TODO: Handle validation
 				// errors. Missing fields, etc...?
@@ -562,6 +571,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		birthDate.setEditable(false);
 		xrayDate.setEditable(false);
 		asmDate.setEditable(false);
+		txtSA.setEditable(false);
+		txtSEE.setEditable(false);
+		txtSA.setDisable(true);
+		txtSEE.setDisable(true);
 		initializeInputList();
 		addListeners();
 		btnSubmit.setOnAction(e -> buttonClicked(e));

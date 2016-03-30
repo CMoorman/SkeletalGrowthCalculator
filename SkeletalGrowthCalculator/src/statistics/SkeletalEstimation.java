@@ -13,4 +13,8 @@ public abstract class SkeletalEstimation {
 	public abstract double performEstimation();
 	public abstract void loadData();
 	public abstract void setAge(double age);
+	public void setSex(String value) {
+		// TODO Auto-generated method stub
+		
+	}
 }
