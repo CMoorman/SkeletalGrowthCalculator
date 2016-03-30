@@ -2,6 +2,7 @@ package controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.FELS_method;
 import main.Indicator;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
@@ -36,6 +38,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 	private static Scene PatientDataFormScene = null;
 	private static FELSDataFormController instance = null;
+	private static FELS_method fels = new FELS_method();
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	private final String maleColor = "#ADD8E6;";
 	private final String femaleColor = "#FAAFBA;";
@@ -497,7 +500,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 		if (E.getSource() == btnSubmit) {
 			if (LoadMeasurementInput() && LoadHeaderInput()) {
-				SaveAllData();
+				fels.setInputList(getInputValueMap());
+				
 			} else {
 				// -- Loading the input Failed, why? TODO: Handle validation
 				// errors. Missing fields, etc...?
@@ -695,16 +699,66 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			}
 		}
 	}
+	class Ratio{
+		private String name = "";
+		double num = 1.0;
+		double denom = 1.0;
+		private String getRatio(){
+			if(denom != 0){
+				return Double.toString(num / denom);
+			}
+			return "1.0";
+		}
+	}
+	String num = "EW";
+	String denom = "MW";
+	Map<String, Ratio> ratios = new HashMap<String,Ratio>();
+	List<String> ratioList = new ArrayList<String>(Arrays.asList("R2", "U2", "METI2", "METIII2", "METV2", "PPI2",
+			"PPIII2", "PPV2", "MPIII2", "MPV2", "DPI2", "DPIII2", "DPV2"));
 	public Map<String, String> getInputValueMap(){
 		Map<String, String> inputMap = new HashMap<String, String>();
 		for(TextField input: inputs){
 			if(input != null){
 				String val = input.getText();
 				if(!val.trim().isEmpty() && !val.equals(NOT_APPLICABLE)){
-					inputMap.put(input.getId(), val);
+					String Id = input.getId();
+					if(Id.contains(num)){
+						String key = subString(Id, num);
+						Ratio ratio = null;
+						if((ratio = ratios.get(key)) == null){
+							ratio = new Ratio();
+						}
+						ratio.num = Double.parseDouble(val);
+						ratios.put(key, ratio);
+					}else if(Id.contains(denom)){
+						String key = subString(Id, denom);
+						Ratio ratio = null;
+						if((ratio = ratios.get(key)) == null){
+							ratio = new Ratio();
+						}
+						ratio.denom = Double.parseDouble(val);
+						ratios.put(key, ratio);
+					}else{
+						inputMap.put(input.getId(), val);
+					}
 				}
 			}
 		}
+		for(String ratioID : ratioList){
+			Ratio ratio = ratios.get(ratioID);
+			String ratioVal = "1.0";
+			if(ratio != null){
+				ratioVal = ratio.getRatio();
+			}
+			inputMap.put(ratioID, ratioVal);
+		}
 		return inputMap;
+	}
+	private String subString(String val, String sub){
+		int index = val.indexOf(sub);
+		if(index > 0){
+			return val.substring(0, index);
+		}
+		return null;
 	}
 }

@@ -5,12 +5,22 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class FELS_method {
-
+	private static String[] pascalIndicatorOrder = { "R1", "R3", "R4", "R5", "R6", "R7", "R8", "U1", "U3", "C1", "C2",
+			"C3", "C4", "H1", "H2", "H3", "H4", "TRI1", "TRI2", "TRI3", "TRI4", "P1", "L1", "L2", "S1", "S2", "S3",
+			"TPM1", "TPM2", "TPM3", "TPM4", "TPM5", "TPD1", "TPD2", "TPD3", "TPD4", "TPD5", "TPD6", "TPD7", "AS1",
+			"METI1", "METI3", "METI4", "METI5", "METI6", "METI7", "METIII1", "METIII3", "METIII4", "METIII5", "METV1",
+			"METV3", "METV4", "METV5", "METV6", "PPI1", "PPI3", "PPI4", "PPI5", "PPI6", "PPI7", "PPIII1", "PPIII3",
+			"PPIII4", "PPIII5", "PPIII6", "PPV1", "PPV3", "PPV4", "PPV5", "MPIII1", "MPIII3", "MPIII4", "MPIII5",
+			"MPV1", "MPV3", "MPV4", "MPV5", "DPI4", "DPIII1", "DPIII3", "DPIII4", "DPV1", "DPV3", "DPV4", "R2", "U2",
+			"METI2", "METIII2", "METV2", "PPI2", "PPIII2", "PPV2", "MPIII2", "MPV2", "DPI2", "DPIII2", "DPV2" };
 	// -- Only 97 (98) indicators for hand/wrist. We are not including the knee
 	// indicators.
 	int TOTAL_INDICATORS = 98;
@@ -50,7 +60,26 @@ public class FELS_method {
 	int NREGR = TOTAL_INDICATORS;
 
 	private static final String CALIBRATION_DATA_FILE = "FEL_calibration_data.csv";
-
+	private List<Double> inputList = new ArrayList<Double>(200);
+	public void setInputList(Map<String, String> inputMap){
+		if(inputMap == null || inputMap.isEmpty()){
+			return;
+		}
+		for(int i = 0; i < pascalIndicatorOrder.length; ++i){
+			String indicator = pascalIndicatorOrder[i];
+			String value = inputMap.get(indicator);
+			double val = 1.0;
+			if(value != null){
+				try{
+					val = Double.parseDouble(value);
+				}catch(NumberFormatException e){
+					val = 1.0;
+				}
+			}
+			inputList.add(val);
+			System.out.println(indicator + " : " + val);
+		}
+	}
 	public void LoadData() {
 
 		int i, j;
