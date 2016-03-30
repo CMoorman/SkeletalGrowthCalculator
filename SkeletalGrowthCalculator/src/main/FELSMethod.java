@@ -11,7 +11,7 @@ import interfaces.SkeletalEstimation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class FELS_method extends SkeletalEstimation{
+public class FELSMethod extends SkeletalEstimation{
 	private static String[] pascalIndicatorOrder = { "R1", "R3", "R4", "R5", "R6", "R7", "R8", "U1", "U3", "C1", "C2",
 			"C3", "C4", "H1", "H2", "H3", "H4", "TRI1", "TRI2", "TRI3", "TRI4", "P1", "L1", "L2", "S1", "S2", "S3",
 			"TPM1", "TPM2", "TPM3", "TPM4", "TPM5", "TPD1", "TPD2", "TPD3", "TPD4", "TPD5", "TPD6", "TPD7", "AS1",

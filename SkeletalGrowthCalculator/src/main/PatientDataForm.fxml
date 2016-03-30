@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.FELSDataFormController">
   <children>
-    <TabPane layoutX="0.0" layoutY="195.0" prefHeight="1911.0" prefWidth="601.0" style="" tabClosingPolicy="UNAVAILABLE">
+    <TabPane fx:id ="tabPane" layoutX="0.0" layoutY="195.0" prefHeight="1911.0" prefWidth="601.0" style="" tabClosingPolicy="UNAVAILABLE">
       <tabs>
         <Tab fx:id="tabFELS" style="width:200px;&#10;-fx-background-color:#eee" text="FELS Method">
           <content>
