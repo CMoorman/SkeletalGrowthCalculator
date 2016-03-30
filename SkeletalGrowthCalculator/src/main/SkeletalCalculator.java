@@ -26,6 +26,7 @@ public class SkeletalCalculator extends Application implements Runnable {
 		try{
 			Scene scene = TitleViewController.getInstance().getScene();
 			primaryStage.setScene(scene);
+			//primaryStage.setResizable(false);
 			primaryStage.show();
 			
 			primaryStage.setOnCloseRequest( new EventHandler<WindowEvent>() {

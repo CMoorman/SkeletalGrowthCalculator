@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import interfaces.SkeletalEstimation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,20 +28,22 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import main.FELS_method;
+import main.FELSMethod;
 import main.Indicator;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
+import statistics.SkeletalEstimation;
 
 public class FELSDataFormController extends SkeletalCalculator implements Initializable {
 
 	private static Scene PatientDataFormScene = null;
 	private static FELSDataFormController instance = null;
-	private static SkeletalEstimation fels = new FELS_method();
+	private static SkeletalEstimation fels = new FELSMethod();
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
 	private static final String MALE_COLOR = "#ADD8E6;";
 	private static final String FEMALE_COLOR = "#FAAFBA;";
@@ -54,6 +55,11 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private List<TextField> inputs = new ArrayList<TextField>();
 	@FXML
 	Pane paneMeasurementInputs;
+	@FXML
+	TabPane tabPane;
+	public TabPane getTabPane(){
+		return tabPane;
+	}
 	// -- Form FXML -- Patient Info ************
 	@FXML
 	TextField txtStudy;
@@ -553,6 +559,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		cmbGender.setItems(genderList);
 		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
 		felsMethod.load();
+		birthDate.setEditable(false);
+		xrayDate.setEditable(false);
+		asmDate.setEditable(false);
 		initializeInputList();
 		addListeners();
 		btnSubmit.setOnAction(e -> buttonClicked(e));

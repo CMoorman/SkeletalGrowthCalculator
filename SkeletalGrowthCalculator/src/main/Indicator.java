@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contains information about the indicator of a method and a static method
- * to load indicators from a given filePath which corresponds to a .csv file
+ * Contains information about the indicator of a method and a static method to
+ * load indicators from a given filePath which corresponds to a .csv file
  * 
  * @author bdecker
  *
@@ -29,16 +29,26 @@ public class Indicator {
 	private int maximumValue = 0;
 
 	private String indicatorValue = "";
-	
-	public Indicator(String name, String description, double maleStartRange, double maleEndRange, double femaleStartRange,
-			double femaleEndRange, int max) {
+
+	public Indicator(String name, String description, double maleStartRange, double maleEndRange,
+			double femaleStartRange, double femaleEndRange, int max) {
 		this.name = name;
 		this.description = description;
 		this.maleStartRange = maleStartRange;
 		this.maleEndRange = maleEndRange;
 		this.femaleStartRange = femaleStartRange;
 		this.femaleEndRange = femaleEndRange;
-		this.setMaximumValue(max);
+		this.maximumValue = max;
+	}
+
+	public Indicator(String name, String description, double maleStartRange, double maleEndRange,
+			double femaleStartRange, double femaleEndRange) {
+		this.name = name;
+		this.description = description;
+		this.maleStartRange = maleStartRange;
+		this.maleEndRange = maleEndRange;
+		this.femaleStartRange = femaleStartRange;
+		this.femaleEndRange = femaleEndRange;
 	}
 
 	public String getName() {
@@ -88,7 +98,7 @@ public class Indicator {
 	public void setFemaleEndRange(double femaleEndRange) {
 		this.femaleEndRange = femaleEndRange;
 	}
-	
+
 	public String getIndicatorValue() {
 		return indicatorValue;
 	}
@@ -96,7 +106,7 @@ public class Indicator {
 	public void setIndicatorValue(String indicatorValue) {
 		this.indicatorValue = indicatorValue;
 	}
-	
+
 	public int getMaximumValue() {
 		return maximumValue;
 	}
@@ -111,7 +121,7 @@ public class Indicator {
 			return indicators;
 		}
 		URL url = Indicator.class.getResource(filePath);
-		if(url == null){
+		if (url == null) {
 			return indicators;
 		}
 		File inputFile = new File(url.getPath());
@@ -128,18 +138,28 @@ public class Indicator {
 			br = new BufferedReader(isr);
 			String line = "";
 			while ((line = br.readLine()) != null) {
-		       String[] indicatorFields = line.split(",");
-		       if(indicatorFields != null && indicatorFields.length == 7){
-		    	   String name = indicatorFields[0];
-		    	   String description = indicatorFields[1];
-		    	   double maleStart = Double.parseDouble(indicatorFields[2]);
-		    	   double maleEnd = Double.parseDouble(indicatorFields[3]);
-		    	   double femaleStart = Double.parseDouble(indicatorFields[4]);
-		    	   double femaleEnd = Double.parseDouble(indicatorFields[3]);
-		    	   int maximum = Integer.parseInt(indicatorFields[6]);
-		    	   indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd, maximum));
-		       }
-		    }
+				String[] indicatorFields = line.split(",");
+
+				if (indicatorFields != null) {
+					int length = indicatorFields.length;
+					if (length >= 6) {
+						String name = indicatorFields[0];
+						String description = indicatorFields[1];
+						double maleStart = Double.parseDouble(indicatorFields[2]);
+						double maleEnd = Double.parseDouble(indicatorFields[3]);
+						double femaleStart = Double.parseDouble(indicatorFields[4]);
+						double femaleEnd = Double.parseDouble(indicatorFields[5]);
+						if (length == 7) {
+							int maximum = Integer.parseInt(indicatorFields[6]);
+							indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd,
+									maximum));
+						} else {
+							indicators
+									.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd));
+						}
+					}
+				}
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File could not be found at path: " + filePath);
 			return indicators;
@@ -148,10 +168,10 @@ public class Indicator {
 			return indicators;
 		} finally {
 			try {
-				if(fileStream != null){
+				if (fileStream != null) {
 					fileStream.close();
 				}
-				if(br != null){
+				if (br != null) {
 					br.close();
 				}
 			} catch (IOException e) {
