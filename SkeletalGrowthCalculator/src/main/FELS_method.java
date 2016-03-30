@@ -121,7 +121,18 @@ public class FELS_method extends SkeletalEstimation{
 			e.printStackTrace();
 		}
 	}
-
+	public void setAge(double age){
+		this.age = age;
+	}
+	public void setSex(String sex){
+		if(sex != null && !sex.isEmpty()){
+			if(sex.equals("Male")){
+				
+			}else{
+				
+			}
+		}
+	}
 	public double performEstimation() {
 
 		current_estimate = age;
@@ -134,7 +145,7 @@ public class FELS_method extends SkeletalEstimation{
 
 			// Stands for non batch mode
 			if (RUNMODE == 0) {
-				System.out.printf("Iteration %d Estimate now", iterator1, current_estimate);
+				System.out.printf("Iteration %d Estimate now: %d", iterator1, current_estimate);
 			}
 
 			T0 = T1;
@@ -144,8 +155,8 @@ public class FELS_method extends SkeletalEstimation{
 			deriv2 = 0;
 
 			for (iterator = FIRST; iterator <= LGRADED; iterator++) {
-
-				if (grade[iterator] != 0) {
+				double currentIdicatorValue = inputList.get(iterator);
+				if (currentIdicatorValue != 0) {
 
 					// SLOPE is d, the rate parameter
 					SLOPE = parameters[(TOTAL_INDICATORS * (sex - 1) + iterator)][1];
@@ -153,7 +164,7 @@ public class FELS_method extends SkeletalEstimation{
 					// For each possible grade
 					for (M1 = 1; M1 < MAX_VALUES[iterator]; M1++) {
 
-						if (grade[iterator] == M1) {
+						if (currentIdicatorValue == M1) {
 
 							grade1 = 1.0;
 
