@@ -135,7 +135,7 @@ public class Indicator {
 		    	   double maleStart = Double.parseDouble(indicatorFields[2]);
 		    	   double maleEnd = Double.parseDouble(indicatorFields[3]);
 		    	   double femaleStart = Double.parseDouble(indicatorFields[4]);
-		    	   double femaleEnd = Double.parseDouble(indicatorFields[3]);
+		    	   double femaleEnd = Double.parseDouble(indicatorFields[5]);
 		    	   int maximum = Integer.parseInt(indicatorFields[6]);
 		    	   indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd, maximum));
 		       }
