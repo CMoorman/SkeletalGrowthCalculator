@@ -1,154 +1,154 @@
-Radius,,,,,
-R1,Epiphyseal ossification and shape,0.25,4.5,0.0833,3.5
-R2EW,Epiphyseal width,0.5,12.5,0.5,12.5
-R2MW,Metaphyseal width,0.5,12.5,0.5,12.5
-R3,Terminal plate of the epiphysis,0.5,6.5,0.75,4.5
-R4,Radiopaque line on or within the distal margin of the epiphysis,0.5,8,0.75,6
-R5,Styloid process of the epiphysis,2,11.5,2,10.5
-R6,Capping and fusion of the medial third of the epiphyseo-diaphyseal junction,10,22,8.5,22
-R7,Capping and fusion of the lateral third of the epiphyseo-diaphyseal junction,11,22,9,22
-R8,Capping and fusion of the central third of the epiphyseo-diaphyseal junction,13.5,20,12,20
-,,,,,
-Ulna,,,,,
-U1,Epiphyseal ossification and shape,2.5,14.5,1.5,12
-U2EW,Epiphyseal width,7,13.5,5.5,12
-U2MW,Metaphyseal width,7,13.5,5.5,12
-U3,Epiphysec-diaphyseal Fusion,15.5,22,13.5,20
-,,,,,
-Capitate,,,,,
-C1,Ossification of the capitate,0.0833,2,0.0833,1
-C2,Shape of the capitate,0.0833,3.5,0.0833,3
-C3,Shape of the medial margin of the capitate,0.0833,13,0.0833,10
-C4,Projection of the capitate toward metacarpal IV,8,22,6,22
-,,,,,
-Hamate,,,,,
-H1,Ossification and shape of the hamate,0.0833,3.5,0.0833,3
-H2,Concavity of the medial margin of the hamate,2.5,10,1.5,7.5
-H3,Projection of the hamate toward metacarpal V,4,13.5,3,10.5
-H4,Ossification of the hook of the hamate,9.5,15.5,7.5,17.5
-,,,,,
-Metacarpal III,,,,,
-METIII1,Ossification of the epiphysis of metacarpal III and epiphyseal shape,0.5,6.5,0.25,5.5
-METIII2EW,Epiphyseal width,3,13.5,2.5,13
-METIII2MW,Metaphyseal width,3,13.5,2.5,13
-METIII3,Radiopaque line or zone within the lateral margin of the epiphysis of metacarpal III,5.5,22,6,15
-METIII4,Proximo medial projection of the epiphysis of metacarpal V,4.5,14.5,3.5,12.5
-METIII5,Epiphyseo-diaphyseal fusion of metacarpal III,13.5,22,8.5,18
-,,,,,
-Metacarpal V,,,,,
-METV1,Ossfication of the epiphysis of metacarpal V,0.5,4.5,0.5,3
-METV2EW,Epiphyseal width,1.5,16,1,15
-METV2MW,Metaphyseal width,1.5,16,1,15
-METV3,Radiopaque line or zone within the lateral margin of the epiphysis of metacarpal V,7.5,15.5,5,13
-METV4,Proximo medial projection of the epiphysis of metacarpal V,8,15.5,6,15
-METV5,Epiphyseo-diaphyseal fusion of metacarpal V,10.5,20,10,20
-METV6,Indentation of the medial margin of the epiphysis of metacarpal V,5.5,14.5,3,12
-,,,,,
-Proximal Phalanx I,,,,,
-PPI1,Ossification of the epiphysis of proximal phalanx I,1,5.5,0.0833,3.5
-PPI2EW,Epiphyseal width,2.5,13,2.5,11
-PPI2MW,Metaphyseal width,2.5,13,2.5,11
-PPI3,The proximal margin of the epiphysis of proximal phalanx I is concave,1.5,10,1,10
-PPI4,Radiopaque line of zone within the proximal margin of the eqiphysis of proximal phalanx I,6.5,16.5,4,14
-PPI5,Epiphyseo-diaphyseal fusion of proximal phalanx I,13.5,20,10.5,16.5
-PPI6,Shape of the distal end of proximal phalanx I,5.5,15,3.5,12.5
-PPI7,Disto-medial projection of the epiphysis of proximal phalanx I,11,16.5,8,14.5
-,,,,,
-Triquetral,,,,,
-TRI1,Ossification and shape of the triquetral,0.0833,8,0.0833,7
-TRI2,Shape of the lateral margin of the triquetral,2.5,13.5,2,14.5
-TRI3,Corner or projection between the lateral and proximal margins of the triquetral,3,13.5,2,12
-TRI4,Radiopaque line or zone within the lateral margin of the triquetral,6.5,16,2.5,12.5
-,,,,,
-PISIForm,,,,,
-P1,<TBD>,6.5,14.5,5,10.5
-,,,,,
-Lunate,,,,,
-L1,Ossification and shape of the lunate,0.0833,14,0.25,11.5
-L2,Corner between the lateral and proximal margins of the lunate,4.5,15.5,3.5,17.5
-,,,,,
-Scaphoid,,,,,
-S1,Ossification and shape of the scaphoid,2.5,12,2,8.5
-S2,Shape of the medial margin of the scaphoid,5,12.5,2.5,10.5
-S3,Tubercle on the distal end of the lateral margin of the scaphoid,7,15.5,5.5,15
-,,,,,
-Trapezium,,,,,
-TPM1,Ossification and shape of the trapezium,1,14,1.5,11
-TPM2,Disto-medial projection of the trapezium,4.5,15.5,3.5,12.5
-TPM3,Radiopaque line or zone within the distal margin of the trapezium,7,15.5,5.5,14
-TPM4,Radiopaque line or zone within the proximal margin of the trapezium,7,20,6.5,22
-TPM5,Corner between the distal and lateral margins of the trapezium,8.5,17.5,7,14
-,,,,,
-Proximal Phalanx III,,,,,
-PPIII1,Ossification of the epiphysis of proximal phalanx III,0.25,3,0.25,2
-PPIII2EW,Epiphyseal width,2.5,11.5,2,12
-PPIII2MW,Metaphyseal width,2.5,11.5,2,12
-PPIII3,The proximal margin of the epiphysis of proximal phalanx III is concave,0.5,8,0.5,7
-PPIII4,Radiopaque line of zone within the proximal margin of the eqiphysis of proximal phalanx III,6,14,4,14.5
-PPIII5,Epiphyseo-diaphyseal fusion of proximal phalanx III,13.5,22,10.5,16.5
-PPIII6,Shape of the distal end of proximal phalanx III,2.5,14.5,0.75,11.5
-,,,,,
-Proximal Phalanx V,,,,,
-PPV1,Ossification of the epiphysis of proximal phalanx V,0.0833,3.5,0.5,3
-PPV2EW,Epiphyseal width,1.5,14.5,0.75,14
-PPV2MW,Metaphyseal width,1.5,14.5,0.75,14
-PPV3,The proximal margin of the epiphysis of proximal phalanx V is concave,0.75,4.5,0.5,3.5
-PPV4,Radiopaque line of zone within the proximal margin of the eqiphysis of proximal phalanx V,8,15.5,7,14.5
-PPV5,Epiphyseo-diaphyseal fusion of proximal phalanx V,13,20,10.5,17.5
-,,,,,
-Middle Phalanx III,,,,,
-MPIII1,Ossification of the epiphysis of middle phalanx III,0.5,4,0.0833,3
-MPIII2EW,Epiphyseal width,1.5,13.5,0.75,12
-MPIII2MW,Metaphyseal width,1.5,13.5,0.75,12
-MPIII3,Epiphyseal projection of middle phalanx III,1.5,10.5,1.5,10.5
-MPIII4,Shape of the distal end of middle phalanx III,7.5,22,5,15.5
-MPIII5,Epiphyseo-diaphyseal fusion of middle phalanx III,13,22,10.5,16.5
-,,,,,
-Trapezoid,,,,,
-TPD1,Ossification of the trapezoid,2,10,1,8.5
-TPD2,Radiopaque line or zone within the medial margin of the trapezoid,4.5,12.5,3,10.5
-TPD3,Shape of the medial margin of the trapezoid,4.5,16,2.5,15.5
-TPD4,Shape of the proximal margin of the trapezoid,5,13.5,3,11.5
-TPD5,Radiopaque line or zone within the distal margin of the trapezoid,5.5,12.5,4,10
-TPD6,Overlapping of metacarpal II by the trapezoid,6.5,16.5,4.5,15
-TPD7,Radiopaque line or zone within the proximal margin of the trapezoid,7.5,15.5,5.5,14
-,,,,,
-Adductor Sesamoid,,,,,
-AS1,Ossification of the adductor sesamoid,8.5,16,7.5,13
-,,,,,
-Metacarpal I,,,,,
-METI1,Ossification and epiphyseal shape,0.75,7,0.5,4
-METI2EW,Epiphyseal width,3.5,13,1.5,13
-METI2MW,Metaphyseal width,3.5,13,1.5,13
-METI3,Terminal plate of the epiphysis,1.5,8,1.5,9.5
-METI4,Indention of the proximal margin of the epiphysis,3.5,13.5,2,10.5
-METI5,Epiphysis overlaps the trapezium,8.5,22,7,22
-METI6,Medial Capping,10.5,16.5,10,20
-METI7,Epiphyseo-diaphyseal fusion,13,20,10,20
-,,,,,
-Middle Phalanx V,,,,,
-MPV1,Ossification of the epiphysis of middle phalanx V,0.75,7,0.25,4.5
-MPV2EW,Epiphyseal width,3.5,14,1,11
-MPV2MW,Metaphyseal width,3.5,14,1,11
-MPV3,Epiphyseal projection of middle phalanx V,1.5,10.5,1.5,10.5
-MPV4,Shape of the distal end of middle phalanx V,8.5,22,8,22
-MPV5,Epiphyseo-diaphyseal fusion of middle phalanx V,13,22,10.5,20
-, ,,,,
-Distal Phalanx I,,,,,
-DPI2EW,Epiphyseal width,1,12,1.5,11
-DPI2MW,Metaphyseal width,1,12,1.5,11
-DPI4,Epiphyseo-diaphyseal fusion of distal phalanx I,12,18,10.5,15.5
-,,,,,
-Distal Phalanx III,,,,,
-DPIII1,Ossification of the center for the epiphysis of distal phalanx III,0.5,5,0.25,4
-DPIII2EW,Epiphyseal width,2.5,10.5,1.5,10
-DPIII2MW,Metaphyseal width,2.5,10.5,1.5,10
-DPIII3,Epiphyseal projection of distal phalanx III,2.5,13,2,11.5
-DPIII4,Epiphyseo-diaphyseal fusion of distal phalanx III,13,20,10.5,17
-,,,,,
-Distal Phalanx V,,,,,
-DPV1,Ossification of the center for the epiphysis of distal phalanx V,1,6,0.75,4.5
-DPV2EW,Epiphyseal width,2.5,11,1.5,10.5
-DPV2MW,Metaphyseal width,2.5,11,1.5,10.5
-DPV3,Epiphyseal projection of distal phalanx V,3.5,13.5,3,12
-DPV4,Epiphyseo-diaphyseal fusion of distal phalanx V,13,22,10,16.5
+Radius,,,,,,
+R1,Epiphyseal ossification and shape,0.25,4.5,0.0833,3.5,3
+R2EW,Epiphyseal width,0.5,12.5,0.5,12.5,
+R2MW,Metaphyseal width,0.5,12.5,0.5,12.5,
+R3,Terminal plate of the epiphysis,0.5,6.5,0.75,4.5,2
+R4,Radiopaque line on or within the distal margin of the epiphysis,0.5,8,0.75,6,2
+R5,Styloid process of the epiphysis,2,11.5,2,10.5,2
+R6,Capping and fusion of the medial third of the epiphyseo-diaphyseal junction,10,22,8.5,22,4
+R7,Capping and fusion of the lateral third of the epiphyseo-diaphyseal junction,11,22,9,22,4
+R8,Capping and fusion of the central third of the epiphyseo-diaphyseal junction,13.5,20,12,20,3
+,,,,,,
+Ulna,,,,,,
+U1,Epiphyseal ossification and shape,2.5,14.5,1.5,12,3
+U2EW,Epiphyseal width,7,13.5,5.5,12,
+U2MW,Metaphyseal width,7,13.5,5.5,12,
+U3,Epiphysec-diaphyseal Fusion,15.5,22,13.5,20,2
+,,,,,,
+Capitate,,,,,,
+C1,Ossification of the capitate,0.0833,2,0.0833,1,2
+C2,Shape of the capitate,0.0833,3.5,0.0833,3,2
+C3,Shape of the medial margin of the capitate,0.0833,13,0.0833,10,3
+C4,Projection of the capitate toward metacarpal IV,8,22,6,22,2
+,,,,,,
+Hamate,,,,,,
+H1,Ossification and shape of the hamate,0.0833,3.5,0.0833,3,3
+H2,Concavity of the medial margin of the hamate,2.5,10,1.5,7.5,2
+H3,Projection of the hamate toward metacarpal V,4,13.5,3,10.5,2
+H4,Ossification of the hook of the hamate,9.5,15.5,7.5,17.5,2
+,,,,,,
+Metacarpal III,,,,,,
+METIII1,Ossification of the epiphysis of metacarpal III and epiphyseal shape,0.5,6.5,0.25,5.5,3
+METIII2EW,Epiphyseal width,3,13.5,2.5,13,
+METIII2MW,Metaphyseal width,3,13.5,2.5,13,
+METIII3,Radiopaque line or zone within the lateral margin of the epiphysis of metacarpal III,5.5,22,6,15,3
+METIII4,Proximo medial projection of the epiphysis of metacarpal V,4.5,14.5,3.5,12.5,2
+METIII5,Epiphyseo-diaphyseal fusion of metacarpal III,13.5,22,8.5,18,2
+,,,,,,
+Metacarpal V,,,,,,
+METV1,Ossfication of the epiphysis of metacarpal V,0.5,4.5,0.5,3,2
+METV2EW,Epiphyseal width,1.5,16,1,15,
+METV2MW,Metaphyseal width,1.5,16,1,15,
+METV3,Radiopaque line or zone within the lateral margin of the epiphysis of metacarpal V,7.5,15.5,5,13,5
+METV4,Proximo medial projection of the epiphysis of metacarpal V,8,15.5,6,15,2
+METV5,Epiphyseo-diaphyseal fusion of metacarpal V,10.5,20,10,20,4
+METV6,Indentation of the medial margin of the epiphysis of metacarpal V,5.5,14.5,3,12,4
+,,,,,,
+Proximal Phalanx I,,,,,,
+PPI1,Ossification of the epiphysis of proximal phalanx I,1,5.5,0.0833,3.5,2
+PPI2EW,Epiphyseal width,2.5,13,2.5,11,
+PPI2MW,Metaphyseal width,2.5,13,2.5,11,
+PPI3,The proximal margin of the epiphysis of proximal phalanx I is concave,1.5,10,1,10,5
+PPI4,Radiopaque line of zone within the proximal margin of the eqiphysis of proximal phalanx I,6.5,16.5,4,14,3
+PPI5,Epiphyseo-diaphyseal fusion of proximal phalanx I,13.5,20,10.5,16.5,2
+PPI6,Shape of the distal end of proximal phalanx I,5.5,15,3.5,12.5,2
+PPI7,Disto-medial projection of the epiphysis of proximal phalanx I,11,16.5,8,14.5,2
+,,,,,,
+Triquetral,,,,,,
+TRI1,Ossification and shape of the triquetral,0.0833,8,0.0833,7,2
+TRI2,Shape of the lateral margin of the triquetral,2.5,13.5,2,14.5,2
+TRI3,Corner or projection between the lateral and proximal margins of the triquetral,3,13.5,2,12,2
+TRI4,Radiopaque line or zone within the lateral margin of the triquetral,6.5,16,2.5,12.5,2
+,,,,,,
+PISIForm,,,,,,
+P1,<TBD>,6.5,14.5,5,10.5,2
+,,,,,,
+Lunate,,,,,,
+L1,Ossification and shape of the lunate,0.0833,14,0.25,11.5,2
+L2,Corner between the lateral and proximal margins of the lunate,4.5,15.5,3.5,17.5,2
+,,,,,,
+Scaphoid,,,,,,
+S1,Ossification and shape of the scaphoid,2.5,12,2,8.5,2
+S2,Shape of the medial margin of the scaphoid,5,12.5,2.5,10.5,3
+S3,Tubercle on the distal end of the lateral margin of the scaphoid,7,15.5,5.5,15,2
+,,,,,,
+Trapezium,,,,,,
+TPM1,Ossification and shape of the trapezium,1,14,1.5,11,2
+TPM2,Disto-medial projection of the trapezium,4.5,15.5,3.5,12.5,2
+TPM3,Radiopaque line or zone within the distal margin of the trapezium,7,15.5,5.5,14,2
+TPM4,Radiopaque line or zone within the proximal margin of the trapezium,7,20,6.5,22,3
+TPM5,Corner between the distal and lateral margins of the trapezium,8.5,17.5,7,14,4
+,,,,,,
+Proximal Phalanx III,,,,,,
+PPIII1,Ossification of the epiphysis of proximal phalanx III,0.25,3,0.25,2,2
+PPIII2EW,Epiphyseal width,2.5,11.5,2,12,
+PPIII2MW,Metaphyseal width,2.5,11.5,2,12,
+PPIII3,The proximal margin of the epiphysis of proximal phalanx III is concave,0.5,8,0.5,7,2
+PPIII4,Radiopaque line of zone within the proximal margin of the eqiphysis of proximal phalanx III,6,14,4,14.5,3
+PPIII5,Epiphyseo-diaphyseal fusion of proximal phalanx III,13.5,22,10.5,16.5,2
+PPIII6,Shape of the distal end of proximal phalanx III,2.5,14.5,0.75,11.5,2
+,,,,,,
+Proximal Phalanx V,,,,,,
+PPV1,Ossification of the epiphysis of proximal phalanx V,0.0833,3.5,0.5,3,2
+PPV2EW,Epiphyseal width,1.5,14.5,0.75,14,
+PPV2MW,Metaphyseal width,1.5,14.5,0.75,14,
+PPV3,The proximal margin of the epiphysis of proximal phalanx V is concave,0.75,4.5,0.5,3.5,3
+PPV4,Radiopaque line of zone within the proximal margin of the eqiphysis of proximal phalanx V,8,15.5,7,14.5,2
+PPV5,Epiphyseo-diaphyseal fusion of proximal phalanx V,13,20,10.5,17.5,2
+,,,,,,
+Middle Phalanx III,,,,,,
+MPIII1,Ossification of the epiphysis of middle phalanx III,0.5,4,0.0833,3,2
+MPIII2EW,Epiphyseal width,1.5,13.5,0.75,12,
+MPIII2MW,Metaphyseal width,1.5,13.5,0.75,12,
+MPIII3,Epiphyseal projection of middle phalanx III,1.5,10.5,1.5,10.5,2
+MPIII4,Shape of the distal end of middle phalanx III,7.5,22,5,15.5,3
+MPIII5,Epiphyseo-diaphyseal fusion of middle phalanx III,13,22,10.5,16.5,2
+,,,,,,
+Trapezoid,,,,,,
+TPD1,Ossification of the trapezoid,2,10,1,8.5,2
+TPD2,Radiopaque line or zone within the medial margin of the trapezoid,4.5,12.5,3,10.5,2
+TPD3,Shape of the medial margin of the trapezoid,4.5,16,2.5,15.5,2
+TPD4,Shape of the proximal margin of the trapezoid,5,13.5,3,11.5,2
+TPD5,Radiopaque line or zone within the distal margin of the trapezoid,5.5,12.5,4,10,3
+TPD6,Overlapping of metacarpal II by the trapezoid,6.5,16.5,4.5,15,2
+TPD7,Radiopaque line or zone within the proximal margin of the trapezoid,7.5,15.5,5.5,14,2
+,,,,,,
+Adductor Sesamoid,,,,,,
+AS1,Ossification of the adductor sesamoid,8.5,16,7.5,13,2
+,,,,,,
+Metacarpal I,,,,,,
+METI1,Ossification and epiphyseal shape,0.75,7,0.5,4,2
+METI2EW,Epiphyseal width,3.5,13,1.5,13,
+METI2MW,Metaphyseal width,3.5,13,1.5,13,
+METI3,Terminal plate of the epiphysis,1.5,8,1.5,9.5,3
+METI4,Indention of the proximal margin of the epiphysis,3.5,13.5,2,10.5,2
+METI5,Epiphysis overlaps the trapezium,8.5,22,7,22,2
+METI6,Medial Capping,10.5,16.5,10,20,2
+METI7,Epiphyseo-diaphyseal fusion,13,20,10,20,3
+,,,,,,
+Middle Phalanx V,,,,,,
+MPV1,Ossification of the epiphysis of middle phalanx V,0.75,7,0.25,4.5,2
+MPV2EW,Epiphyseal width,3.5,14,1,11,
+MPV2MW,Metaphyseal width,3.5,14,1,11,
+MPV3,Epiphyseal projection of middle phalanx V,1.5,10.5,1.5,10.5,2
+MPV4,Shape of the distal end of middle phalanx V,8.5,22,8,22,2
+MPV5,Epiphyseo-diaphyseal fusion of middle phalanx V,13,22,10.5,20,3
+, ,,,,,
+Distal Phalanx I,,,,,,
+DPI2EW,Epiphyseal width,1,12,1.5,11,
+DPI2MW,Metaphyseal width,1,12,1.5,11,
+DPI4,Epiphyseo-diaphyseal fusion of distal phalanx I,12,18,10.5,15.5,3
+,,,,,,
+Distal Phalanx III,,,,,,
+DPIII1,Ossification of the center for the epiphysis of distal phalanx III,0.5,5,0.25,4,2
+DPIII2EW,Epiphyseal width,2.5,10.5,1.5,10,
+DPIII2MW,Metaphyseal width,2.5,10.5,1.5,10,
+DPIII3,Epiphyseal projection of distal phalanx III,2.5,13,2,11.5,2
+DPIII4,Epiphyseo-diaphyseal fusion of distal phalanx III,13,20,10.5,17,3
+,,,,,,
+Distal Phalanx V,,,,,,
+DPV1,Ossification of the center for the epiphysis of distal phalanx V,1,6,0.75,4.5,2
+DPV2EW,Epiphyseal width,2.5,11,1.5,10.5,
+DPV2MW,Metaphyseal width,2.5,11,1.5,10.5,
+DPV3,Epiphyseal projection of distal phalanx V,3.5,13.5,3,12,2
+DPV4,Epiphyseo-diaphyseal fusion of distal phalanx V,13,22,10,16.5,3
