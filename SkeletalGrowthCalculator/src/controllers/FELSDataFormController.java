@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import interfaces.SkeletalEstimation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,6 +37,7 @@ import main.FELSMethod;
 import main.Indicator;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
+import statistics.SkeletalEstimation;
 
 public class FELSDataFormController extends SkeletalCalculator implements Initializable {
 

@@ -7,9 +7,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import interfaces.SkeletalEstimation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import statistics.SkeletalEstimation;
 
 public class FELSMethod extends SkeletalEstimation{
 	private static String[] pascalIndicatorOrder = { "R1", "R3", "R4", "R5", "R6", "R7", "R8", "U1", "U3", "C1", "C2",
@@ -127,9 +127,9 @@ public class FELSMethod extends SkeletalEstimation{
 	public void setSex(String sex){
 		if(sex != null && !sex.isEmpty()){
 			if(sex.equals("Male")){
-				
+				this.sex = 0;
 			}else{
-				
+				this.sex = 1;
 			}
 		}
 	}

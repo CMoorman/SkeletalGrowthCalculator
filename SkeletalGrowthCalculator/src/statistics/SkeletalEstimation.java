@@ -1,7 +1,7 @@
 /*
  * 
  */
-package interfaces;
+package statistics;
 
 import java.util.ArrayList;
 import java.util.List;

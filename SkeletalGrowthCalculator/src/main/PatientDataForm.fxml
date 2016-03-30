@@ -61,7 +61,15 @@
                         <Text layoutX="416.0" layoutY="160.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-4" />
                         <Text layoutX="416.0" layoutY="190.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-5" />
                         <Text layoutX="416.0" layoutY="219.0" scaleX="1.0" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-6" />
-                        <Text layoutX="416.0" layoutY="249.0" scaleX="0.9999970143193245" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-7" />
+                        <TextField fx:id="P1" layoutX="253.0" layoutY="221.0" prefWidth="69.0" />
+                        <Text layoutX="199.0" layoutY="211.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="PISIForm">
+                          <fill>
+                            <Color blue="1.000" green="0.000" red="0.078" fx:id="x2" />
+                          </fill>
+                        </Text>
+						<TextField fx:id="L1" layoutX="252.0" layoutY="306.0" prefWidth="69.0" />
+                        <TextField fx:id="L2" layoutX="252.0" layoutY="334.0" prefWidth="69.0" />
+						<Text layoutX="416.0" layoutY="249.0" scaleX="0.9999970143193245" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="TPD-7" />
                         <TextField fx:id="TPD1" layoutX="463.0" layoutY="55.0" prefWidth="69.0" />
                         <TextField fx:id="TPD2" layoutX="463.0" layoutY="85.0" prefWidth="69.0" />
                         <TextField fx:id="TPD3" layoutX="463.0" layoutY="116.0" prefWidth="69.0" />
@@ -69,29 +77,33 @@
                         <TextField fx:id="TPD5" layoutX="463.0" layoutY="174.0" prefWidth="69.0" />
                         <TextField fx:id="TPD6" layoutX="463.0" layoutY="203.0" prefWidth="69.0" />
                         <TextField fx:id="TPD7" layoutX="463.0" layoutY="233.0" prefWidth="69.0" />
-                        <TextField fx:id="P1" layoutX="253.0" layoutY="221.0" prefWidth="69.0" />
-                        <Text layoutX="199.0" layoutY="211.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="PISIForm">
-                          <fill>
-                            <Color blue="1.000" green="0.000" red="0.078" fx:id="x2" />
-                          </fill>
-                        </Text>
-                        <Text layoutX="223.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P-1" />
+						<TextField fx:id="AS1" layoutX="463.0" layoutY="306.0" prefWidth="69.0" />
+						<Text layoutX="223.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="P-1" />
                         <Text fill="$x2" layoutX="27.0" layoutY="388.0" scaleX="0.9541317251613348" scaleY="0.9999985584373634" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Ulna" />
                         <Text layoutX="38.0" layoutY="417.0" scaleX="0.9541323112729819" scaleY="0.9999920270442658" strokeType="OUTSIDE" strokeWidth="0.0" text="U-1" />
                         <Text layoutX="39.0" layoutY="442.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="U-2" />
                         <Text layoutX="40.0" layoutY="520.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="U-3" />
                         <TextField fx:id="U1" layoutX="75.0" layoutY="401.0" prefWidth="69.00003051757812" />
-                        <TextField fx:id="U3" layoutX="74.0" layoutY="504.0" prefWidth="69.0" />
-                        <Label id="lblU2EW" layoutX="52.0" layoutY="449.0" text="(EW)" />
-                        <Label id="lblU2ME" layoutX="50.0" layoutY="477.0" text="(MW)" />
                         <TextField fx:id="U2EW" layoutX="88.0" layoutY="446.0" prefWidth="55.0" />
                         <TextField fx:id="U2MW" layoutX="88.0" layoutY="474.0" prefWidth="55.0" />
-                        <TextField fx:id="L1" layoutX="252.0" layoutY="306.0" prefWidth="69.0" />
+						<TextField fx:id="U3" layoutX="74.0" layoutY="504.0" prefWidth="69.0" />
+                        <Label id="lblU2EW" layoutX="52.0" layoutY="449.0" text="(EW)" />
+                        <Label id="lblU2ME" layoutX="50.0" layoutY="477.0" text="(MW)" />
+                        <TextField fx:id="C1" layoutX="65.0" layoutY="592.0" prefWidth="69.0" />
+                        <Text fill="$x2" layoutX="14.0" layoutY="582.0" scaleX="0.9541317251613348" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Capitate" />
+                        <Text layoutX="35.0" layoutY="608.0" scaleX="0.999995603168921" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-1" />
+                        <TextField fx:id="C2" layoutX="65.0" layoutY="620.0" prefWidth="69.0" />
+                        <Text layoutX="35.0" layoutY="636.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-2" />
+                        <TextField fx:id="C3" layoutX="65.0" layoutY="648.0" prefWidth="69.0" />
+                        <Text layoutX="35.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-3" />
+                        <TextField fx:id="C4" layoutX="65.0" layoutY="677.0" prefWidth="69.0" />
+                        <Text layoutX="35.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-4" />
+                        
                         <Text fill="$x2" layoutX="201.0" layoutY="296.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Lunate" />
                         <Text layoutX="222.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L-1" />
-                        <TextField fx:id="L2" layoutX="252.0" layoutY="334.0" prefWidth="69.0" />
+                        
                         <Text layoutX="222.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L-2" />
-                        <TextField fx:id="AS1" layoutX="463.0" layoutY="306.0" prefWidth="69.0" />
+                        
                         <Text fill="$x2" layoutX="404.0" layoutY="296.0" scaleX="0.9541317251613348" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Adductor Sesamoid" />
                         <Text layoutX="420.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AS-1" />
                         <TextField fx:id="S1" layoutX="252.0" layoutY="409.0" prefWidth="69.0" />
@@ -108,25 +120,27 @@
                         <Text layoutX="409.0" layoutY="524.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET I-4" />
                         <Text layoutX="409.0" layoutY="554.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET I-5" />
                         <Text layoutX="409.0" layoutY="583.0" scaleX="1.0" scaleY="0.9999999999146807" strokeType="OUTSIDE" strokeWidth="0.0" text="MET I-6" />
-                        <Text layoutX="409.0" layoutY="613.0" scaleX="0.9999970143193245" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="MET I-7" />
-                        <TextField fx:id="METI1" layoutX="463.0" layoutY="378.0" prefWidth="69.0" />
-                        <TextField fx:id="METI3" layoutX="462.0" layoutY="480.0" prefWidth="69.0" />
+                        
+						<Text layoutX="409.0" layoutY="613.0" scaleX="0.9999970143193245" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="MET I-7" />
+                        <TextField fx:id="TPM1" layoutX="250.0" layoutY="547.0" prefWidth="69.0" />
+                        <Text fill="$x2" layoutX="200.0" layoutY="537.0" scaleX="0.9541317251613348" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Trapezium" />
+                        <Text layoutX="204.0" layoutY="563.0" scaleX="0.999995603168921" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-1" />
+                        <TextField fx:id="TPM2" layoutX="250.0" layoutY="575.0" prefWidth="69.0" />
+                        <Text layoutX="204.0" layoutY="591.0" scaleX="1.0" scaleY="0.9999985584373634" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-2" />
+                        <TextField fx:id="TPM3" layoutX="250.0" layoutY="603.0" prefWidth="69.0" />
+                        <Text layoutX="205.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-3" />
+                        <TextField fx:id="TPM4" layoutX="250.0" layoutY="632.0" prefWidth="69.0" />
+                        
+						<TextField fx:id="METI1" layoutX="463.0" layoutY="378.0" prefWidth="69.0" />
+                        <TextField fx:id="METI2EW" layoutX="476.0" layoutY="425.0" prefWidth="55.0" />
+                        <TextField fx:id="METI2MW" layoutX="476.0" layoutY="453.0" prefWidth="55.0" />
+						<TextField fx:id="METI3" layoutX="462.0" layoutY="480.0" prefWidth="69.0" />
                         <TextField fx:id="METI4" layoutX="462.0" layoutY="508.0" prefWidth="69.0" />
                         <TextField fx:id="METI5" layoutX="462.0" layoutY="538.0" prefWidth="69.0" />
                         <TextField fx:id="METI6" layoutX="462.0" layoutY="567.0" prefWidth="69.0" />
                         <TextField fx:id="METI7" layoutX="462.0" layoutY="597.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="440.0" layoutY="428.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="438.0" layoutY="456.0" text="(MW)" />
-                        <TextField fx:id="METI2EW" layoutX="476.0" layoutY="425.0" prefWidth="55.0" />
-                        <TextField fx:id="METI2MW" layoutX="476.0" layoutY="453.0" prefWidth="55.0" />
-                        <TextField fx:id="C1" layoutX="65.0" layoutY="592.0" prefWidth="69.0" />
-                        <Text fill="$x2" layoutX="14.0" layoutY="582.0" scaleX="0.9541317251613348" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Capitate" />
-                        <Text layoutX="35.0" layoutY="608.0" scaleX="0.999995603168921" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-1" />
-                        <TextField fx:id="C2" layoutX="65.0" layoutY="620.0" prefWidth="69.0" />
-                        <Text layoutX="35.0" layoutY="636.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-2" />
-                        <TextField fx:id="C3" layoutX="65.0" layoutY="648.0" prefWidth="69.0" />
-                        <Text layoutX="35.0" layoutY="664.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-3" />
-                        <TextField fx:id="C4" layoutX="65.0" layoutY="677.0" prefWidth="69.0" />
                         <Text layoutX="35.0" layoutY="693.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C-4" />
                         <TextField fx:id="H1" layoutX="65.0" layoutY="742.0" prefWidth="69.0" />
                         <Text fill="$x2" layoutX="15.0" layoutY="732.0" scaleX="0.9541317251613348" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Hamate" />
@@ -137,14 +151,6 @@
                         <Text layoutX="35.0" layoutY="814.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H-3" />
                         <TextField fx:id="H4" layoutX="65.0" layoutY="827.0" prefWidth="69.0" />
                         <Text layoutX="35.0" layoutY="843.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H-4" />
-                        <TextField fx:id="TPM1" layoutX="250.0" layoutY="547.0" prefWidth="69.0" />
-                        <Text fill="$x2" layoutX="200.0" layoutY="537.0" scaleX="0.9541317251613348" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Trapezium" />
-                        <Text layoutX="204.0" layoutY="563.0" scaleX="0.999995603168921" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-1" />
-                        <TextField fx:id="TPM2" layoutX="250.0" layoutY="575.0" prefWidth="69.0" />
-                        <Text layoutX="204.0" layoutY="591.0" scaleX="1.0" scaleY="0.9999985584373634" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-2" />
-                        <TextField fx:id="TPM3" layoutX="250.0" layoutY="603.0" prefWidth="69.0" />
-                        <Text layoutX="205.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-3" />
-                        <TextField fx:id="TPM4" layoutX="250.0" layoutY="632.0" prefWidth="69.0" />
                         <Text layoutX="204.0" layoutY="646.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TPM-4" />
                         <Text fill="$x2" layoutX="14.0" layoutY="887.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Metacarpal III" />
                         <Text layoutX="28.0" layoutY="915.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET III-1" />
@@ -153,14 +159,14 @@
                         <Text layoutX="28.0" layoutY="1044.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET III-4" />
                         <Text layoutX="28.0" layoutY="1074.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET III-5" />
                         <TextField fx:id="METIII1" layoutX="92.0" layoutY="899.0" prefWidth="69.0" />
-                        <TextField fx:id="METIII3" layoutX="91.0" layoutY="1000.0" prefWidth="69.0" />
+                         <TextField fx:id="METIII2EW" layoutX="105.0" layoutY="945.0" pickOnBounds="false" prefWidth="55.0" />
+                        <TextField fx:id="METIII2MW" layoutX="105.0" layoutY="973.0" prefWidth="55.0" />
+						<TextField fx:id="METIII3" layoutX="91.0" layoutY="1000.0" prefWidth="69.0" />
                         <TextField fx:id="METIII4" layoutX="91.0" layoutY="1028.0" prefWidth="69.0" />
                         <TextField fx:id="METIII5" layoutX="91.0" layoutY="1057.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="65.0" layoutY="948.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="63.0" layoutY="976.0" text="(MW)" />
-                        <TextField fx:id="METIII2EW" layoutX="105.0" layoutY="945.0" pickOnBounds="false" prefWidth="55.0" />
-                        <TextField fx:id="METIII2MW" layoutX="105.0" layoutY="973.0" prefWidth="55.0" />
-                        <Text fill="$x2" layoutX="184.0" layoutY="689.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Proximal Phalanx III" />
+                       <Text fill="$x2" layoutX="184.0" layoutY="689.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Proximal Phalanx III" />
                         <Text layoutX="198.0" layoutY="717.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP III-1" />
                         <Text layoutX="198.0" layoutY="742.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP III-2" />
                         <Text layoutX="201.0" layoutY="819.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP III-3" />
@@ -168,28 +174,30 @@
                         <Text layoutX="201.0" layoutY="877.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP III-5" />
                         <Text layoutX="201.0" layoutY="906.0" scaleX="1.0" scaleY="0.9999999999146807" strokeType="OUTSIDE" strokeWidth="0.0" text="PP III-6" />
                         <TextField fx:id="PPIII1" layoutX="252.0" layoutY="701.0" prefWidth="69.0" />
-                        <TextField fx:id="PPIII3" layoutX="254.0" layoutY="803.0" prefWidth="69.0" />
+                        <TextField fx:id="PPIII2EW" layoutX="268.0" layoutY="748.0" prefWidth="55.0" />
+                        <TextField fx:id="PPIII2MW" layoutX="268.0" layoutY="776.0" prefWidth="55.0" />
+                       	<TextField fx:id="PPIII3" layoutX="254.0" layoutY="803.0" prefWidth="69.0" />
                         <TextField fx:id="PPIII4" layoutX="254.0" layoutY="831.0" prefWidth="69.0" />
                         <TextField fx:id="PPIII5" layoutX="254.0" layoutY="861.0" prefWidth="69.0" />
                         <TextField fx:id="PPIII6" layoutX="254.0" layoutY="890.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="233.0" layoutY="751.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="231.0" layoutY="779.0" text="(MW)" />
-                        <TextField fx:id="PPIII2EW" layoutX="268.0" layoutY="748.0" prefWidth="55.0" />
-                        <TextField fx:id="PPIII2MW" layoutX="268.0" layoutY="776.0" prefWidth="55.0" />
                         <Text fill="$x2" layoutX="390.0" layoutY="689.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Middle Phalanx V" />
                         <Text layoutX="404.0" layoutY="717.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP V-1" />
                         <Text layoutX="404.0" layoutY="742.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP V-2" />
                         <Text layoutX="404.0" layoutY="819.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP V-3" />
                         <Text layoutX="404.0" layoutY="847.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP V-4" />
                         <Text layoutX="404.0" layoutY="877.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP V-5" />
-                        <TextField fx:id="MPV1" layoutX="457.0" layoutY="701.0" prefWidth="69.0" />
-                        <TextField fx:id="MPV3" layoutX="456.0" layoutY="803.0" prefWidth="69.0" />
+                        
+						<TextField fx:id="MPV1" layoutX="457.0" layoutY="701.0" prefWidth="69.0" />
+                        <TextField fx:id="MPVEW" layoutX="470.0" layoutY="748.0" prefWidth="55.0" />
+                        <TextField fx:id="MPVMW" layoutX="470.0" layoutY="776.0" prefWidth="55.0" />
+                        
+						<TextField fx:id="MPV3" layoutX="456.0" layoutY="803.0" prefWidth="69.0" />
                         <TextField fx:id="MPV4" layoutX="456.0" layoutY="831.0" prefWidth="69.0" />
                         <TextField fx:id="MPV5" layoutX="456.0" layoutY="861.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="433.0" layoutY="751.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="429.0" layoutY="779.0" text="(MW)" />
-                        <TextField fx:id="MPVEW" layoutX="470.0" layoutY="748.0" prefWidth="55.0" />
-                        <TextField fx:id="MPVMW" layoutX="470.0" layoutY="776.0" prefWidth="55.0" />
                         <Text fill="$x2" layoutX="14.0" layoutY="1133.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Metacarpal V" />
                         <Text layoutX="28.0" layoutY="1161.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-1" />
                         <Text layoutX="28.0" layoutY="1184.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-2" />
@@ -197,13 +205,13 @@
                         <Text layoutX="32.0" layoutY="1286.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-4" />
                         <Text layoutX="32.0" layoutY="1316.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-5" />
                         <TextField fx:id="METV1" layoutX="92.0" layoutY="1145.0" prefWidth="69.0" />
+                        <TextField fx:id="METV2EW" layoutX="109.0" layoutY="1188.0" prefWidth="55.0" />
+                        <TextField fx:id="METV2MW" layoutX="109.0" layoutY="1215.0" prefWidth="55.0" />
                         <TextField fx:id="METV3" layoutX="95.0" layoutY="1242.0" prefWidth="69.0" />
                         <TextField fx:id="METV4" layoutX="95.0" layoutY="1270.0" prefWidth="69.0" />
                         <TextField fx:id="METV5" layoutX="95.0" layoutY="1303.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="69.0" layoutY="1190.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="67.0" layoutY="1218.0" text="(MW)" />
-                        <TextField fx:id="METV2EW" layoutX="109.0" layoutY="1188.0" prefWidth="55.0" />
-                        <TextField fx:id="METV2MW" layoutX="109.0" layoutY="1215.0" prefWidth="55.0" />
                         <Text layoutX="32.0" layoutY="1346.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MET V-6" />
                         <TextField fx:id="METV6" layoutX="95.0" layoutY="1330.0" prefWidth="69.0" />
                         <Text fill="$x2" layoutX="184.0" layoutY="961.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Proximal Phalanx V" />
@@ -213,13 +221,13 @@
                         <Text layoutX="198.0" layoutY="1116.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="PP V-4" />
                         <Text layoutX="198.0" layoutY="1146.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP V-5" />
                         <TextField fx:id="PPV1" layoutX="252.0" layoutY="973.0" prefWidth="69.0" />
+                        <TextField fx:id="PPV2EW" layoutX="265.0" layoutY="1017.0" prefWidth="55.0" />
+                        <TextField fx:id="PPV2MW" layoutX="265.0" layoutY="1045.0" prefWidth="55.0" />
                         <TextField fx:id="PPV3" layoutX="251.0" layoutY="1072.0" prefWidth="69.0" />
                         <TextField fx:id="PPV4" layoutX="251.0" layoutY="1100.0" prefWidth="69.0" />
                         <TextField fx:id="PPV5" layoutX="251.0" layoutY="1130.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="230.0" layoutY="1020.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="228.0" layoutY="1048.0" text="(MW)" />
-                        <TextField fx:id="PPV2EW" layoutX="265.0" layoutY="1017.0" prefWidth="55.0" />
-                        <TextField fx:id="PPV2MW" layoutX="265.0" layoutY="1045.0" prefWidth="55.0" />
                         <Text fill="$x2" layoutX="14.0" layoutY="1412.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Proximal Phalanx I" />
                         <Text layoutX="28.0" layoutY="1440.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP I-1" />
                         <Text layoutX="28.0" layoutY="1464.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP I-2" />
@@ -227,13 +235,13 @@
                         <Text layoutX="28.0" layoutY="1566.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP I-4" />
                         <Text layoutX="28.0" layoutY="1596.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP I-5" />
                         <TextField fx:id="PPI1" layoutX="75.0" layoutY="1424.0" prefWidth="69.0" />
+                        <TextField fx:id="PPI2EW" layoutX="88.0" layoutY="1467.0" prefWidth="55.0" />
+                        <TextField fx:id="PPI2MW" layoutX="88.0" layoutY="1495.0" prefWidth="55.0" />
                         <TextField fx:id="PPI3" layoutX="74.0" layoutY="1522.0" prefWidth="69.0" />
                         <TextField fx:id="PPI4" layoutX="74.0" layoutY="1550.0" prefWidth="69.0" />
                         <TextField fx:id="PPI5" layoutX="74.0" layoutY="1580.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="48.0" layoutY="1470.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="46.0" layoutY="1498.0" text="(MW)" />
-                        <TextField fx:id="PPI2EW" layoutX="88.0" layoutY="1467.0" prefWidth="55.0" />
-                        <TextField fx:id="PPI2MW" layoutX="88.0" layoutY="1495.0" prefWidth="55.0" />
                         <Text layoutX="28.0" layoutY="1626.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="PP I-6" />
                         <TextField fx:id="PPI6" layoutX="74.0" layoutY="1610.0" prefWidth="69.0" />
                         <Text fill="$x2" layoutX="389.0" layoutY="960.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Distal Phalanx I" />
@@ -244,6 +252,7 @@
                         <Label id="lblMETI2ME" layoutX="433.0" layoutY="1033.0" text="(MW)" />
                         <TextField fx:id="DPI2EW" layoutX="470.0" layoutY="1002.0" prefWidth="55.0" />
                         <TextField fx:id="DPI2MW" layoutX="470.0" layoutY="1030.0" prefWidth="55.0" />
+                        <TextField fx:id="DPI4" layoutX="456.0" layoutY="1057.0" prefWidth="69.0" />
                         <Text fill="$x2" layoutX="184.0" layoutY="1204.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Middle Phalanx III" />
                         <Text layoutX="198.0" layoutY="1232.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP III-1" />
                         <Text layoutX="198.0" layoutY="1256.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="MP III-2" />
@@ -251,38 +260,39 @@
                         <Text layoutX="198.0" layoutY="1358.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="MP III-4" />
                         <Text layoutX="198.0" layoutY="1388.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP III-5" />
                         <TextField fx:id="MPIII1" layoutX="256.0" layoutY="1216.0" prefWidth="69.0" />
+                        <TextField fx:id="MPIII2EW" layoutX="269.0" layoutY="1259.0" prefWidth="55.0" />
+                        <TextField fx:id="MPIII2MW" layoutX="269.0" layoutY="1287.0" prefWidth="55.0" />
                         <TextField fx:id="MPIII3" layoutX="255.0" layoutY="1314.0" prefWidth="69.0" />
                         <TextField fx:id="MPIII4" layoutX="255.0" layoutY="1342.0" prefWidth="69.0" />
                         <TextField fx:id="MPIII5" layoutX="255.0" layoutY="1372.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="233.0" layoutY="1262.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="231.0" layoutY="1290.0" text="(MW)" />
-                        <TextField fx:id="MPIII2EW" layoutX="269.0" layoutY="1259.0" prefWidth="55.0" />
-                        <TextField fx:id="MPIII2MW" layoutX="269.0" layoutY="1287.0" prefWidth="55.0" />
                         <Text fill="$x2" layoutX="391.0" layoutY="1125.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Distal Phalanx III" />
                         <Text layoutX="405.0" layoutY="1153.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="DP III-1" />
                         <Text layoutX="405.0" layoutY="1177.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="DP III-2" />
                         <Text layoutX="405.0" layoutY="1251.0" scaleX="1.0" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="DP III-3" />
                         <Text layoutX="405.0" layoutY="1279.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="DP III-4" />
                         <TextField fx:id="DPIII1" layoutX="463.0" layoutY="1137.0" prefWidth="69.0" />
-                        <TextField fx:id="DPIII3" layoutX="462.0" layoutY="1235.0" prefWidth="69.0" />
+                        <TextField fx:id="DPIII2EW" layoutX="476.0" layoutY="1180.0" prefWidth="55.0" />
+                        <TextField fx:id="DPIII2MW" layoutX="476.0" layoutY="1208.0" prefWidth="55.0" />
+                        
+						<TextField fx:id="DPIII3" layoutX="462.0" layoutY="1235.0" prefWidth="69.0" />
                         <TextField fx:id="DPIII4" layoutX="462.0" layoutY="1263.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="440.0" layoutY="1183.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="438.0" layoutY="1211.0" text="(MW)" />
-                        <TextField fx:id="DPIII2EW" layoutX="476.0" layoutY="1180.0" prefWidth="55.0" />
-                        <TextField fx:id="DPIII2MW" layoutX="476.0" layoutY="1208.0" prefWidth="55.0" />
                         <Text fill="$x2" layoutX="386.0" layoutY="1330.0" scaleX="1.0" scaleY="0.9999934685548276" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight:bold;" text="Distal Phalanx V" />
                         <Text layoutX="400.0" layoutY="1358.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="DP V-1" />
                         <Text layoutX="400.0" layoutY="1382.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="DP V-2" />
                         <Text layoutX="400.0" layoutY="1456.0" scaleX="1.0" scaleY="0.9999934685121683" strokeType="OUTSIDE" strokeWidth="0.0" text="DP V-3" />
                         <Text layoutX="400.0" layoutY="1484.0" scaleX="1.0" scaleY="0.9999920270016065" strokeType="OUTSIDE" strokeWidth="0.0" text="DP V-4" />
                         <TextField fx:id="DPV1" layoutX="457.0" layoutY="1341.0" prefWidth="69.0" />
-                        <TextField fx:id="DPV3" layoutX="457.0" layoutY="1440.0" prefWidth="69.0" />
+                        <TextField fx:id="DPV2EW" layoutX="471.0" layoutY="1385.0" prefWidth="55.0" />
+                        <TextField fx:id="DPV2MW" layoutX="471.0" layoutY="1413.0" prefWidth="55.0" />
+                      <TextField fx:id="DPV3" layoutX="457.0" layoutY="1440.0" prefWidth="69.0" />
                         <TextField fx:id="DPV4" layoutX="457.0" layoutY="1468.0" prefWidth="69.0" />
                         <Label id="lblMETI2EW" layoutX="435.0" layoutY="1388.0" text="(EW)" />
                         <Label id="lblMETI2ME" layoutX="433.0" layoutY="1416.0" text="(MW)" />
-                        <TextField fx:id="DPV2EW" layoutX="471.0" layoutY="1385.0" prefWidth="55.0" />
-                        <TextField fx:id="DPV2MW" layoutX="471.0" layoutY="1413.0" prefWidth="55.0" />
-                      </children>
+                        </children>
                     </Pane>
                   </content>
                 </ScrollPane>
