@@ -53,12 +53,12 @@ public class FELSMethod extends SkeletalEstimation {
 	double deriv_holder;
 	double age;
 
-	int NGRADED = 76; // -- Not sure if this is right.
+	int NGRADED = 65; // -- Not sure if this is right.
 	int LGRADED = TOTAL_INDICATORS;
 
 	int FIRST = 0;
 
-	int MREGR = 76; // -- Not sure if this is right.
+	int MREGR = 66; // -- Not sure if this is right.
 	int NREGR = TOTAL_INDICATORS;
 
 	private static final String CALIBRATION_DATA_FILE = "FEL_calibration_data.csv";
