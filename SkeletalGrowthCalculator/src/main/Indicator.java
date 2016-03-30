@@ -139,24 +139,25 @@ public class Indicator {
 			String line = "";
 			while ((line = br.readLine()) != null) {
 				String[] indicatorFields = line.split(",");
-				if (indicatorFields != null && indicatorFields.length == 7) {
-					String name = indicatorFields[0];
-					String description = indicatorFields[1];
-					double maleStart = Double.parseDouble(indicatorFields[2]);
-					double maleEnd = Double.parseDouble(indicatorFields[3]);
-					double femaleStart = Double.parseDouble(indicatorFields[4]);
-					double femaleEnd = Double.parseDouble(indicatorFields[5]);
-					int maximum = Integer.parseInt(indicatorFields[6]);
-					indicators
-							.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd, maximum));
-				} else if (indicatorFields.length == 6) {
-					String name = indicatorFields[0];
-					String description = indicatorFields[1];
-					double maleStart = Double.parseDouble(indicatorFields[2]);
-					double maleEnd = Double.parseDouble(indicatorFields[3]);
-					double femaleStart = Double.parseDouble(indicatorFields[4]);
-					double femaleEnd = Double.parseDouble(indicatorFields[5]);
-					indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd));
+
+				if (indicatorFields != null) {
+					int length = indicatorFields.length;
+					if (length >= 6) {
+						String name = indicatorFields[0];
+						String description = indicatorFields[1];
+						double maleStart = Double.parseDouble(indicatorFields[2]);
+						double maleEnd = Double.parseDouble(indicatorFields[3]);
+						double femaleStart = Double.parseDouble(indicatorFields[4]);
+						double femaleEnd = Double.parseDouble(indicatorFields[5]);
+						if (length == 7) {
+							int maximum = Integer.parseInt(indicatorFields[6]);
+							indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd,
+									maximum));
+						} else {
+							indicators
+									.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd));
+						}
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
