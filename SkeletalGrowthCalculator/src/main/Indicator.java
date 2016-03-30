@@ -31,13 +31,14 @@ public class Indicator {
 	private String indicatorValue = "";
 	
 	public Indicator(String name, String description, double maleStartRange, double maleEndRange, double femaleStartRange,
-			double femaleEndRange) {
+			double femaleEndRange, int max) {
 		this.name = name;
 		this.description = description;
 		this.maleStartRange = maleStartRange;
 		this.maleEndRange = maleEndRange;
 		this.femaleStartRange = femaleStartRange;
 		this.femaleEndRange = femaleEndRange;
+		this.setMaximumValue(max);
 	}
 
 	public String getName() {
@@ -95,6 +96,14 @@ public class Indicator {
 	public void setIndicatorValue(String indicatorValue) {
 		this.indicatorValue = indicatorValue;
 	}
+	
+	public int getMaximumValue() {
+		return maximumValue;
+	}
+
+	public void setMaximumValue(int maximumValue) {
+		this.maximumValue = maximumValue;
+	}
 
 	public static List<Indicator> loadIndicators(String filePath) {
 		List<Indicator> indicators = new ArrayList<Indicator>();
@@ -127,7 +136,8 @@ public class Indicator {
 		    	   double maleEnd = Double.parseDouble(indicatorFields[3]);
 		    	   double femaleStart = Double.parseDouble(indicatorFields[4]);
 		    	   double femaleEnd = Double.parseDouble(indicatorFields[3]);
-		    	   indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd));
+		    	   int maximum = Integer.parseInt(indicatorFields[4]);
+		    	   indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd, maximum));
 		       }
 		    }
 		} catch (FileNotFoundException e) {
