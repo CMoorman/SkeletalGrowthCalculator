@@ -129,14 +129,14 @@ public class Indicator {
 			String line = "";
 			while ((line = br.readLine()) != null) {
 		       String[] indicatorFields = line.split(",");
-		       if(indicatorFields != null && indicatorFields.length == 6){
+		       if(indicatorFields != null && indicatorFields.length == 7){
 		    	   String name = indicatorFields[0];
 		    	   String description = indicatorFields[1];
 		    	   double maleStart = Double.parseDouble(indicatorFields[2]);
 		    	   double maleEnd = Double.parseDouble(indicatorFields[3]);
 		    	   double femaleStart = Double.parseDouble(indicatorFields[4]);
 		    	   double femaleEnd = Double.parseDouble(indicatorFields[3]);
-		    	   int maximum = Integer.parseInt(indicatorFields[4]);
+		    	   int maximum = Integer.parseInt(indicatorFields[6]);
 		    	   indicators.add(new Indicator(name, description, maleStart, maleEnd, femaleStart, femaleEnd, maximum));
 		       }
 		    }

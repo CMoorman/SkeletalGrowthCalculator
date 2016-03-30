@@ -419,8 +419,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		sCurrentInput = inputTextField.getText().trim();
 		// -- Check if editable AND the value is a double.
 		if (inputTextField.isEditable() && IsDoubleValue(sCurrentInput)) {
-			s_MeasurementData += sCurrentInput + ",";
-			inputTextField.setStyle("-fx-background-color: white;");
+			Indicator currentIndicator = felsMethod.getIndicatorMap().get(inputTextField.getId());
+			
+			if(Double.parseDouble( sCurrentInput ) <= currentIndicator.getMaximumValue()) {
+				s_MeasurementData += sCurrentInput + ",";
+				inputTextField.setStyle("-fx-background-color: white;");
+			}
+			else {
+				inputTextField.setStyle("-fx-background-color: #D178F0;");
+				m_ErrorIDList.add(inputTextField);
+			}
+			
 		} else {
 			// -- Make sure that if we had a problem, we are looking at an
 			// editable field.
@@ -457,7 +466,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private void ShowErrorAlert() {
 		Alert eAlert = new Alert(AlertType.ERROR);
 		eAlert.setTitle("Invalid Indicators");
-		eAlert.setHeaderText("There are invalid indicators on the form.  Please review them below.");
+		eAlert.setHeaderText("There are invalid indicators on the form.  Please review them below. Yellow indicators are\n"
+				+ "invalid input and Purple indicators are values out of maximum range.");
 
 		String sAlertString = "";
 
