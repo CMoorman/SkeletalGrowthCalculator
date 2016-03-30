@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import interfaces.SkeletalEstimation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,12 +39,12 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 	private static Scene PatientDataFormScene = null;
 	private static FELSDataFormController instance = null;
-	private static FELS_method fels = new FELS_method();
+	private static SkeletalEstimation fels = new FELS_method();
 	private ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female");
-	private final String maleColor = "#ADD8E6;";
-	private final String femaleColor = "#FAAFBA;";
-	private final String whiteColor = "#000000;";
-	private final String fxBckgrndStyleConst = "-fx-background-color: ";
+	private static final String MALE_COLOR = "#ADD8E6;";
+	private static final String FEMALE_COLOR = "#FAAFBA;";
+	private static final String WHITE_COLOR = "#000000;";
+	private static final String CSS_BACKGROUND = "-fx-background-color: ";
 	private SkeletalMaturityMethod felsMethod;
 	private static final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
 	private static final String NOT_APPLICABLE = "N/A";
@@ -374,7 +375,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		} // -- Do nothing.
 	}
 
-	private void AddHeaderInfoToString(Object inputObject) {
+	private void addHeaderInfoToString(Object inputObject) {
 		// TODO: Do we need some sort of validation per header input text
 		// field??
 		String sCurrentInput = "";
@@ -393,35 +394,35 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		s_FormHeaderData += sCurrentInput;
 	}
 
-	private boolean LoadHeaderInput() {
+	private boolean loadHeaderInput() {
 		boolean rval = true;
 
-		AddHeaderInfoToString(txtStudy);
-		AddHeaderInfoToString(txtID);
-		AddHeaderInfoToString(txtChronAge);
-		AddHeaderInfoToString(cmbGender);
-		AddHeaderInfoToString(txtAssessorNum);
-		AddHeaderInfoToString(txtAssessmentNum);
+		addHeaderInfoToString(txtStudy);
+		addHeaderInfoToString(txtID);
+		addHeaderInfoToString(txtChronAge);
+		addHeaderInfoToString(cmbGender);
+		addHeaderInfoToString(txtAssessorNum);
+		addHeaderInfoToString(txtAssessmentNum);
 		// AddHeaderInfoToString( txtBirthDate );
 		// AddHeaderInfoToString( txtXrayDate );
 		// AddHeaderInfoToString( txtAsmDate );
-		AddHeaderInfoToString(txtSA);
-		AddHeaderInfoToString(txtSEE);
+		addHeaderInfoToString(txtSA);
+		addHeaderInfoToString(txtSEE);
 
 		if (m_ErrorIDList.size() > 0) {
 			// -- We found errors. Uh oh.
-			ShowErrorAlert();
+			showErrorAlert();
 			rval = false;
 		}
 
 		return rval;
 	}
 
-	private void AddMeasurementInputToString(TextField inputTextField) {
+	private void addMeasurementInputToString(TextField inputTextField) {
 		String sCurrentInput = "";
 		sCurrentInput = inputTextField.getText().trim();
 		// -- Check if editable AND the value is a double.
-		if (inputTextField.isEditable() && IsDoubleValue(sCurrentInput)) {
+		if (inputTextField.isEditable() && isDoubleValue(sCurrentInput)) {
 			Indicator currentIndicator = felsMethod.getIndicatorMap().get(inputTextField.getId());
 			
 			if(Double.parseDouble( sCurrentInput ) <= currentIndicator.getMaximumValue()) {
@@ -447,26 +448,26 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		}
 	}
 
-	private boolean LoadMeasurementInput() {
+	private boolean loadMeasurementInput() {
 
 		boolean rval = true;
 
 		// -- Make sure to have clean measurement data before we begin.
 		s_MeasurementData = "";
 		for (TextField input : inputs) {
-			AddMeasurementInputToString(input);
+			addMeasurementInputToString(input);
 		}
 
 		if (m_ErrorIDList.size() > 0) {
 
-			ShowErrorAlert();
+			showErrorAlert();
 			rval = false;
 			s_MeasurementData = "";
 		}
 		return rval;
 	}
 
-	private void ShowErrorAlert() {
+	private void showErrorAlert() {
 		Alert eAlert = new Alert(AlertType.ERROR);
 		eAlert.setTitle("Invalid Indicators");
 		eAlert.setHeaderText("There are invalid indicators on the form.  Please review them below. Yellow indicators are\n"
@@ -483,7 +484,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		eAlert.showAndWait();
 	}
 
-	private boolean IsDoubleValue(String dInput) {
+	private boolean isDoubleValue(String dInput) {
 		try {
 			Double.parseDouble(dInput);
 		} catch (NumberFormatException e) {
@@ -492,14 +493,10 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		return true;
 	}
 
-	private void SaveAllData() {
-
-	}
-
-	private void ButtonClicked(ActionEvent E) {
+	private void buttonClicked(ActionEvent E) {
 
 		if (E.getSource() == btnSubmit) {
-			if (LoadMeasurementInput() && LoadHeaderInput()) {
+			if (loadMeasurementInput() && loadHeaderInput()) {
 				fels.setInputList(getInputValueMap());
 				
 			} else {
@@ -554,8 +551,8 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		felsMethod.load();
 		initializeInputList();
 		addListeners();
-		btnSubmit.setOnAction(e -> ButtonClicked(e));
-		btnGoBack.setOnAction(e -> ButtonClicked(e));
+		btnSubmit.setOnAction(e -> buttonClicked(e));
+		btnGoBack.setOnAction(e -> buttonClicked(e));
 	}
 
 	private void addListeners() {
@@ -563,11 +560,11 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old, String current) {
 				if (current.equals("Male")) {
-					paneMeasurementInputs.setStyle(fxBckgrndStyleConst + maleColor);
+					paneMeasurementInputs.setStyle(CSS_BACKGROUND + MALE_COLOR);
 				} else if (current.equals("Female")) {
-					paneMeasurementInputs.setStyle(fxBckgrndStyleConst + femaleColor);
+					paneMeasurementInputs.setStyle(CSS_BACKGROUND + FEMALE_COLOR);
 				} else {
-					paneMeasurementInputs.setStyle(fxBckgrndStyleConst + whiteColor);
+					paneMeasurementInputs.setStyle(CSS_BACKGROUND + WHITE_COLOR);
 				}
 				enableDisableInputs();
 			}
