@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package interfaces;
 
 import java.util.ArrayList;
@@ -9,4 +12,5 @@ public abstract class SkeletalEstimation {
 	public abstract void setInputList(Map<String, String> inputMap);
 	public abstract double performEstimation();
 	public abstract void loadData();
+	public abstract void setAge(double age);
 }

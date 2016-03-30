@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controllers;
 
 import java.net.URL;
@@ -497,8 +500,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 		if (E.getSource() == btnSubmit) {
 			if (loadMeasurementInput() && loadHeaderInput()) {
+				fels.setAge(Double.parseDouble(txtChronAge.getText()));
 				fels.setInputList(getInputValueMap());
-				
+				double generatedAge = fels.performEstimation();
 			} else {
 				// -- Loading the input Failed, why? TODO: Handle validation
 				// errors. Missing fields, etc...?
