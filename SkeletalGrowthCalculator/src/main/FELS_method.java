@@ -11,7 +11,7 @@ import interfaces.SkeletalEstimation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class FELS_method extends SkeletalEstimation{
+public class FELS_method extends SkeletalEstimation {
 	private static String[] pascalIndicatorOrder = { "R1", "R3", "R4", "R5", "R6", "R7", "R8", "U1", "U3", "C1", "C2",
 			"C3", "C4", "H1", "H2", "H3", "H4", "TRI1", "TRI2", "TRI3", "TRI4", "P1", "L1", "L2", "S1", "S2", "S3",
 			"TPM1", "TPM2", "TPM3", "TPM4", "TPM5", "TPD1", "TPD2", "TPD3", "TPD4", "TPD5", "TPD6", "TPD7", "AS1",
@@ -59,19 +59,19 @@ public class FELS_method extends SkeletalEstimation{
 	int NREGR = TOTAL_INDICATORS;
 
 	private static final String CALIBRATION_DATA_FILE = "FEL_calibration_data.csv";
-	
-	public void setInputList(Map<String, String> inputMap){
-		if(inputMap == null || inputMap.isEmpty()){
+
+	public void setInputList(Map<String, String> inputMap) {
+		if (inputMap == null || inputMap.isEmpty()) {
 			return;
 		}
-		for(int i = 0; i < pascalIndicatorOrder.length; ++i){
+		for (int i = 0; i < pascalIndicatorOrder.length; ++i) {
 			String indicator = pascalIndicatorOrder[i];
 			String value = inputMap.get(indicator);
 			double val = 1.0;
-			if(value != null){
-				try{
+			if (value != null) {
+				try {
 					val = Double.parseDouble(value);
-				}catch(NumberFormatException e){
+				} catch (NumberFormatException e) {
 					val = 1.0;
 				}
 			}
@@ -79,7 +79,7 @@ public class FELS_method extends SkeletalEstimation{
 			System.out.println(indicator + " : " + val);
 		}
 	}
-	
+
 	public void loadData() {
 
 		int i, j;
@@ -128,7 +128,7 @@ public class FELS_method extends SkeletalEstimation{
 		T1 = 0;
 		deriv1 = 0;
 		iterator1 = 0;
-		
+
 		do {
 			iterator1++;
 
@@ -359,6 +359,11 @@ public class FELS_method extends SkeletalEstimation{
 		}
 
 		return current_estimate;
+	}
+
+	@Override
+	public void setAge(double age) {
+		this.age = age;
 	}
 };
 /*
