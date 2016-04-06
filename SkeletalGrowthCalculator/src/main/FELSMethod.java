@@ -256,12 +256,12 @@ public class FELSMethod extends SkeletalEstimation {
 
 			for (iterator = MREGR; iterator <= NREGR; iterator++) {
 
-				if (cubed_ratio[iterator] != 0.0) {
+				if (inputList.get(iterator) != 0.0) {
 
 					double BETA = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][1];
 					double MU = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][2];
 					double SIGMA = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][3];
-					double ZD = (cubed_ratio[iterator] - BETA * current_estimate - MU) / SIGMA;
+					double ZD = (inputList.get(iterator) - BETA * current_estimate - MU) / SIGMA;
 
 					// Add up derivatives with respect to theta across
 					// continuous indicators
