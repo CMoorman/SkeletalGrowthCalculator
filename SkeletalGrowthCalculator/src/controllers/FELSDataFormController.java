@@ -517,7 +517,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				fels.setAge(Double.parseDouble(txtChronAge.getText()));
 				fels.setSex(cmbGender.getValue());
 				fels.setInputList(getInputValueMap());
-				//double generatedAge = fels.performEstimation();
+				double generatedAge = fels.performEstimation();
 			} else {
 				// -- Loading the input Failed, why? TODO: Handle validation
 				// errors. Missing fields, etc...?
@@ -728,7 +728,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		double denom = 1.0;
 		private String getRatio(){
 			if(denom != 0){
-				return Double.toString(num / denom);
+				return Double.toString(Math.pow((num / denom), 3));
 			}
 			return "1.0";
 		}

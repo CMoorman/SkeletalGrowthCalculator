@@ -190,9 +190,8 @@
                         <Text layoutX="404.0" layoutY="877.0" scaleX="1.0" scaleY="0.9999999999573403" strokeType="OUTSIDE" strokeWidth="0.0" text="MP V-5" />
                         
 						<TextField fx:id="MPV1" layoutX="457.0" layoutY="701.0" prefWidth="69.0" />
-                        <TextField fx:id="MPVEW" layoutX="470.0" layoutY="748.0" prefWidth="55.0" />
-                        <TextField fx:id="MPVMW" layoutX="470.0" layoutY="776.0" prefWidth="55.0" />
-                        
+                        <TextField fx:id="MPV2EW" layoutX="470.0" layoutY="748.0" prefWidth="55.0" />
+                        <TextField fx:id="MPV2MW" layoutX="470.0" layoutY="776.0" prefWidth="55.0" />
 						<TextField fx:id="MPV3" layoutX="456.0" layoutY="803.0" prefWidth="69.0" />
                         <TextField fx:id="MPV4" layoutX="456.0" layoutY="831.0" prefWidth="69.0" />
                         <TextField fx:id="MPV5" layoutX="456.0" layoutY="861.0" prefWidth="69.0" />
