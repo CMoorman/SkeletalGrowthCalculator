@@ -113,11 +113,18 @@ public class ApplicationOptionsController extends SkeletalCalculator implements 
 			setScene( TitleViewController.getInstance().getScene() );
 		}
 		else if( e.getSource() == btnEdit ){
-			// -- Go to a view with indicators.
+			
+			ParameterEntry sDummyEntry = entryList.get( listEntryView.getSelectionModel().getSelectedIndex() );
+			
+			DummyEntryDataFormController.getInstance().setParameterEntry( sDummyEntry );
+			
+			DummyEntryDataFormController.getInstance().refresh();
+			
+			setScene( DummyEntryDataFormController.getInstance().getScene() );
 		}
 		else if( e.getSource() == btnRemove ){
 			// -- Delete the selected option in the data list and reload the list.
-			// -- Prompt for warning if wanting to delte?
+			// -- Prompt for warning if wanting to delete?
 		}
 		else if( e.getSource() == btnGoBack ){
 			// -- Go to a new view with empty indicators list.

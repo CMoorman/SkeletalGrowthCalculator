@@ -43,5 +43,7 @@ public class ParameterEntry {
 				indicatorList.get(i).setIndicatorValue("N/A");
 			}
 		}
+		
+		indicators = indicatorList;
 	}
 }
