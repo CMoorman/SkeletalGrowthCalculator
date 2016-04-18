@@ -1,11 +1,15 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -54,14 +58,14 @@ public class FELSMethod extends SkeletalEstimation {
 	double age;
 
 	int NGRADED = 65; // -- Not sure if this is right.
-	int LGRADED = TOTAL_INDICATORS;
+	int LGRADED = NGRADED;
 
 	int FIRST = 0;
 
 	int MREGR = 66; // -- Not sure if this is right.
-	int NREGR = TOTAL_INDICATORS;
+	int NREGR = MREGR;
 
-	private static final String CALIBRATION_DATA_FILE = "FEL_calibration_data.csv";
+	private static final String CALIBRATION_DATA_FILE = "FELS_calibration_data.csv";
 
 	public void setInputList(Map<String, String> inputMap) {
 		if (inputMap == null || inputMap.isEmpty()) {
@@ -86,26 +90,30 @@ public class FELSMethod extends SkeletalEstimation {
 	public void loadData() {
 
 		int i, j;
-		String[] matcher = new String[5];
+		Pattern p = Pattern.compile("(?:\\d*\\.)?\\d+");
+		Matcher matcher;
 		// String pattern = "(?:\\d*\\.)?\\d+";
 		i = j = 0;
 
 		try {
+			// File calibration = new File(CALIBRATION_DATA_FILE);
+
 			URL url = Indicator.class.getResource(CALIBRATION_DATA_FILE);
 			FileInputStream fileStream = new FileInputStream(url.getPath());
 			InputStreamReader isr = new InputStreamReader(fileStream, Charset.forName("UTF-8"));
 			BufferedReader br = new BufferedReader(isr);
 			String line = "";
+
 			while ((line = br.readLine()) != null) {
 
 				i++;
 				j = 0;
 
-				matcher = line.split("(?:\\d*\\.)?\\d+");
+				matcher = p.matcher(line);
 
-				for (String pull : matcher) {
+				while (matcher.find()) {
 
-					parameters[i][j++] = Double.parseDouble(pull);
+					parameters[i][j++] = Double.parseDouble(matcher.group());
 				}
 
 			}

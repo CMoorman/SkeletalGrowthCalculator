@@ -514,6 +514,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 		if (E.getSource() == btnSubmit) {
 			if (loadMeasurementInput() && loadHeaderInput()) {
+				fels.loadData();
 				fels.setAge(Double.parseDouble(txtChronAge.getText()));
 				fels.setSex(cmbGender.getValue());
 				fels.setInputList(getInputValueMap());
