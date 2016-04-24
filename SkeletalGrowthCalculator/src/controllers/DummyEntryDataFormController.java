@@ -2,9 +2,13 @@ package controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,6 +33,10 @@ public class DummyEntryDataFormController extends SkeletalCalculator implements 
 	private static ParameterEntry currentEntry = null;	
 	private List<TextField> inputs = new ArrayList<TextField>();
 	
+	private static int nCurrentEntryID = Integer.MAX_VALUE;
+	
+	private static boolean bEditFlag = false;
+
 	@FXML
 	Pane paneMeasurementInputs;
 	
@@ -329,7 +337,83 @@ public class DummyEntryDataFormController extends SkeletalCalculator implements 
 		
 		if( e.getSource() == btnSave ) {
 			// -- Save values and go back to title view.
+			ArrayList<ParameterEntry> entryList = new ArrayList<>();	
+			entryList = ApplicationOptionsController.getInstance().getEntryList();
+			ObservableList<String> tmpObsList = ApplicationOptionsController.getInstance().getEntryObsViewList();			
 			
+			// -- Need to save off all of the values.
+			String tmpStringToSave = "";
+			if( nCurrentEntryID != Integer.MAX_VALUE ) {
+				tmpStringToSave += nCurrentEntryID + ",";
+			}
+			
+			for( int i = 0; i < inputs.size(); i++ ) {
+				if( inputs.get( i ).getText() != null ) {
+					if( i != inputs.size() - 1 ) {
+						tmpStringToSave += inputs.get(i).getText() + ",";
+					}
+					else {
+						// -- We're at the end of the list, we don't want an extra ",".
+						tmpStringToSave += inputs.get(i).getText();
+					}
+				}else {
+					// -- Else it is empty, just place a 0 for a value, add a comma to prepare for next input value.
+					if( i != inputs.size() - 1 ) {
+						tmpStringToSave += "0,";
+					}
+					else {
+						// -- We're at the end of the list, we don't want an extra ",".
+						tmpStringToSave += "0";
+					}
+				}
+			}
+			
+			ParameterEntry pCurrentEntry = new ParameterEntry(tmpStringToSave);			
+			
+			// -- If we are editing, we need to remove the previous entry.
+			// -- I know this is a horrible way to handle this, just doing it to get it done. - CM
+			if( bEditFlag ) {
+				for( int i = 0; i < entryList.size(); i++ ) {
+					if( entryList.get(i).getEntryName().compareTo( pCurrentEntry.getEntryName() ) == 0 ) {
+						entryList.remove(i);
+					}
+				}
+				for( int q = 0; q < tmpObsList.size(); q++ ) {
+					if( tmpObsList.get( q ).compareTo( pCurrentEntry.getEntryName() ) == 0 ) {
+						tmpObsList.remove(q);
+					}
+				}
+			}
+			
+			// -- Add our new values to their respective list.
+			entryList.add(pCurrentEntry);
+			tmpObsList.add(Integer.toString( getCurrentEntryID() ) );			
+			
+			// -- Set our edited list to the existing ones.
+			ApplicationOptionsController.getInstance().setEntryList(entryList);
+			ApplicationOptionsController.getInstance().setEntryObsViewList(tmpObsList);
+			
+			
+			// -- Give both of our lists a good sort.
+			Collections.sort(entryList, new Comparator<ParameterEntry>() {
+		        public int compare(ParameterEntry p1, ParameterEntry p2) {
+		        	int tmpId1;
+			    	int tmpId2;
+			    	
+			    	tmpId1 = Integer.parseInt( p1.getEntryName() );
+			    	tmpId2 = Integer.parseInt( p2.getEntryName() );
+			    	
+			        return Integer.toString(tmpId1).compareTo( Integer.toString(tmpId2));
+		        }
+			});
+			Collections.sort( tmpObsList, new Comparator<String>() {
+				@Override
+				public int compare(String o1, String o2) {
+					return o1.compareTo(o2);
+				}				
+			});
+			
+			// -- Now navigate back to our options view.
 			setScene( ApplicationOptionsController.getInstance().getScene() );
 		}
 		else if( e.getSource() == btnGoBack ){
@@ -346,6 +430,7 @@ public class DummyEntryDataFormController extends SkeletalCalculator implements 
 		
 		// -- Reset the entry that we are looking at.
 		currentEntry = null;
+		bEditFlag = false;
 	}
 	
 	public void refresh() {
@@ -360,7 +445,7 @@ public class DummyEntryDataFormController extends SkeletalCalculator implements 
 			
 			// -- Hard coding for now. First slot will always be the entry ID.
 			txtID.setText( currentEntry.getEntryName() );
-		}
+		}			
 	}
 	
 	private void initializeInputList() {
@@ -371,12 +456,24 @@ public class DummyEntryDataFormController extends SkeletalCalculator implements 
 		}
 	}
 	
+	public void setbEditFlag(boolean bEditFlag) {
+		DummyEntryDataFormController.bEditFlag = bEditFlag;
+	}
+	
 	public Scene getScene() {
 		return DummyEntryDataFormScene;
 	}
 	
 	public void setParameterEntry( ParameterEntry pEntry ) {
 		currentEntry = pEntry;		
+	}
+	
+	public static int getCurrentEntryID() {
+		return nCurrentEntryID;
+	}
+
+	public void setCurrentEntryID(int nCurrentEntryID) {
+		DummyEntryDataFormController.nCurrentEntryID = nCurrentEntryID;
 	}
 	
 	public static DummyEntryDataFormController getInstance() {
@@ -405,7 +502,21 @@ public class DummyEntryDataFormController extends SkeletalCalculator implements 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		btnGoBack.setOnAction( e -> ButtonClicked(e) );
+		btnSave.setOnAction( e -> ButtonClicked(e) );
+			
+		initializeInputList();				
 		
-		initializeInputList();
-	}
+		// -- Let's just do some quick disabling.
+		txtStudy.setEditable(false);
+		txtID.setEditable(false);
+		txtChronAge.setEditable(false);
+		cmbGender.setEditable(false);
+		txtAssessorNum.setEditable(false);
+		txtAssessmentNum.setEditable(false);
+		birthDate.setEditable(false);
+		xrayDate.setEditable(false);
+		asmDate.setEditable(false);
+		txtSA.setEditable(false);
+		txtSEE.setEditable(false);
+	}	
 }

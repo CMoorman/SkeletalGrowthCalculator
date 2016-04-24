@@ -1,11 +1,16 @@
 package controllers;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -32,9 +37,12 @@ public class ApplicationOptionsController extends SkeletalCalculator implements 
 	
 	private static final String PARAMETER_DATA_FILE_PATH = "ParameterData.txt";
 	
-	ArrayList<ParameterEntry> entryList = new ArrayList<>();
-	ObservableList<String> entryObsViewList = FXCollections.observableArrayList();
+	ArrayList<ParameterEntry> entryList = new ArrayList<>();	
+	ObservableList<String> entryObsViewList = FXCollections.observableArrayList();	
 	
+	ArrayList<ParameterEntry> b4EditEntryList = new ArrayList<>();	
+	ObservableList<String> b4EditEntryObsViewList = FXCollections.observableArrayList();	
+
 	@FXML
 	ListView<String> listEntryView;
 	
@@ -60,17 +68,14 @@ public class ApplicationOptionsController extends SkeletalCalculator implements 
 		btnGoBack.setOnAction( e -> ButtonClicked(e) );
 		btnEdit.setOnAction( e -> ButtonClicked(e) );
 		btnRemove.setOnAction( e -> ButtonClicked(e) );
-		btnNew.setOnAction( e -> ButtonClicked(e) );
-		
-		Platform.runLater( new Runnable() {
-			@Override
-			public void run() {
-				populateEntryList();
-			}
-		});
+		btnNew.setOnAction( e -> ButtonClicked(e) );		
 	}
 	
-	private void populateEntryList() {
+	public void populateEntryList() {
+		
+		b4EditEntryList = entryList;
+		b4EditEntryObsViewList = entryObsViewList;
+		
 		// -- Going to read in each entry line by line.
 		try{
 			URL url = Indicator.class.getResource(PARAMETER_DATA_FILE_PATH);
@@ -101,15 +106,54 @@ public class ApplicationOptionsController extends SkeletalCalculator implements 
 			eAlert.showAndWait();
 			e.printStackTrace();
 		}
+		
+		// -- Sort our entries.
+		FXCollections.sort( entryObsViewList );
 	}
 	
 	private void ButtonClicked( ActionEvent e ) {
 		
 		if( e.getSource() == btnSave ) {
-			// -- Save values and go back to title view.
+			
+			// -- Overwrite our temp lists so that they're updated.
+			b4EditEntryList = entryList;
+			b4EditEntryObsViewList = entryObsViewList;
+			
+			// -- Rewrite our input text file.
+			File saveFile = new File( PARAMETER_DATA_FILE_PATH );
+			try {
+				FileOutputStream oStream = new FileOutputStream(saveFile, false);
+				
+				// -- I dunno why this isn't working.
+				if( entryList.size() == 0 ) {
+					// -- We have nothing to write, so write nothing.
+					byte[] line = "".getBytes();
+					oStream.write(line);
+				}
+				else
+				{
+					for( int i = 0; i < entryList.size(); i++ ) {
+						String tmp = entryList.get(i).getEntryRawInput() + "\n";
+						byte[] line = tmp.getBytes();
+						oStream.write(line);
+					}
+				}				
+				
+				oStream.close();
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			// -- Save values and go back to options view.
+			setScene( TitleViewController.getInstance().getScene() );			
 		}
 		else if( e.getSource() == btnGoBack ){
-			// -- Go back to title view.
+			// -- Go back to title view.			
+			entryList = b4EditEntryList;
+			entryObsViewList = b4EditEntryObsViewList;
+						
 			setScene( TitleViewController.getInstance().getScene() );
 		}
 		else if( e.getSource() == btnEdit ){
@@ -118,21 +162,62 @@ public class ApplicationOptionsController extends SkeletalCalculator implements 
 			
 			DummyEntryDataFormController.getInstance().setParameterEntry( sDummyEntry );
 			
+			DummyEntryDataFormController.getInstance().setCurrentEntryID( Integer.parseInt( sDummyEntry.getEntryName() ) );
+			
+			DummyEntryDataFormController.getInstance().setbEditFlag(true);
+			
 			DummyEntryDataFormController.getInstance().refresh();
 			
 			setScene( DummyEntryDataFormController.getInstance().getScene() );
 		}
 		else if( e.getSource() == btnRemove ){
-			// -- Delete the selected option in the data list and reload the list.
-			// -- Prompt for warning if wanting to delete?
+			entryList.remove( listEntryView.getSelectionModel().getSelectedIndex() );
+			entryObsViewList.remove( listEntryView.getSelectionModel().getSelectedIndex() );
 		}
-		else if( e.getSource() == btnGoBack ){
-			// -- Go to a new view with empty indicators list.
+		else if( e.getSource() == btnNew ) {
+			// -- Start a counter for our entry ID.
+			int tmpId = 1; 
+			
+			// -- Make sure our list is sorted before we begin.
+			FXCollections.sort( entryObsViewList );
+			
+			boolean inserted = false;
+			while(!inserted) {
+				if( entryObsViewList.contains( Integer.toString( tmpId ) ) ){
+					tmpId++;
+				}
+				else {
+					// -- We found our new ID.
+					inserted = true;
+				}
+			}
+			
+			DummyEntryDataFormController.getInstance().setCurrentEntryID(tmpId);
+			
+			setScene( DummyEntryDataFormController.getInstance().getScene() );
 		}
+	}	
+	
+	// -- Getters and Setters
+	
+	public ArrayList<ParameterEntry> getEntryList() {
+		return entryList;
+	}
+
+	public void setEntryList(ArrayList<ParameterEntry> entryList) {
+		this.entryList = entryList;
 	}
 	
 	public Scene getScene() {
 		return ApplicationViewScene;
+	}
+	
+	public ObservableList<String> getEntryObsViewList() {
+		return entryObsViewList;
+	}
+
+	public void setEntryObsViewList(ObservableList<String> entryObsViewList) {
+		this.entryObsViewList = entryObsViewList;
 	}
 	
 	public static ApplicationOptionsController getInstance() {

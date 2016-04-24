@@ -10,8 +10,10 @@ public class ParameterEntry {
 	List<Indicator> indicators = new ArrayList<Indicator>();
 	
 	private String entryName = "";
+	private String entryRawInput = "";
 	
 	public ParameterEntry( String entryInput ) {
+		setEntryRawInput(entryInput);
 		ParseInput( entryInput );
 	}
 	
@@ -45,5 +47,13 @@ public class ParameterEntry {
 		}
 		
 		indicators = indicatorList;
+	}
+
+	public String getEntryRawInput() {
+		return entryRawInput;
+	}
+
+	private void setEntryRawInput(String entryRawInput) {
+		this.entryRawInput = entryRawInput;
 	}
 }
