@@ -323,7 +323,7 @@ public class FELSMethod extends SkeletalEstimation {
 			if(Double.isNaN(deriv1)){
 				deriv1 = 0;
 			}
-		} while ((iterator1 < 50) && (Math.abs(deriv1) > 0.0001) || deriv1 == 0);
+		} while ((iterator1 < 50) && (Math.abs(deriv1) > 0.0001));
 
 		if (deriv1 > 0.0001) {
 			System.out.printf("Algorithm did not converge. Beware of the results");
