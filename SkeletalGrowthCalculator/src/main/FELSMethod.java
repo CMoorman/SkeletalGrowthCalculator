@@ -90,8 +90,8 @@ public class FELSMethod extends SkeletalEstimation {
 		Pattern p = Pattern.compile("(?:\\d*\\.)?\\d+");
 		Matcher matcher;
 		// String pattern = "(?:\\d*\\.)?\\d+";
-		i = j = 0;
-
+		i = -1;
+		j = 0;
 		try {
 			// File calibration = new File(CALIBRATION_DATA_FILE);
 
