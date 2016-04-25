@@ -38,8 +38,6 @@ public class FELSMethod extends SkeletalEstimation {
 	double E;
 	double U;
 	double current_estimate;
-	double deriv1;
-	double deriv2;
 	double deriv_holder;
 	double age;
 
@@ -141,12 +139,13 @@ public class FELSMethod extends SkeletalEstimation {
 			}
 		}
 	}
-
+	double deriv1 = 0;
+	double deriv2 = 0;
 	public double performEstimation() {
-		
 		current_estimate = age;
 		double T1 = 0;
 		deriv1 = 0;
+		deriv2 = 0;
 		int iterator1 = 0;
 		int iterator = 0;
 		NGRADED = 0; // -- Not sure if this is right.
@@ -258,18 +257,14 @@ public class FELSMethod extends SkeletalEstimation {
 					}
 				}
 			}
-
-			
-
 			for (iterator = MREGR; iterator <= NREGR; iterator++) {
-				double cubedVal = inputList.get(iterator);
-				cubedVal = Math.pow(cubedVal, 3);
-				if (cubedVal != 0) {
+				double val = inputList.get(iterator);
+				if (val != 0) {
 
 					double BETA = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][1];
 					double MU = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][2];
 					double SIGMA = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][3];
-					double ZD = (cubedVal - BETA * current_estimate - MU) / SIGMA;
+					double ZD = (val - BETA * current_estimate - MU) / SIGMA;
 
 					// Add up derivatives with respect to theta across
 					// continuous indicators
