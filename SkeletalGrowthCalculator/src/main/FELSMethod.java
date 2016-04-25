@@ -33,22 +33,10 @@ public class FELSMethod extends SkeletalEstimation {
 	int grade[];
 	int cubed_ratio[];
 	int sex; // 1 for male 2 for female
-	int iterator1;
 	int RUNMODE;
 	int M1;
-	int iterator;
 	double E;
 	double U;
-	double grade1;
-	double grade2;
-	double grade3;
-	double Q1;
-	double Q2;
-	double SLOPE;
-	double P1Q1;
-	double P2Q2;
-	double T0;
-	double T1;
 	double current_estimate;
 	double deriv1;
 	double deriv2;
@@ -133,7 +121,6 @@ public class FELSMethod extends SkeletalEstimation {
 			eAlert.setContentText("The Calibration Data file could not be located or loaded.");
 
 			eAlert.showAndWait();
-			e.printStackTrace();
 		}
 	}
 
@@ -158,10 +145,10 @@ public class FELSMethod extends SkeletalEstimation {
 	public double performEstimation() {
 		
 		current_estimate = age;
-		T1 = 0;
+		double T1 = 0;
 		deriv1 = 0;
-		iterator1 = -1;
-		iterator = 0;
+		int iterator1 = 0;
+		int iterator = 0;
 		NGRADED = 0; // -- Not sure if this is right.
 		LGRADED = 84;
 		FIRST = 0;
@@ -175,7 +162,7 @@ public class FELSMethod extends SkeletalEstimation {
 				System.out.printf("Iteration %d Estimate now: %f", iterator1, current_estimate);
 			}
 
-			T0 = T1;
+			double T0 = T1;
 			T1 = current_estimate;
 			deriv_holder = deriv1;
 			deriv1 = 0;
@@ -186,14 +173,14 @@ public class FELSMethod extends SkeletalEstimation {
 				if (currIndicatorVal != 0) {
 
 					// SLOPE is d, the rate parameter
-					SLOPE = parameters[(TOTAL_INDICATORS * (sex - 1) + iterator)][1];
+					double SLOPE = parameters[(TOTAL_INDICATORS * (sex - 1) + iterator)][1];
 
 					// For each possible grade
 					for (M1 = 1; M1 < MAX_VALUES[iterator]; M1++) {
 
 						if (currIndicatorVal == M1) {
 
-							grade1 = 1.0;
+							double grade1 = 1.0;
 
 							if (M1 != 1) {
 
@@ -219,7 +206,7 @@ public class FELSMethod extends SkeletalEstimation {
 								grade1 = 1.0 / (1.0 + Math.exp(U));
 							}
 
-							grade2 = 0.0;
+							double grade2 = 0.0;
 
 							if (M1 != MAX_VALUES[iterator]) {
 
@@ -244,7 +231,7 @@ public class FELSMethod extends SkeletalEstimation {
 								grade2 = 1.0 / (1.0 + Math.exp(U));
 							}
 
-							grade3 = grade1 - grade2;
+							double grade3 = grade1 - grade2;
 
 							// Correct values that are too small in magnitude
 							// since later you divide by grade3
@@ -253,14 +240,14 @@ public class FELSMethod extends SkeletalEstimation {
 								grade3 = 0.005;
 							}
 
-							Q1 = 1.0 - grade1;
-							Q2 = 1.0 - grade2;
-							P1Q1 = grade1 * Q1;
-							P2Q2 = grade2 * Q2;
+							double Q1 = 1.0 - grade1;
+							double Q2 = 1.0 - grade2;
+							double P1Q1 = grade1 * Q1;
+							double P2Q2 = grade2 * Q2;
 
 							// Add up the first derivatives with respect to
 							// current_estimate across graded indicators
-							deriv1 = deriv1 + SLOPE * (P1Q1 - P2Q2) / grade3;
+							deriv1 = deriv1 + ((SLOPE * (P1Q1 - P2Q2)) / grade3);
 							double D = (Q1 - grade1) * P1Q1 + (grade2 - Q2) * P2Q2;
 							D = D - Math.sqrt(P2Q2 - P1Q1) / grade3;
 
@@ -340,7 +327,7 @@ public class FELSMethod extends SkeletalEstimation {
 				}
 			}
 
-		} while ((iterator1 <= 50) || (Math.abs(deriv1) > 0.0001));
+		} while ((iterator1 <= 50) && (Math.abs(deriv1) > 0.0001));
 
 		if (deriv1 > 0.0001) {
 			System.out.printf("Algorithm did not converge. Beware of the results");
