@@ -142,6 +142,10 @@ public class FELSMethod extends SkeletalEstimation {
 
 	public void setSex(String sex) {
 		if (sex != null && !sex.isEmpty()) {
+			if(sex.equals("1") || sex.equals("2")){
+				this.sex = Integer.parseInt(sex);
+				return;
+			}
 			if (sex.equals("Male")) {
 				this.sex = 1;
 			} else {
