@@ -259,29 +259,26 @@ public class FELSMethod extends SkeletalEstimation {
 				}
 			}
 
-			// -- Don't think we need RSW.
-			// if( RSW ) {
+			
 
-			/*for (iterator = MREGR; iterator <= NREGR; iterator++) {
-
-				if (inputList.get(iterator) != 0.0) {
+			for (iterator = MREGR; iterator <= NREGR; iterator++) {
+				double cubedVal = inputList.get(iterator);
+				cubedVal = Math.pow(cubedVal, 3);
+				if (cubedVal != 0) {
 
 					double BETA = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][1];
 					double MU = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][2];
 					double SIGMA = parameters[TOTAL_INDICATORS * (sex - 1) + iterator][3];
-					double ZD = (inputList.get(iterator) - BETA * current_estimate - MU) / SIGMA;
+					double ZD = (cubedVal - BETA * current_estimate - MU) / SIGMA;
 
 					// Add up derivatives with respect to theta across
 					// continuous indicators
 					deriv1 = deriv1 + BETA * ZD / SIGMA;
 					deriv2 = deriv2 * Math.sqrt(BETA / SIGMA);
 				}
-			}*/
-			// }
-
+			}
 			// If second derivative is negative, make it positive
 			if (deriv2 < 0) {
-
 				deriv2 = -deriv2;
 			}
 

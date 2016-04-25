@@ -794,7 +794,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		}
 		for(String ratioID : ratioList){
 			Ratio ratio = ratios.get(ratioID);
-			String ratioVal = "1.0";
+			String ratioVal = "0.0";
 			if(ratio != null){
 				ratioVal = ratio.getRatio();
 			}
