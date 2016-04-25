@@ -1,9 +1,7 @@
 package main;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -83,7 +81,6 @@ public class FELSMethod extends SkeletalEstimation {
 				}
 			}
 			inputList.add(val);
-			System.out.println(indicator + " : " + val);
 		}
 	}
 
@@ -165,7 +162,7 @@ public class FELSMethod extends SkeletalEstimation {
 
 			// Stands for non batch mode
 			if (RUNMODE == 0) {
-				System.out.printf("Iteration %d Estimate now: %f", iterator1, current_estimate);
+				//System.out.printf("Iteration %d Estimate now: %f", iterator1, current_estimate);
 			}
 
 			T0 = T1;
@@ -336,7 +333,6 @@ public class FELSMethod extends SkeletalEstimation {
 		} while ((iterator1 > 50) || (Math.abs(deriv1) < 0.001));
 
 		if (deriv1 > 0.0001) {
-
 			System.out.printf("Algorithm did not converge. Beware of the results");
 		}
 
@@ -387,9 +383,9 @@ public class FELSMethod extends SkeletalEstimation {
 		if ((RUNMODE == 0) && (current_estimate > 0)
 				&& (((sex == 1) && (current_estimate < 18.00)) || ((sex == 2) && (current_estimate < 18.00)))) {
 
-			System.out.printf("The estimated skeletal age is %f.2 years", current_estimate);
-			System.out.printf("with an estimated standard error of %f.2 years.", E);
-			System.out.printf("%d iterations were required.", iterator1);
+			//System.out.printf("The estimated skeletal age is %f.2 years", current_estimate);
+			//System.out.printf("with an estimated standard error of %f.2 years.", E);
+			//System.out.printf("%d iterations were required.", iterator1);
 		}
 
 		return current_estimate;

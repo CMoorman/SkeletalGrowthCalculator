@@ -38,6 +38,7 @@ import main.Indicator;
 import main.SkeletalCalculator;
 import main.SkeletalMaturityMethod;
 import statistics.SkeletalEstimation;
+import testing.FelsTest;
 
 public class FELSDataFormController extends SkeletalCalculator implements Initializable {
 
@@ -514,11 +515,11 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 		if (E.getSource() == btnSubmit) {
 			if (loadMeasurementInput() && loadHeaderInput()) {
-				fels.loadData();
 				fels.setAge(Double.parseDouble(txtChronAge.getText()));
 				fels.setSex(cmbGender.getValue());
 				fels.setInputList(getInputValueMap());
 				double generatedAge = fels.performEstimation();
+				txtSA.setText(generatedAge + "");
 			} else {
 				// -- Loading the input Failed, why? TODO: Handle validation
 				// errors. Missing fields, etc...?
@@ -529,7 +530,9 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 			}
 		}
 		else if(E.getSource() == btnGoBack){
-			// -- NEED TO RESET DATA BEFORE GOING BACK OR ELSE IT PERSISTS.
+			for(TextField input: inputs){
+					input.setText("");
+			}
 			setScene( TitleViewController.getInstance().getScene() );
 		}
 	}
@@ -566,6 +569,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		FelsTest.test();
 		cmbGender.setItems(genderList);
 		felsMethod = new SkeletalMaturityMethod("FELS", INDICATOR_FILE_PATH);
 		felsMethod.load();
@@ -578,6 +582,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		txtSEE.setDisable(true);
 		initializeInputList();
 		addListeners();
+		fels.loadData();
 		btnSubmit.setOnAction(e -> buttonClicked(e));
 		btnGoBack.setOnAction(e -> buttonClicked(e));
 	}
