@@ -29,7 +29,7 @@ public class FELSMethod extends SkeletalEstimation {
 	int MAX_VALUES[] = { 3, 2, 2, 2, 4, 4, 3, 3, 2, 2, 2, 3, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 5, 2, 4, 4, 2, 5, 3, 2, 2, 2,
 			2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 4, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2, 2, 2,
 			2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 2, 2, 3, 2, 2, 3 };
-	double[][] parameters = new double[198][7];
+	double[][] parameters = new double[198][5];
 	int grade[];
 	int cubed_ratio[];
 	int sex; // 1 for male 2 for female
@@ -90,7 +90,7 @@ public class FELSMethod extends SkeletalEstimation {
 		Pattern p = Pattern.compile("(?:\\d*\\.)?\\d+");
 		Matcher matcher;
 		// String pattern = "(?:\\d*\\.)?\\d+";
-		i = -1;
+		i = 0;
 		j = 0;
 		try {
 			// File calibration = new File(CALIBRATION_DATA_FILE);
@@ -103,7 +103,6 @@ public class FELSMethod extends SkeletalEstimation {
 
 			while ((line = br.readLine()) != null) {
 
-				i++;
 				j = 0;
 
 				matcher = p.matcher(line);
@@ -118,6 +117,8 @@ public class FELSMethod extends SkeletalEstimation {
 					}
 					parameters[i][j++] = d;
 				}
+				
+				i++;
 
 			}
 
