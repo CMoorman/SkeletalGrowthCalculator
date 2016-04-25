@@ -55,13 +55,13 @@ public class FELSMethod extends SkeletalEstimation {
 	double deriv_holder;
 	double age;
 
-	int NGRADED = 65; // -- Not sure if this is right.
-	int LGRADED = NGRADED;
+	int NGRADED = 0; // -- Not sure if this is right.
+	int LGRADED = 84;
 
 	int FIRST = 0;
 
-	int MREGR = 66; // -- Not sure if this is right.
-	int NREGR = MREGR;
+	int MREGR = 85;
+	int NREGR = 97;
 
 	private static final String CALIBRATION_DATA_FILE = "FELS_calibration_data.csv";
 
@@ -156,18 +156,23 @@ public class FELSMethod extends SkeletalEstimation {
 	}
 
 	public double performEstimation() {
-
+		
 		current_estimate = age;
 		T1 = 0;
 		deriv1 = 0;
-		iterator1 = 0;
-
+		iterator1 = -1;
+		iterator = 0;
+		NGRADED = 0; // -- Not sure if this is right.
+		LGRADED = 84;
+		FIRST = 0;
+		MREGR = 85;
+		NREGR = 97;
 		do {
 			iterator1++;
 
 			// Stands for non batch mode
 			if (RUNMODE == 0) {
-				//System.out.printf("Iteration %d Estimate now: %f", iterator1, current_estimate);
+				System.out.printf("Iteration %d Estimate now: %f", iterator1, current_estimate);
 			}
 
 			T0 = T1;
@@ -270,7 +275,7 @@ public class FELSMethod extends SkeletalEstimation {
 			// -- Don't think we need RSW.
 			// if( RSW ) {
 
-			for (iterator = MREGR; iterator <= NREGR; iterator++) {
+			/*for (iterator = MREGR; iterator <= NREGR; iterator++) {
 
 				if (inputList.get(iterator) != 0.0) {
 
@@ -284,7 +289,7 @@ public class FELSMethod extends SkeletalEstimation {
 					deriv1 = deriv1 + BETA * ZD / SIGMA;
 					deriv2 = deriv2 * Math.sqrt(BETA / SIGMA);
 				}
-			}
+			}*/
 			// }
 
 			// If second derivative is negative, make it positive
@@ -335,7 +340,7 @@ public class FELSMethod extends SkeletalEstimation {
 				}
 			}
 
-		} while ((iterator1 > 50) || (Math.abs(deriv1) < 0.001));
+		} while ((iterator1 <= 50) || (Math.abs(deriv1) > 0.0001));
 
 		if (deriv1 > 0.0001) {
 			System.out.printf("Algorithm did not converge. Beware of the results");
