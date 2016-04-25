@@ -65,7 +65,7 @@ public class PatientValidationDataLoader {
 					for (int i = 3; i < inputLst.size(); ++i) {
 						String indicator = parameterList.get(i);
 						String val = inputLst.get(i);
-						String measurement = "1.0";
+						String measurement = "0";
 						if (!val.isEmpty() || !val.equals(".")) {
 							measurement = val;
 						}
