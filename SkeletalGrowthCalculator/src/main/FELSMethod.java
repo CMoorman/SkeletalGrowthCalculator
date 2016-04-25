@@ -176,7 +176,9 @@ public class FELSMethod extends SkeletalEstimation {
 
 					// For each possible grade
 					for (M1 = 1; M1 < MAX_VALUES[iterator]; M1++) {
-
+						if(Double.isNaN(deriv1)){
+							deriv1 = 0;
+						}
 						if (currIndicatorVal == M1) {
 
 							double grade1 = 1.0;
@@ -318,8 +320,10 @@ public class FELSMethod extends SkeletalEstimation {
 					current_estimate = (T0 + T1) / 2.0;
 				}
 			}
-
-		} while ((iterator1 < 50) && (Math.abs(deriv1) > 0.0001));
+			if(Double.isNaN(deriv1)){
+				deriv1 = 0;
+			}
+		} while ((iterator1 < 50) && (Math.abs(deriv1) > 0.0001) || deriv1 == 0);
 
 		if (deriv1 > 0.0001) {
 			System.out.printf("Algorithm did not converge. Beware of the results");
