@@ -53,6 +53,7 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 	private SkeletalMaturityMethod felsMethod;
 	private static final String INDICATOR_FILE_PATH = "FELS_Indicators.csv";
 	private static final String NOT_APPLICABLE = "N/A";
+	private static String sGender = null;
 	private List<TextField> inputs = new ArrayList<TextField>();
 	@FXML
 	Pane paneMeasurementInputs;
@@ -474,6 +475,13 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 		for (TextField input : inputs) {
 			addMeasurementInputToString(input);
 		}
+		
+		if( cmbGender.getSelectionModel().getSelectedItem() == null ) {
+			rval = false;
+		}
+		else {
+			sGender = cmbGender.getSelectionModel().getSelectedItem();
+		}
 
 		if (m_ErrorIDList.size() > 0) {
 
@@ -524,6 +532,17 @@ public class FELSDataFormController extends SkeletalCalculator implements Initia
 				// -- Loading the input Failed, why? TODO: Handle validation
 				// errors. Missing fields, etc...?
 
+				if( sGender == null ) {
+					Alert eAlert = new Alert(AlertType.ERROR);
+					eAlert.setTitle("Missing Gender");
+					eAlert.setHeaderText("The patients gender was not selected.");
+					String sAlertString = "Please select the patients gender and try again.";
+
+					eAlert.setContentText(sAlertString);
+
+					eAlert.showAndWait();
+				}
+				
 				// -- We displayed our errors. Clear it out for the next round.
 				m_ErrorIDList.clear();
 				s_MeasurementData = "";
