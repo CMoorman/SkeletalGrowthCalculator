@@ -327,7 +327,7 @@ public class FELSMethod extends SkeletalEstimation {
 				}
 			}
 
-		} while ((iterator1 <= 50) && (Math.abs(deriv1) > 0.0001));
+		} while ((iterator1 < 50) && (Math.abs(deriv1) > 0.0001));
 
 		if (deriv1 > 0.0001) {
 			System.out.printf("Algorithm did not converge. Beware of the results");
