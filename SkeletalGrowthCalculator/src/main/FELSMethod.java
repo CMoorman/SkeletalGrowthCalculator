@@ -31,7 +31,7 @@ public class FELSMethod extends SkeletalEstimation {
 	int MAX_VALUES[] = { 3, 2, 2, 2, 4, 4, 3, 3, 2, 2, 2, 3, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 5, 2, 4, 4, 2, 5, 3, 2, 2, 2,
 			2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 3, 4, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2, 2, 2,
 			2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 2, 2, 3, 2, 2, 3 };
-	double[][] parameters = new double[197/* Place holder */][5];
+	double[][] parameters = new double[198][7];
 	int grade[];
 	int cubed_ratio[];
 	int sex; // 1 for male 2 for female
@@ -112,8 +112,14 @@ public class FELSMethod extends SkeletalEstimation {
 				matcher = p.matcher(line);
 
 				while (matcher.find()) {
-
-					parameters[i][j++] = Double.parseDouble(matcher.group());
+					double d = 0.0;
+					String s = matcher.group();
+					try{
+						d = Double.parseDouble(s);
+					}catch(NumberFormatException e){
+						d = 0;
+					}
+					parameters[i][j++] = d;
 				}
 
 			}
@@ -304,6 +310,9 @@ public class FELSMethod extends SkeletalEstimation {
 			}
 
 			// Update the estimate
+			if(Double.isNaN(deriv_end)){
+				deriv_end = 0;
+			}
 			current_estimate = current_estimate + deriv_end;
 
 			// Store second derivative to compute standard error
